@@ -1,0 +1,10 @@
+HOST REACTPRESS:
+- npm run build the project
+- then access to the folder /home/careerf/public_html/wp-content/reactpress/apps/ by plugin WP File Manager
+- remove the old project folder, then reupload the updated folder
+- then use ReactPress to choose host destination of the folder
+- note: 
+    - but we can set the destination to only / or the main adress
+    - we only set it to /abcxyz 
+    - so we need to tool/Redirection (Redirection plugin) to setup automatically redirect to the address of the project when we access / 
+
