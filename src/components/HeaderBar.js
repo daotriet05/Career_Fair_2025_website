@@ -32,7 +32,14 @@ function HeaderBar() {
 
                 {/* Buttons */}
                 <div class="flex space-x-2">
-                    <button class="bg-white h-12 text-black px-10 py-2 text-sm font-bold rounded-md" style={{ backgroundColor: '#f6c914'}}>REGISTER NOW</button>
+                    <a
+                        href="https://docs.google.com/forms/u/1/d/1Um8irhxixuR6jvbCO7Dvp1_AMQYKPsGU4zxirNEWJr0/edit?usp=drivesdk"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="bg-yellow-400 h-12 text-black px-10 py-2 text-sm font-bold rounded-md flex items-center justify-center"
+                    >
+                        REGISTER NOW
+                    </a>
                 </div>
             </nav>
 
