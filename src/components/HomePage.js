@@ -14,10 +14,6 @@ function HomePage() {
             <HeaderBar />
             <div className="Sections-Homepage">
                 <IntroSection />
-                <InforSection />
-                <AgendaSection />
-                <SponsorSection />
-                <RecapSection />
             </div>
         </div>
     );

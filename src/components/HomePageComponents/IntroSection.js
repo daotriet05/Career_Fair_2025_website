@@ -5,40 +5,111 @@ import introSection from "../../images/intro-section.png";
 
 function IntroSection() {
     return (
-      <div className="home-page-section text-white relative" style={{ backgroundColor: '#275F48', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-      
-          {/* <!-- Main Container --> */}
-          <div className="flex w-full h-screen px-10 py-5">
-              
-              {/* <!-- Left Section (7/12) --> */}
-              <div className="w-7/12 flex flex-col justify-center pl-10">
-                  
-                  {/* <!-- Replace text with Image --> */}
-                  <div className="relative mb-12">
-                      <img src={introSection} alt="Spark Your Future" className="w-full" />
-                  </div>
-              </div>
-  
-              {/* <!-- Right Section (5/12) --> */}
-              <div className="w-5/12 flex flex-col justify-center items-start text-left space-y-12 pr-10 h-full">
-                  
-                  {/* <!-- Event Details --> */}
-                  <div className="text-2xl font-semibold bg-gray-200 bg-opacity-75 p-8 rounded-md text-black border border-black ml-10">
-    <p className="text-[#275F48]"><strong>Date:</strong> <span className="text-black">14th May 2025</span></p>
-    <p className="mt-6 text-[#275F48]"><strong>Time:</strong> <span className="text-black">8:30 - 13:30</span></p>
-    <p className="mt-6 text-[#275F48]"><strong>Venue:</strong> <span className="text-black">VGU Convention Hall - Ben Cat Campus</span></p>
-                </div>
+      <div className="home-page-section" style={styles.section}>
+        
+        {/* Main Container */}
+        <div style={styles.mainContainer}>
+          
+          {/* Left Section */}
+          <div style={styles.leftSection}>
+            <div style={styles.imageContainer}>
+              <img src={introSection} alt="Spark Your Future" style={styles.image} />
+            </div>
+          </div>
 
-              </div>
+          {/* Right Section */}
+          <div style={styles.rightSection}>
+            <div style={styles.eventBox}>
+              <p style={styles.label}><strong>Date:</strong> <span style={styles.value}>14th May 2025</span></p>
+              <p style={{ ...styles.label, marginTop: '1.5rem' }}><strong>Time:</strong> <span style={styles.value}>8:30 - 13:30</span></p>
+              <p style={{ ...styles.label, marginTop: '1.5rem' }}><strong>Venue:</strong> <span style={styles.value}>VGU Convention Hall - Ben Cat Campus</span></p>
+            </div>
           </div>
-  
-          {/* <!-- Marquee Logos Section --> */}
-          <div className="absolute bottom-0 w-full">
-              <MarqueeLogos />
-          </div>
+        </div>
+
+        {/* Marquee Logos */}
+        <div style={styles.marqueeWrapper}>
+          <MarqueeLogos />
+        </div>
+
+        {/* Internal CSS */}
+        <style>{`
+          .home-page-section {
+            color: white;
+            position: relative;
+            background-color: #275F48;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        `}</style>
       </div>
     );
-  }
-  
-  export default IntroSection;
-  
+}
+
+const styles = {
+  section: {
+    backgroundColor: '#275F48',
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    position: 'relative',
+  },
+  mainContainer: {
+    display: 'flex',
+    width: '100%',
+    height: '100vh',
+    padding: '1.25rem 2.5rem', // py-5 px-10
+  },
+  leftSection: {
+    width: '58.3333%', // 7/12
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingLeft: '2.5rem', // pl-10
+  },
+  imageContainer: {
+    position: 'relative',
+    marginBottom: '3rem', // mb-12
+  },
+  image: {
+    width: '100%',
+  },
+  rightSection: {
+    width: '41.6667%', // 5/12
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    textAlign: 'left',
+    gap: '3rem', // space-y-12
+    paddingRight: '2.5rem', // pr-10
+    height: '100%',
+  },
+  eventBox: {
+    fontSize: '1.5rem', // text-2xl
+    fontWeight: 600, // font-semibold
+    backgroundColor: 'rgba(229, 231, 235, 0.75)', // bg-gray-200 + opacity
+    padding: '2rem',
+    borderRadius: '0.375rem', // rounded-md
+    color: 'black',
+    border: '1px solid black',
+    marginLeft: '2.5rem', // ml-10
+  },
+  label: {
+    color: '#275F48',
+  },
+  value: {
+    color: 'black',
+  },
+  marqueeWrapper: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
+};
+
+export default IntroSection;
