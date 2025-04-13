@@ -54,7 +54,7 @@ function RecapSection() {
                     </div>
 
                     <div class="flex items-center gap-3 h-36">
-                        <span class="text-9xl font-bold">>1000</span>
+                        <span class="text-9xl font-bold">1000</span>
                     </div>
                 </div>
 
