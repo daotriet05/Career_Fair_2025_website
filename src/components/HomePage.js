@@ -21,7 +21,7 @@ function HomePage() {
                 <AgendaSection />
                 <JobsSection />
                 <WorkshopSection />
-                <SponsorSection />
+                <RecapSection />
                 <CoreteamSection />
             </div>
         </div>
