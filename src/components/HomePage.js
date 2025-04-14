@@ -17,13 +17,12 @@ function HomePage() {
             <HeaderBar />
             <div className="Sections-Homepage">
                 <IntroSection />
-                {/*
                 <InforSection />
                 <AgendaSection />
                 <JobsSection />
                 <WorkshopSection />
                 <SponsorSection />
-                <CoreteamSection />*/}
+                <CoreteamSection />
             </div>
         </div>
     );
