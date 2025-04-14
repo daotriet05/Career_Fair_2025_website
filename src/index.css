@@ -1,3 +1,15 @@
+@font-face{
+  font-family: "IntroRust";
+  src: local("IntroRust"),
+    url("./fonts/IntroRust.otf") format("opentype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";;
+  src: url("./fonts/Montserrat.ttf") format("truetype");
+  font-weight: normal;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

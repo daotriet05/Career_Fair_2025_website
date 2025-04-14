@@ -17,7 +17,8 @@ function HomePage() {
             <HeaderBar />
             <div className="Sections-Homepage">
                 <IntroSection />
-                {/*<InforSection />
+                {/*
+                <InforSection />
                 <AgendaSection />
                 <JobsSection />
                 <WorkshopSection />
