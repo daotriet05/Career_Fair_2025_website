@@ -19,10 +19,10 @@ function HomePage() {
                 <IntroSection />
                 <InforSection />
                 <AgendaSection />
-                <JobsSection />
+                {/*<JobsSection />*/}
                 <WorkshopSection />
-                <SponsorSection />
-                <CoreteamSection />
+                <RecapSection />
+                {/*<CoreteamSection />*/}
             </div>
         </div>
     );
