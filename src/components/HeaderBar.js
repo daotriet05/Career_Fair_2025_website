@@ -8,7 +8,7 @@ function HeaderBar() {
         <header className="text-white">
 
             {/* Sticky Navbar */}
-            <nav className="fixed top-2 inset-x-0 mx-auto w-11/12 md:w-2/3 max-w-screen-xl h-20 flex items-center justify-between pt-2 px-3 bg-gradient-to-r from-gray-200 to-gray-100 shadow-md z-50 rounded-lg">
+            <nav className="fixed top-2 inset-x-0 mx-auto w-11/12 md:w-2/3 max-w-screen-xl h-20 flex items-center justify-between px-3 bg-gradient-to-r from-gray-200 to-gray-100 shadow-md z-50 rounded-lg">
 
 
 
