@@ -24,7 +24,7 @@ const marqueeImages = [
 
 const MarqueeLogosRecap = () => {
     return (
-    <div className="bg-white py-4 w-screen overflow-hidden">
+    <div className="bg-[#e5ea98] py-2 w-screen overflow-hidden">
         <Marquee speed={50} pauseOnHover gradient={false}>
           {marqueeImages.map((src, index) => (
             <img

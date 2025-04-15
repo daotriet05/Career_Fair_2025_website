@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../App.css';
 import MarqueeLogosRecap from './MarqueeLogosRecap';
-// import businessesImage from '../../images/collaborating-businesses.png';
-// import sponsorshipsImage from '../../images/sponsorships.png';
+import businessesImage from '../../images/recap_2024/collaboration.png';
+import sponsorshipsImage from '../../images/recap_2024/sponsorships.png'; // ✅ Make sure this path is correct
 
 function RecapSection() {
   return (
@@ -16,9 +16,10 @@ function RecapSection() {
       }}
     >
       {/* Content block WITH padding */}
-      <div className="w-full max-w-7xl mx-auto text-center flex-1 flex flex-col px-8 py-8">
+      <div className="w-full max-w-7xl mx-auto text-center flex-1 flex flex-col px-8 py-1 sm:pt-28 sm:pb-4 sm:py-0">
+
         {/* Title */}
-        <h1 className="text-6xl sm:text-5xl font-extrabold uppercase text-[#ffffff] mb-6">
+        <h1 className="text-6xl font-extrabold uppercase text-[#ffffff] mb-6">
           VGU CFIED24 SUCCESS
         </h1>
 
@@ -37,7 +38,7 @@ function RecapSection() {
             </h3>
             <div className="bg-white p-2 rounded-xl shadow-md max-w-md mx-auto">
               <img
-                // src={businessesImage}
+                src={businessesImage}
                 alt="19 Collaborating Businesses"
                 className="w-full h-auto object-contain"
               />
@@ -50,7 +51,7 @@ function RecapSection() {
             </h3>
             <div className="bg-white p-2 rounded-xl shadow-md max-w-md mx-auto">
               <img
-                // src={sponsorshipsImage}
+                src={sponsorshipsImage}
                 alt="9 Sponsorships"
                 className="w-full h-auto object-contain"
               />
