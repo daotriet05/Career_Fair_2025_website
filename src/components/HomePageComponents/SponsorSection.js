@@ -17,7 +17,7 @@ function SponsorSection() {
 
           {/* Collaborating Businesses */}
           <div className="w-10/12 md:w-3/12">
-            <h2 className="text-2xl md:text-4xl font-bold" style={{ color: '#ffe98e' }}>19 Collaborating</h2>
+            <h2 className="text-2xl md:text-4xl font-bold" style={{ color: '#ffffff' }}>19 Collaborating</h2>
             <div className="mt-4 bg-white h-60 p-6 rounded-lg shadow-lg text-black">
               <div className="space-x-6">
                 da
