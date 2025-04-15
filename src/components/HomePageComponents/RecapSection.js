@@ -25,15 +25,20 @@ function RecapSection() {
 
         {/* Recap Buttons */}
         <div className="flex justify-center items-center gap-4 mb-8 flex-wrap">
-          <button className="flex items-center gap-2 bg-white text-[#194d39] px-4 py-2 rounded-full font-semibold shadow-md hover:scale-105 transition">
-            ▶️ 2024 VGU CFIE Recap
-          </button>
+            <a
+                href="https://www.youtube.com/watch?v=AKjRGArpgMo" // replace this with the real URL
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-white text-[#194d39] px-4 py-2 rounded-full font-semibold shadow-md hover:scale-105 transition"
+            >
+                ▶️ 2024 VGU CFIE Recap
+            </a>
         </div>
 
         {/* Business + Sponsor Logos */}
         <div className="flex flex-col lg:flex-row justify-center items-center gap-8 mb-10">
           <div>
-            <h3 className="text-lg font-bold text-[#e5ea98] text-600 mb-2">
+            <h3 className="text-2xl font-bold text-[#e5ea98] text-600 mb-2">
               19 Collaborating Businesses
             </h3>
             <div className="bg-white p-2 rounded-xl shadow-md max-w-md mx-auto">
@@ -46,7 +51,7 @@ function RecapSection() {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold text-[#e5ea98] text-600 mb-2">
+            <h3 className="text-2xl font-bold text-[#e5ea98] text-600 mb-2">
               9 Sponsorships
             </h3>
             <div className="bg-white p-2 rounded-xl shadow-md max-w-md mx-auto">

@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import '../../App.css';
 import email from '../../icons/email.png';
 import facebook from '../../icons/facebook-app-symbol.png';
-import location from '../../icons/location.png';
-import www from '../../icons/world-wide-web.png';
+import instagram from '../../icons/instagram-symbol.png';
 
 function InforSection() {
   return (
@@ -12,11 +11,11 @@ function InforSection() {
       <div className="max-w-7xl mx-auto px-4 py-20 flex flex-col lg:flex-row gap-10">
         {/* Left Column */}
         <div className="lg:w-1/2 font-montserrat">
-          <div className="h-3 w-11/12 bg-[#145f48] mb-6"></div>
+          <div className="h-5 w-11/12 bg-[#145f48] mb-6"></div>
           <p className="text-gray-800 text-justify text-lg">
             VGU Career Fair and Industry Exploration Day 2025 is a flagship event to foster collaboration, innovation, and career exploration. CFIED25 aims to:
           </p>
-          <ul className="mt-5 text-gray-700 italic space-y-3 list-disc list-inside">
+          <ul className="mt-5 text-left text-gray-700 italic space-y-3 list-disc list-inside">
             <li><em>Connect VGU students with industry partners for careers and internships.</em></li>
             <li><em>Provide a platform for companies to showcase technologies and opportunities.</em></li>
             <li><em>Build and strengthen VGU-industry partnerships for collaboration and knowledge exchange.</em></li>
@@ -42,23 +41,31 @@ function InforSection() {
             <div className="text-left lg:w-1/2">
                 <h3 className="text-2xl font-bold">Contact Information</h3>
                 <p className="text-lg">Mrs. Vo Phan Hoang Trang</p>
-                <p className="text-lg">Tel: 09 9999 9999</p>
-                <p className="text-lg">Email: abc@vgu.edu.vn</p>
+                <p className="text-lg">Tel: +84-(0)935664155</p>
+                <p className="text-lg">Email: trang.vph@vgu.edu.vn</p>
             </div>
 
             {/* Right: Icons aligned to bottom */}
             <div className="flex flex-col justify-end items-end lg:w-1/2 h-full">
                 <div className="flex gap-6 mt-auto">
-                {[www, facebook, email, location].map((icon, idx) => (
-                    <div
-                    key={idx}
-                    className="w-12 h-12 rounded-full bg-[#184A45] flex items-center justify-center"
+                    {[
+                    { icon: facebook, url: "https://www.facebook.com/VGU.CFIED" },
+                    { icon: instagram, url: "https://www.instagram.com/vgu.cfied" },
+                    { icon: email, url: "mailto:irttc@vgu.edu.vn" },
+                    ].map((item, idx) => (
+                    <a
+                        key={idx}
+                        href={item.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-16 h-16 rounded-full bg-[#184A45] flex items-center justify-center transition hover:scale-110"
                     >
-                    <img src={icon} alt="icon" className="w-6 h-6 invert" />
-                    </div>
-                ))}
+                        <img src={item.icon} alt="icon" className="w-8 h-8 invert" />
+                    </a>
+                    ))}
                 </div>
             </div>
+
         </div>
     </div>
   );

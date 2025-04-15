@@ -43,9 +43,14 @@ function WorkshopSection() {
           <div className="flex-1 w-full bg-[#0a4f3c] text-white rounded-3xl p-6 shadow-md">
             <h3 className="text-xl font-bold text-center mb-1">ỨNG VIÊN VƯỢT NGÀN CV</h3>
             <p className="text-center text-sm mb-4">21/04/2025</p>
-            <Link to="#" className="text-center text-sm underline block mb-6">
-              (Click here to register)
-            </Link>
+            <a
+                href="https://forms.gle/vqN49fBzX8dvoywH6"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-center text-sm underline block mb-6"
+                >
+                (Click here to register)
+            </a>
 
             <div className="bg-white text-[#194d39] rounded-xl p-4 mb-4">
               <h4 className="font-bold text-lg mb-1">📄 1:1 CV Screening</h4>
@@ -68,9 +73,14 @@ function WorkshopSection() {
           <div className="flex-1 w-full bg-[#0a4f3c] text-white rounded-3xl p-6 shadow-md">
             <h3 className="text-xl font-bold text-center mb-1">SINH VIÊN VGU ĐẠP GIÓ RẼ SÓNG</h3>
             <p className="text-center text-sm mb-4">28/04/2025</p>
-            <Link to="#" className="text-center text-sm underline block mb-6">
-              (Click here to register)
-            </Link>
+            <a
+                href="https://forms.gle/5ifURXtAvjdpEgrq7"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-center text-sm underline block mb-6"
+                >
+                (Click here to register)
+            </a>
 
             <div className="bg-white text-[#194d39] rounded-xl p-4 mb-4">
               <h4 className="font-bold text-lg mb-1">🤝 1:1 Mock Interview (English)</h4>
