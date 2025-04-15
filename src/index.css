@@ -1,3 +1,15 @@
+@font-face{
+  font-family: "IntroRust";
+  src: local("IntroRust"),
+    url("./fonts/IntroRust.otf") format("opentype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Montserrat";;
+  src: url("./fonts/Montserrat.ttf") format("truetype");
+  font-weight: normal;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,3 +23,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.icon {
+  background-color: #145f48;
+  padding: 5px;
+  border-radius: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.icon-img {
+  filter: invert(1) brightness(2);
+  width: 90%;
+  height: 90%;
+}
+
