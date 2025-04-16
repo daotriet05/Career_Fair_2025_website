@@ -71,7 +71,7 @@ function WorkshopSection() {
 
           {/* Right Card */}
           <div className="flex-1 w-full bg-[#0a4f3c] text-white rounded-3xl p-6 shadow-md">
-            <h3 className="text-xl font-bold text-center mb-1">SINH VIÊN VGU ĐẠP GIÓ RẼ SÓNG</h3>
+            <h3 className="text-xl font-bold text-center mb-1">Ơn Giời, Đậu Interview Rồi</h3>
             <p className="text-center text-sm mb-4">28/04/2025</p>
             <a
                 href="https://forms.gle/5ifURXtAvjdpEgrq7"
@@ -91,7 +91,7 @@ function WorkshopSection() {
             </div>
 
             <div className="bg-white text-[#194d39] rounded-xl p-4">
-              <h4 className="font-bold text-lg mb-1">🎤 Talkshow: Mock Interview Insights</h4>
+              <h4 className="font-bold text-lg mb-1">🎤 Talskhow: Interview Insights from HR Experts</h4>
               <p className="text-sm">🕟 16:30 – 17:30 | 📅 April 28, 2025 | 📍 Ceremony Hall</p>
               <p className="text-sm mt-2 break-words">
                 Hear from recruiters and hiring managers about what truly matters in interviews. Get insider advice on mindset, preparation, and how to tackle challenging questions effectively.
