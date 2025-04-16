@@ -10,13 +10,13 @@ import Indefol from "../images/logo_2025/Indefol.png";
 import Kyungbang from "../images/logo_2025/Kyungbang.png";
 import LEGO from "../images/logo_2025/LEGO.png";
 import MACZT from "../images/logo_2025/MAC ZT.png";
-import Mitek from "../images/logo_2025/Mitek.png";
+import Mitek from "../images/logo_2025/mitek.png";
 import Netcompany from "../images/logo_2025/Netcompany.png";
-import Nextern from "../images/logo_2025/Nextern.png";
+import Nextern from "../images/logo_2025/nextern.png";
 import Renesas from "../images/logo_2025/Renesas.png";
 import ShopeeExpress from "../images/logo_2025/Shopee Express.png";
 import TTI from "../images/logo_2025/TTI.png";
-import Wanek from "../images/logo_2025/Wanek.png";
+import Wanek from "../images/logo_2025/wanek.png";
 import ZiehlAbegg from "../images/logo_2025/Ziehl Abegg.png";
 
 
