@@ -16,7 +16,12 @@ const agendas = [
     { time: "9:40 - 9:45", title: "Welcoming Speech", image: img3 },
     { time: "9:45 - 10:00", title: "Keynote Speech", image: img4 },
     { time: "10:00 - 10:15", title: "Appreciation Ceremony", image: img5 },
-    { time: "10:15 - 12:30", title: "Booth Exhibition, Mock & Real Interview", image: img6 },
+    { time: "10:15 - 12:30", title: (
+        <>
+          Booth Exhibition,<br />
+          Job & Internship Interview
+        </>
+      ), image: img6 },
     { time: "12:30 - 13:30", title: "Booth Exhibition, Lunch, Lucky Draw & Closing", image: img7 },
 ];
 
