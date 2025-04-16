@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import "../App.css";
 import IntroSection from "./HomePageComponents/IntroSection";
 import InforSection from "./HomePageComponents/InforSection";
@@ -10,33 +9,17 @@ import JobsSection from "./HomePageComponents/JobsSection";
 import CoreteamSection from "./HomePageComponents/CoreteamSection";
 
 function HomePage() {
-  // Refs for sections
-  const introRef = useRef(null);
-  const infoRef = useRef(null);
-  const agendaRef = useRef(null);
-  const workshopRef = useRef(null);
-  const jobRef = useRef(null);
-  const recapRef = useRef(null);
-
   return (
-    <div className="Homepage">
-      <HeaderBar
-        scrollTo={{
-          introRef,
-          infoRef,
-          agendaRef,
-          jobRef,
-          workshopRef,
-          recapRef,
-        }}
-      />
+    <div className="Homepage scroll-smooth">
+      <HeaderBar />
+
       <div className="Sections-Homepage">
-        <div ref={introRef}><IntroSection /></div>
-        <div ref={infoRef}><InforSection /></div>
-        <div ref={agendaRef}><AgendaSection /></div>
-        <div ref={jobRef}><JobsSection /></div>
-        <div ref={workshopRef}><WorkshopSection /></div>
-        <div ref={recapRef}><RecapSection /></div>
+        <div id="intro"><IntroSection /></div>
+        <div id="info"><InforSection /></div>
+        <div id="agenda"><AgendaSection /></div>
+        <div id="jobs"><JobsSection /></div>
+        <div id="workshop"><WorkshopSection /></div>
+        <div id="recap"><RecapSection /></div>
       </div>
     </div>
   );
