@@ -7,8 +7,8 @@ import instagram from '../../icons/instagram-symbol.png';
 
 function InforSection() {
   return (
-    <div className="w-full bg-white">
-      <div className="max-w-7xl mx-auto px-4 py-20 flex flex-col lg:flex-row gap-10">
+    <div className="w-full bg-white min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 py-24 flex flex-col lg:flex-row gap-10">
         {/* Left Column */}
         <div className="lg:w-1/2 font-montserrat">
           <div className="h-5 w-11/12 bg-[#145f48] mb-6"></div>
@@ -36,7 +36,8 @@ function InforSection() {
 
         {/* Footer section with contact + icons */}
         <div className="w-2/3 h-3 bg-[#145f48] my-6 ml-auto"></div>
-        <div className="max-w-7xl mx-auto px-4 pt-2 pb-16 flex flex-col lg:flex-row justify-between items-start gap-8">
+        <div className="max-w-7xl mx-auto px-4 py-20 flex flex-col lg:flex-row justify-between items-start gap-8">
+
             {/* Left: Contact Info */}
             <div className="text-left lg:w-1/2">
                 <h3 className="text-2xl font-bold">Contact Information</h3>

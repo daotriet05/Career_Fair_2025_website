@@ -58,28 +58,39 @@ function JobsSection() {
       <hr className="border-t-4 border-yellow-300 w-full max-w-7xl mb-10" />
 
       {/* Job Cards */}
-        <div className="w-full max-w-7xl grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="w-full max-w-7xl grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
             {jobDataMap[activeTab].map((job, index) => (
-                <div
-                key={index}
-                className="bg-[#444] text-white p-4 rounded-lg flex items-center gap-6"
-                >
-                {/* Logo on the left */}
-                <img
-                    src={job.logo}
-                    alt={`${job.company} logo`}
-                    className="h-24 w-24 object-contain flex-shrink-0"
-                />
+            <div
+            key={index}
+            className="bg-white border-2 border-[#e4e4e4] text-black p-4 rounded-lg flex items-center gap-6"
+            >
+            {/* Logo on the left */}
+            <img
+                src={job.logo}
+                alt={`${job.company} logo`}
+                className="h-24 w-24 object-contain flex-shrink-0"
+            />
 
-                {/* Text aligned to left */}
-                <div className="flex flex-col text-left">
-                    <p className="font-bold text-base">{job.position}</p>
-                    <p className="text-sm">{job.company}</p>
-                    <p className="text-sm">{job.location}</p>
-                </div>
-                </div>
-            ))}
+            {/* Text aligned to left */}
+            <div className="flex flex-col text-left flex-1">
+                <p className="font-bold text-md">{job.position}</p>
+                <p className="text-md">{job.company}</p>
+                <p className="text-md">{job.location}</p>
+
+                {/* JD Button */}
+                <a
+                    href={job.jdLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 inline-block px-4 py-1 text-sm font-semibold rounded-md max-w-[100px] text-center bg-yellow-400 hover:bg-yellow-500 text-black hover:bg-yellow-500"
+                >
+                    View JD
+                </a>
+            </div>
         </div>
+    ))}
+    </div>
+
 
     </div>
   );

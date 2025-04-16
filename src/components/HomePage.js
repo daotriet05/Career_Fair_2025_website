@@ -15,6 +15,7 @@ function HomePage() {
   const infoRef = useRef(null);
   const agendaRef = useRef(null);
   const workshopRef = useRef(null);
+  const jobRef = useRef(null);
   const recapRef = useRef(null);
 
   return (
@@ -24,6 +25,7 @@ function HomePage() {
           introRef,
           infoRef,
           agendaRef,
+          jobRef,
           workshopRef,
           recapRef,
         }}
@@ -32,6 +34,7 @@ function HomePage() {
         <div ref={introRef}><IntroSection /></div>
         <div ref={infoRef}><InforSection /></div>
         <div ref={agendaRef}><AgendaSection /></div>
+        <div ref={jobRef}><JobsSection /></div>
         <div ref={workshopRef}><WorkshopSection /></div>
         <div ref={recapRef}><RecapSection /></div>
       </div>
