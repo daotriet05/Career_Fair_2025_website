@@ -88,28 +88,28 @@ export const engineeringJobs = [
         position: 'IPQC Engineer',
         location: '',
         JD_link: 'https://drive.google.com/file/d/1QYmQ8cEqH_PT1s5sPdPvxIJhJ8kKpoVH/view?usp=drive_link',
-        logo: require('../../images/logo_2025/Nextern.png'),
+        logo: require('../../images/logo_2025/nextern.png'),
     },
     {
         company: 'Wanek',
         position: 'Warehouse Automation Design Engineer',
         location: '',
         JD_link: 'https://docs.google.com/document/d/1T1FQe2zEufYXK53lJongo5GYsU9yLjMk/edit',
-        logo: require('../../images/logo_2025/Wanek.png'),
+        logo: require('../../images/logo_2025/wanek.png'),
     },
     {
         company: 'Wanek',
         position: 'PLC & Robotic Programmer',
         location: '',
         JD_link: 'https://docs.google.com/document/d/17C9arb3CKXDTocXvXebWkOi7fLek0EyT/edit',
-        logo: require('../../images/logo_2025/Wanek.png'),
+        logo: require('../../images/logo_2025/wanek.png'),
     },
     {
         company: 'Wanek',
         position: 'Automation Design Engineer',
         location: '',
         JD_link: 'https://docs.google.com/document/d/1woloLCZDy4LZhFm_FU0XTzKAb3ngjGar/edit?usp=drive_web&ouid=113519301845794276564&rtpof=true',
-        logo: require('../../images/logo_2025/Wanek.png'),
+        logo: require('../../images/logo_2025/wanek.png'),
     },
     // ...
   ];
@@ -143,21 +143,21 @@ export const engineeringJobs = [
         position: 'Structural designer',
         location: '',
         JD_link: 'https://docs.google.com/spreadsheets/d/1hXNxizMhjSfS1u6keaFMc__xoRSNXFfD/edit?usp=drive_link&ouid=113519301845794276564&rtpof=true&sd=true',
-        logo: require('../../images/logo_2025/Mitek.png'),
+        logo: require('../../images/logo_2025/mitek.png'),
     },
     {
         company: 'Mitek',
         position: 'Architectural Drafter',
         location: '',
         JD_link: 'https://docs.google.com/spreadsheets/d/1hXNxizMhjSfS1u6keaFMc__xoRSNXFfD/edit?usp=drive_link&ouid=113519301845794276564&rtpof=true&sd=true',
-        logo: require('../../images/logo_2025/Mitek.png'),
+        logo: require('../../images/logo_2025/mitek.png'),
     },
     {
         company: 'Mitek',
         position: 'Budget Officer',
         location: '',
         JD_link: 'https://docs.google.com/spreadsheets/d/1hXNxizMhjSfS1u6keaFMc__xoRSNXFfD/edit?usp=drive_link&ouid=113519301845794276564&rtpof=true&sd=true',
-        logo: require('../../images/logo_2025/Mitek.png'),
+        logo: require('../../images/logo_2025/mitek.png'),
     },
   ];
   export const itJobs = [
