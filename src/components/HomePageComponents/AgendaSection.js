@@ -26,11 +26,18 @@ const agendas = [
 ];
 
 const AgendaCard = ({ time, title, image }) => (
-    <div className="flex flex-col items-center gap-3">
-      <div className="bg-white w-[230px] h-[140px] rounded-xl shadow-md overflow-hidden">
+    <div className="flex flex-col items-center gap-3 w-[230px]">
+      {/* Image */}
+      <div className="bg-white w-full h-[140px] rounded-xl shadow-md overflow-hidden">
         <img src={image} alt={title} className="w-full h-full object-cover" />
       </div>
-      <div className="text-center font-extrabold text-lg max-w-[220px]">{title}</div>
+  
+      {/* Title */}
+      <div className="text-center font-extrabold text-lg h-[60px] flex items-center justify-center text-balance">
+        {title}
+      </div>
+  
+      {/* Time */}
       <div className="inline-flex items-center gap-2 bg-[#184A45] text-white px-4 py-1.5 rounded-lg font-extrabold text-base">
         <Clock size={18} className="text-white" />
         {time}
