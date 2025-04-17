@@ -23,15 +23,12 @@ function HeaderBar() {
 
         {/* Registration Button */}
         <div className="flex space-x-2">
-          <a
-            href="https://docs.google.com/forms/u/1/d/1Um8irhxixuR6jvbCO7Dvp1_AMQYKPsGU4zxirNEWJr0/edit?usp=drivesdk"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-yellow-400 h-12 text-black px-2 md:px-6 py-2 text-sm font-bold rounded-md flex items-center justify-center"
-          >
-            Company Registration
-          </a>
-        </div>
+                    <Link 
+                    to="/login" 
+                    className="bg-yellow-400 h-12 text-black px-6 md:px-10 py-2 text-sm font-bold rounded-md flex items-center justify-center">
+                    Login
+                    </Link>
+                </div>
       </nav>
     </header>
   );
