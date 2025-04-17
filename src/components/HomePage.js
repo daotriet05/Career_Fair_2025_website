@@ -6,7 +6,7 @@ import RecapSection from "./HomePageComponents/RecapSection";
 import HeaderBar from "./HeaderBar";
 import WorkshopSection from "./HomePageComponents/WorkshopSection";
 import JobsSection from "./HomePageComponents/JobsSection";
-import CoreteamSection from "./HomePageComponents/CoreteamSection";
+//import CoreteamSection from "./HomePageComponents/CoreteamSection";
 
 function HomePage() {
   return (
