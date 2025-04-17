@@ -79,7 +79,7 @@ function JobsSection() {
 
                 {/* JD Button */}
                 <a
-                    href={job.jdLink}
+                    href={job.JD_link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-block px-4 py-1 text-sm font-semibold rounded-md max-w-[100px] text-center bg-yellow-400 hover:bg-yellow-500 text-black hover:bg-yellow-500"

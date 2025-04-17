@@ -17,6 +17,7 @@ function HeaderBar() {
           <HashLink smooth to="/#intro" className="hover:text-black">Home</HashLink>
           <HashLink smooth to="/#info" className="hover:text-black">Information</HashLink>
           <HashLink smooth to="/#agenda" className="hover:text-black">Agenda</HashLink>
+          <HashLink smooth to="/#jobs" className="hover:text-black">Jobs</HashLink>
           <HashLink smooth to="/#workshop" className="hover:text-black">Workshop</HashLink>
           <HashLink smooth to="/#recap" className="hover:text-black">Recap</HashLink>
         </div>
