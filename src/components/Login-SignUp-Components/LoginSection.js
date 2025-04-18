@@ -12,16 +12,16 @@ function LoginSection() {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
-            // if (user) {
-            //   setIsLoggedIn(true);
-            // //   navigate('/'); // Navigate to home if already logged in
-            // } else {
-            //   setIsLoggedIn(false);
-            // }
-
             if (user) {
-                navigate('/'); // Navigate to the home page (assuming '/' is your home route)
+              setIsLoggedIn(true);
+            //   navigate('/'); // Navigate to home if already logged in
+            } else {
+              setIsLoggedIn(false);
             }
+
+            // if (user) {
+            //     navigate('/'); // Navigate to the home page (assuming '/' is your home route)
+            // }
         });
 
         return () => unsubscribe(); // Cleanup subscription on unmount
@@ -34,7 +34,7 @@ function LoginSection() {
         try {
         await signInWithEmailAndPassword(auth, studentEmail, password);
         console.log('Login successful!');
-        // navigate('/'); // Navigate to the home page (assuming '/' is your home route)
+        navigate('/'); // Navigate to the home page (assuming '/' is your home route)
         } catch (authError) {
         console.error('Login failed:', authError);
         if (authError.code === 'auth/user-not-found') {

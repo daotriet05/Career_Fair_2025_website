@@ -67,8 +67,8 @@ function RegisterSection() {
                 createdAt: Timestamp.now(),
             });
             await signOut(auth); // Force user to verify before using app
-            setStatus("Registration successful! A verification email has been sent to ${studentEmail}.");
-            // navigate("/login"); // Redirect to login page after registration
+            setStatus("Registration successful! A verification email has been sent to your email.");
+            navigate("/login"); // Redirect to login page after registration
 
         } catch (error) {
             setStatus("Error: " + error.message);

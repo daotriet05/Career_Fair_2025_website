@@ -2,14 +2,13 @@ import { useState } from "react";
 import BoardingPass from "./DashboardComponents/BoardingPass";
 import QRScanner from "./DashboardComponents/QRScanner";
 import dashboardBanner from "../images/dashboard_banner.png";
-import HeaderBar from "./HeaderBar";
+
 
 function Dashboard() {
     const [tab, setTab] = useState("boarding");
   
     return (
         <>
-            <HeaderBar />
             <div className="min-h-screen bg-white p-6 pt-28 font-sans flex flex-col items-center">
                 {/* Banner Image */}
                 <img
