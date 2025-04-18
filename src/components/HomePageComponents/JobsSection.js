@@ -30,9 +30,14 @@ function JobsSection() {
             </h1>
 
             <div className="mt-4 sm:mt-0 sm:ml-0">
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 rounded-md">
-                Submit Your CV Here
-                </button>
+                <a 
+                    href="https://forms.gle/b5ZrWNCbre2Qoghg8" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 rounded-md inline-block text-center"
+                    >
+                    Submit Your CV Here
+                </a>
             </div>
         </div>
 
@@ -79,7 +84,7 @@ function JobsSection() {
 
                 {/* JD Button */}
                 <a
-                    href={job.jdLink}
+                    href={job.JD_link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-block px-4 py-1 text-sm font-semibold rounded-md max-w-[100px] text-center bg-yellow-400 hover:bg-yellow-500 text-black hover:bg-yellow-500"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import '../../App.css';
 import bulb from '../../images/light_bulb.png'; // ✅ Make sure this path is correct
 

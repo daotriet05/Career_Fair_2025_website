@@ -7,6 +7,7 @@ import "../App.css";
 import vgulogo from "../images/vgu-logo.png";
 
 
+
 function HeaderBar({ isLoggedIn, showLogoutButton }) { // Receive isLoggedIn as a prop	
 	
 	const handleLogout = async () => {
@@ -26,11 +27,13 @@ function HeaderBar({ isLoggedIn, showLogoutButton }) { // Receive isLoggedIn as 
                     <img src={vgulogo} alt="VGU Logo" className="h-12" />
                 </div>
 
+
                 {/* Navigation Links */}
                 <div className="hidden md:flex space-x-6 text-gray-600 text-lg font-medium">
                     <HashLink smooth to="/#intro" className="hover:text-black">Home</HashLink>
                     <HashLink smooth to="/#info" className="hover:text-black">Information</HashLink>
                     <HashLink smooth to="/#agenda" className="hover:text-black">Agenda</HashLink>
+                    <HashLink smooth to="/#jobs" className="hover:text-black">Jobs</HashLink>
                     <HashLink smooth to="/#workshop" className="hover:text-black">Workshop</HashLink>
                     <HashLink smooth to="/#recap" className="hover:text-black">Recap</HashLink>
                 </div>
