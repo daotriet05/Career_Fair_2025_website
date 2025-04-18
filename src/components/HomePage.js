@@ -11,7 +11,7 @@ import JobsSection from "./HomePageComponents/JobsSection";
 function HomePage() {
   return (
     <div className="Homepage scroll-smooth">
-      <HeaderBar />
+      {/* <HeaderBar /> */}
 
       <div className="Sections-Homepage">
         <div id="intro"><IntroSection /></div>

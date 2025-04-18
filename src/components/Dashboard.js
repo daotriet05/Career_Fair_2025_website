@@ -3,7 +3,7 @@ import BoardingPass from "./DashboardComponents/BoardingPass";
 import QRScanner from "./DashboardComponents/QRScanner";
 import Analysis from "./DashboardComponents/Analysis";
 import dashboardBanner from "../images/dashboard_banner.png";
-import HeaderBar from "./HeaderBar";
+
 
 // Change userData as needed to test different roles
 /*const userData = {
@@ -43,7 +43,6 @@ function Dashboard() {
 
     return (
         <>
-            <HeaderBar />
             <div className="min-h-screen bg-white p-6 pt-28 font-sans flex flex-col items-center">
                 <img src={dashboardBanner} alt="VGU to Career" className="w-full max-w-md mb-6" />
 
