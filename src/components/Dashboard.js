@@ -32,8 +32,8 @@ const userData = {
     numCode: "1234567890",
     checkinStatus: false, // when checkinStatus is activated, set checkoutStatus to false (for cases when users re-checkin)
     checkoutStatus: false,
-    CV_link: "https://drive.google.com/file/d/1Um8irhxixuR6jvbCO7Dvp1_AMQYKPsGU4zxirNEWJr0/edit?usp=drivesdk",
-    linkedIn_link: "https://www.linkedin.com/in/dao-hoang-minh-triet-1234567890",
+    CV_link: "",
+    linkedIn_link: "",
 }
 
 function Dashboard() {
