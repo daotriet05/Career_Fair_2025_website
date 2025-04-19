@@ -3,7 +3,7 @@ import BoardingPass from "./DashboardComponents/BoardingPass";
 import QRScanner from "./DashboardComponents/QRScanner";
 import Analysis from "./DashboardComponents/Analysis";
 import dashboardBanner from "../images/dashboard_banner.png";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 
 // Change userData as needed to test different roles
@@ -39,29 +39,20 @@ import { db, auth } from "../firebase-config";
 
 class User {
     constructor(uid) {
-      this.uid = uid || auth.currentUser?.uid;
-      this.ref = doc(db, "studentRegistrations", this.uid);
+        if (!uid) throw new Error("UID is required");
+        this.uid = uid;
+        this.ref = doc(db, "studentRegistrations", uid);
     }
   
     async getUserData() {
-      try {
         const snap = await getDoc(this.ref);
         if (!snap.exists()) throw new Error("No user data found.");
         return snap.data();
-      } catch (error) {
-        console.error("❌ Failed to get user data:", error);
-        throw error;
-      }
     }
 
-    async updateUserData(updates) {
-      try {
-        await updateDoc(this.ref, updates);
-        console.log("✅ User data updated.");
-      } catch (error) {
-        console.error("Failed to update user data:", error);
-        throw error;
-      }
+    async updateUserData(updatedData) {
+        await setDoc(this.ref, updatedData); // overwrite the full document
+        console.log("✅ Data updated.");
     }
   
     async markBoothCollected(boothName) {
@@ -85,17 +76,19 @@ function Dashboard() {
 
     useEffect(() => {
         const fetchData = async () => {
-          const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
-            if (firebaseUser) {
-              const user = new User(firebaseUser.uid); // 👈 pass UID directly
-              setUserObj(user);
-              const data = await user.getUserData();
-              setUserData(data);
-              setTab(data.role === "Student" ? "boarding" : "analysis");
-            }
-          });
-      
-          return () => unsubscribe();
+            const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
+                if (firebaseUser) {
+                    const user = new User(firebaseUser.uid); // 👈 pass UID directly
+                    setUserObj(user);
+                    const data = await user.getUserData();
+                    setUserData(data);
+
+                    console.log("Adnovum booth collected:", data.boothCollected?.Adnovum);
+                    setTab(data.role === "Student" ? "boarding" : "analysis");
+                }
+            });
+        
+            return () => unsubscribe();
         };
       
         fetchData();
@@ -144,6 +137,43 @@ function Dashboard() {
                     {tab === "boarding" && isStudent && <BoardingPass data={userData} />}
                     {tab === "analysis" && !isStudent && <Analysis data={userData} />}
                 </div>
+
+
+                {/* 
+                    TEST BUTTON: CHANGE BOOTH COLLECTED STATUS ADNOVUM FROM FALSE TO TRUE
+                    How to use:
+                    - First check in firebase if the status of Adnovum is false (if not, change it false)
+                    - Then click the button below to change it to true (open console to see the result)
+                */}
+
+                {/* {userObj && (
+                    <button
+                        onClick={async () => {
+                        try {
+                            const currentData = await userObj.getUserData();
+
+                            console.log("Before:", currentData.boothCollected?.Adnovum); // 🔍
+
+                            currentData.boothCollected = {
+                            ...(currentData.boothCollected || {}),
+                            Adnovum: true,
+                            };
+
+                            await userObj.updateUserData(currentData);
+
+                            console.log("After:", currentData.boothCollected.Adnovum); // ✅
+
+                            setUserData(currentData); // refresh state
+
+                        } catch (err) {
+                            console.error("❌ Test update failed:", err);
+                        }
+                        }}
+                        className="mt-4 px-4 py-2 bg-green-600 text-white rounded"
+                    >
+                        Test: Set Adnovum to True
+                    </button>
+                )} */}
             </div>
         </>
     );
