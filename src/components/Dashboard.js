@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BoardingPass from "./DashboardComponents/BoardingPass";
 import QRScanner from "./DashboardComponents/QRScanner";
+import QRCodeDisplay from "./DashboardComponents/QRCodeDisplay";
 import Analysis from "./DashboardComponents/Analysis";
 import dashboardBanner from "../images/dashboard_banner.png";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
@@ -55,18 +56,6 @@ class User {
         console.log("✅ Data updated.");
     }
   
-    async markBoothCollected(boothName) {
-      try {
-        const data = await this.getUserData();
-        const boothCollected = {
-          ...(data.boothCollected || {}),
-          [boothName]: true,
-        };
-        await this.updateUserData({ boothCollected });
-      } catch (error) {
-        console.error("Failed to mark booth:", error);
-      }
-    }
 }
 
 function Dashboard() {
@@ -87,21 +76,40 @@ function Dashboard() {
                     setTab(data.role === "Student" ? "boarding" : "analysis");
                 }
             });
-        
+            
             return () => unsubscribe();
         };
       
         fetchData();
+        
+        
     }, []);
       
 
     const isStudent = userData?.role === "Student";
 
-    const handleCollect = async (booth) => {
-        await userObj.markBoothCollected(booth);
-        const updatedData = await userObj.getUserData();
-        setUserData(updatedData);
-    };
+    const updateBoothCollected = async (boothName, uid) => {
+        try {
+            const userRef = doc(db, "studentRegistrations", uid);
+            const userSnap = await getDoc(userRef);
+
+            if (!userSnap.exists()) {
+                console.error("User not found:", uid);
+                return;
+            }
+
+            const userData = userSnap.data();
+            const boothCollected = {
+                ...(userData.boothCollected || {}),
+                [boothName]: true,
+            };
+
+            await updateDoc(userRef, { boothCollected });
+            console.log(`Booth ${boothName} marked as collected for user ${uid}.`);
+        } catch (error) {
+            console.error("Error updating booth collected status:", error);
+        }
+    }
 
     return (
         <>
@@ -133,7 +141,8 @@ function Dashboard() {
                 </div>
 
                 <div className="w-full max-w-5xl">
-                    {tab === "scanner" && <QRScanner onScan={handleCollect} />}
+                    {tab === "scanner" && isStudent && <QRCodeDisplay userID={userObj.uid} />}
+                    {tab === "scanner" && !isStudent && <QRScanner companyName={userData?.displayName} updateBoothCollected={updateBoothCollected}/>}
                     {tab === "boarding" && isStudent && <BoardingPass data={userData} />}
                     {tab === "analysis" && !isStudent && <Analysis data={userData} />}
                 </div>
