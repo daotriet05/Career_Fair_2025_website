@@ -1,7 +1,7 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
 import Adnovum from "../images/logo_2025/Adnovum.png";
-import BakerHughes from "../images/logo_2025/Baker Hughes.png";
+import SAP from "../images/logo_2025/SAP.png";
 import Bosch from "../images/logo_2025/Bosch.png";
 import EndressHauser from "../images/logo_2025/Endress Hauser.png";
 import Fischer from "../images/logo_2025/fischer.png";
@@ -29,7 +29,7 @@ const MarqueeLogos = () => {
         <div className="bg-gray-100 py-4">
             <Marquee speed={50} pauseOnHover>
             <img src={Adnovum} alt="Adnovum" className="h-12 mx-10" />
-            <img src={BakerHughes} alt="Baker Hughes" className="h-12 mx-10" />
+            <img src={SAP} alt="SAP" className="h-16 mx-10" />
             <img src={Bosch} alt="Bosch" className="h-12 mx-10" />
             <img src={EndressHauser} alt="Endress Hauser" className="h-12 mx-10" />
             <img src={Fischer} alt="fischer" className="h-12 mx-10" />

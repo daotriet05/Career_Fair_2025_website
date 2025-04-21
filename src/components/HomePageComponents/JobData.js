@@ -77,13 +77,6 @@ export const engineeringJobs = [
         logo: require('../../images/logo_2025/TTI.png'),
     },
     {
-        company: 'TTI',
-        position: 'Data Engineer Intern',
-        location: '',
-        JD_link: 'https://drive.google.com/file/d/175vokCv5TD2ing-UPjVZBMhvNXT2IDMg/view?usp=drive_link',
-        logo: require('../../images/logo_2025/TTI.png'),
-    },
-    {
         company: 'Nextern',
         position: 'IPQC Engineer',
         location: '',
@@ -111,12 +104,60 @@ export const engineeringJobs = [
         JD_link: 'https://docs.google.com/document/d/1woloLCZDy4LZhFm_FU0XTzKAb3ngjGar/edit?usp=drive_web&ouid=113519301845794276564&rtpof=true',
         logo: require('../../images/logo_2025/wanek.png'),
     },
-    // ...
+    {
+        company: 'Indefol',
+        position: 'Mechanical Engineer Intern',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1Z7fnt3QDPDKp_twCJzedIN2CJuvhdnJD/view?usp=drive_open',
+        logo: require('../../images/logo_2025/Indefol.png'),
+    },
+    {
+        company: 'Indefol',
+        position: 'Quality Management Engineering Intern',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1bosarfvCa9jp24t1QoUGgUeb0WsYnGDn/view?usp=drive_open',
+        logo: require('../../images/logo_2025/Indefol.png'),
+    },
+    {
+        company: 'Indefol',
+        position: 'Automation Electrical Engineer',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1-aW4L18vdTq8SJBBadB8XO-UpTrXqhwr/view?usp=drive_link',
+        logo: require('../../images/logo_2025/Indefol.png'),
+    },
+    {
+        company: 'Indefol',
+        position: 'Mechanical Engineer',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1uv50Wxt8ZwlP_lgD5VwZntwXVDBYz50N/view?usp=drive_link',
+        logo: require('../../images/logo_2025/Indefol.png'),
+    },
+    {
+        company: 'Indefol',
+        position: 'Quality Management Engineer',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1Y7eukgMP4R2rZM4PGyHvrnfpNbHECBV4/view?usp=drive_link',
+        logo: require('../../images/logo_2025/Indefol.png'),
+    },
+    {
+        company: 'MAC ZT',
+        position: 'MEP Engineer - HVAC Modeler',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1YcOw6Z6-rIKwMXyprdCDaA-_N8G__5O2/edit?usp=drive_link&ouid=107987931277148505499&rtpof=true&sd=true',
+        logo: require('../../images/logo_2025/MAC ZT.png'),
+    },
+    {
+        company: 'MAC ZT',
+        position: 'MEP Engineer - Sanitary Modeler',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1B-ijLygA_Of3dn5x4uHdJx133ZA2_r2L/edit?usp=drive_link&ouid=107987931277148505499&rtpof=true&sd=true',
+        logo: require('../../images/logo_2025/MAC ZT.png'),
+    },
   ];
   
   export const econMgmtJobs = [
     {
-        company: 'TTI',
+        datacompany: 'TTI',
         position: 'Translator-Interpreter Intern',
         location: '',
         JD_link: 'https://drive.google.com/file/d/1DHjVSQKeFfgc77IIYr4MrrORIlh4V5P3/view?usp=drive_link',
@@ -159,8 +200,27 @@ export const engineeringJobs = [
         JD_link: 'https://docs.google.com/spreadsheets/d/1hXNxizMhjSfS1u6keaFMc__xoRSNXFfD/edit?usp=drive_link&ouid=113519301845794276564&rtpof=true&sd=true',
         logo: require('../../images/logo_2025/mitek.png'),
     },
+    {
+        company: 'Indefol',
+        position: 'Chemical Engineer Intern',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1h4rRwc6mfyRUF7Vl9IBAAyZoHGRe6Pbo/view?usp=drive_open',
+        logo: require('../../images/logo_2025/Indefol.png'),
+    },
   ];
   export const itJobs = [
-    
+    {
+    company: 'Netcompany',
+    position: 'Talented IT Graduates',
+    location: '',
+    JD_link: 'https://docs.google.com/document/d/1M9Hjq8H5nSUc6G5hibDTLG3HumU-13z1/edit?usp=sharing&ouid=104119655429819847708&rtpof=true&sd=true',
+    logo: require('../../images/logo_2025/Netcompany.png'),
+    },
+    {
+        company: 'TTI',
+        position: 'Data Engineer Intern',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/175vokCv5TD2ing-UPjVZBMhvNXT2IDMg/view?usp=drive_link',
+        logo: require('../../images/logo_2025/TTI.png'),
+    },
   ];
-  
