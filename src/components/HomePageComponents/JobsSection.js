@@ -27,7 +27,7 @@ function JobsSection() {
       {/* Header */}
         <div className="w-full max-w-7xl flex flex-col sm:flex-row sm:items-center sm:gap-6 pt-24 mb-8 text-center sm:text-left">
             <h1 className="text-6xl font-extrabold text-[#194d39] uppercase">
-                Open Positions
+                Job Interview
             </h1>
 
             <div className="mt-4 sm:mt-0 sm:ml-0">
