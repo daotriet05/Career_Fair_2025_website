@@ -23,6 +23,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body {
+  height: auto;
+  overflow: hidden;
+  scroll-behavior: auto;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
