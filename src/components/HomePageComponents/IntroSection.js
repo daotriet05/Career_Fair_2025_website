@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../App.css';
 import MarqueeLogos from "../MarqueeLogos";
-import introSection from "../../images/intro-section.png";
+import introSection from "../../images/intro-section.webp";
 
 function IntroSection() {
     return (

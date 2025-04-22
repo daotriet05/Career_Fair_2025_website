@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../App.css';
 import MarqueeLogosRecap from './MarqueeLogosRecap';
-import businessesImage from '../../images/recap_2024/collaboration.png';
-import sponsorshipsImage from '../../images/recap_2024/sponsorships.png'; // ✅ Make sure this path is correct
+import businessesImage from '../../images/recap_2024/collaboration.webp';
+import sponsorshipsImage from '../../images/recap_2024/sponsorships.webp'; // ✅ Make sure this path is correct
 
 function RecapSection() {
   return (

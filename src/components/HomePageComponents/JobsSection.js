@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../App.css';
+import LazyImage from '../EffectComponents/LazyImage'; // thêm ở đầu file (chính xác đường dẫn)
 
 // Replace these imports with your actual arrays
 import { engineeringJobs, econMgmtJobs, urbanEnvJobs, itJobs } from './JobData';
@@ -26,7 +27,7 @@ function JobsSection() {
       {/* Header */}
         <div className="w-full max-w-7xl flex flex-col sm:flex-row sm:items-center sm:gap-6 pt-24 mb-8 text-center sm:text-left">
             <h1 className="text-6xl font-extrabold text-[#194d39] uppercase">
-                Open Positions
+                Job Interview
             </h1>
 
             <div className="mt-4 sm:mt-0 sm:ml-0">
@@ -70,10 +71,10 @@ function JobsSection() {
             className="bg-white border-2 border-[#e4e4e4] text-black p-4 rounded-lg flex items-center gap-6"
             >
             {/* Logo on the left */}
-            <img
-                src={job.logo}
-                alt={`${job.company} logo`}
-                className="h-24 w-24 object-contain flex-shrink-0"
+            <LazyImage
+              src={job.logo}
+              alt={`${job.company} logo`}
+              className="h-24 w-24 object-contain flex-shrink-0"
             />
 
             {/* Text aligned to left */}

@@ -23,6 +23,7 @@ import { db, auth } from "../firebase-config";
     },
 };*/
 
+
 // const userData = {
 //     displayName : "DAO HOANG MINH TRIET",
 //     role : "Student",
@@ -56,7 +57,7 @@ class User {
         console.log("✅ Data updated.");
     }
   
-}
+
 
 function Dashboard() {
     const [tab, setTab] = useState("boarding");

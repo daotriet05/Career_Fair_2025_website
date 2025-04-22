@@ -1,6 +1,7 @@
 import React, {useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
+import useLenis from './components/EffectComponents/useLenis';
 import HomePage from './components/HomePage';
 import RegisterSection from './components/Login-SignUp-Components/RegisterSection';
 import LoginSection from "./components/Login-SignUp-Components/LoginSection";
@@ -10,6 +11,7 @@ import { auth } from './firebase-config'; // Import Firebase auth
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+	useLenis();
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user => {

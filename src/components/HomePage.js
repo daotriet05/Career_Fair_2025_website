@@ -1,18 +1,33 @@
+import { useEffect } from "react";
 import "../App.css";
 import IntroSection from "./HomePageComponents/IntroSection";
 import InforSection from "./HomePageComponents/InforSection";
 import AgendaSection from "./HomePageComponents/AgendaSection";
 import RecapSection from "./HomePageComponents/RecapSection";
-import HeaderBar from "./HeaderBar";
 import WorkshopSection from "./HomePageComponents/WorkshopSection";
 import JobsSection from "./HomePageComponents/JobsSection";
-//import CoreteamSection from "./HomePageComponents/CoreteamSection";
 
 function HomePage() {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+  
+    const scrollToHashElement = () => {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        setTimeout(scrollToHashElement, 100);
+      }
+    };
+  
+    requestAnimationFrame(() => {
+      setTimeout(scrollToHashElement, 500);
+    });
+  }, []);
+
   return (
     <div className="Homepage scroll-smooth">
-      {/* <HeaderBar /> */}
-
       <div className="Sections-Homepage">
         <div id="intro"><IntroSection /></div>
         <div id="info"><InforSection /></div>
