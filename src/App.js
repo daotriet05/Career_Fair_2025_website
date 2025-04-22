@@ -2,6 +2,7 @@ import React, {useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import './App.css';
 import useLenis from './components/EffectComponents/useLenis';
+import AnimatedCursor from "react-animated-cursor"
 import HomePage from './components/HomePage';
 import RegisterSection from './components/Login-SignUp-Components/RegisterSection';
 import LoginSection from "./components/Login-SignUp-Components/LoginSection";
@@ -25,6 +26,26 @@ function App() {
     return (
         <Router>
             <div className="App">
+			<AnimatedCursor
+				color="#fff"
+				innerSize={15}
+				outerSize={45}
+				innerScale={0.5}
+				outerScale={3}
+				outerAlpha={0}
+				outerStyle={{
+				  mixBlendMode: 'difference'
+				}}
+				clickables={[
+					'input[type="email"]',
+					'input[type="submit"]',
+					'label[for]',
+					'select',
+					'button',
+					'.link'
+				]}
+			/>
+
                 {/* Header (Example) - Now using HeaderBar */}
                 <HeaderBar isLoggedIn={isLoggedIn} />
 
