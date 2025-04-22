@@ -57,7 +57,7 @@ class User {
         console.log("✅ Data updated.");
     }
   
-
+}
 
 function Dashboard() {
     const [tab, setTab] = useState("boarding");
