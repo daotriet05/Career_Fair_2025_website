@@ -6,6 +6,7 @@ import AgendaSection from "./HomePageComponents/AgendaSection";
 import RecapSection from "./HomePageComponents/RecapSection";
 import WorkshopSection from "./HomePageComponents/WorkshopSection";
 import JobsSection from "./HomePageComponents/JobsSection";
+import SponserNowSection from "./HomePageComponents/SponserNowSection";
 
 function HomePage() {
   useEffect(() => {
@@ -35,6 +36,7 @@ function HomePage() {
         <div id="jobs"><JobsSection /></div>
         <div id="workshop"><WorkshopSection /></div>
         <div id="recap"><RecapSection /></div>
+        <div id="sponser"><SponserNowSection/></div>
       </div>
     </div>
   );
