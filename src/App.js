@@ -12,39 +12,51 @@ import { auth } from './firebase-config'; // Import Firebase auth
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+	const [showReady, setCursorReady] = useState(false)
+
 	useLenis();
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
-			setIsLoggedIn(!!user); // Set login status based on user state
+			setIsLoggedIn(!!user);
 			console.log("Auth state changed, isLoggedIn:", !!user);
-
 		});
-		return () => unsubscribe(); // Cleanup subscription on unmount
+		
+		// Delay mounting the cursor slightly
+		const timer = setTimeout(() => {
+			setCursorReady(true);
+		}, 100); // even 10ms might be enough
+	
+		return () => {
+			clearTimeout(timer);
+			unsubscribe();
+		};
 	}, []);
+	
 
     return (
         <Router>
             <div className="App">
-			<AnimatedCursor
-				color="#fff"
-				innerSize={15}
-				outerSize={45}
-				innerScale={0.5}
-				outerScale={3}
-				outerAlpha={0}
-				outerStyle={{
-				  mixBlendMode: 'difference'
-				}}
-				clickables={[
-					'input[type="email"]',
-					'input[type="submit"]',
-					'label[for]',
-					'select',
-					'button',
-					'.link'
-				]}
-			/>
+				{showReady ? (
+					<AnimatedCursor
+						color="#fff"
+						innerSize={15}
+						outerSize={45}
+						innerScale={0.5}
+						outerScale={3}
+						outerAlpha={0}
+						outerStyle={{
+							mixBlendMode: 'exclusion',
+							zIndex: 9999
+						}}
+						innerStyle={{
+							zIndex: 9999
+						}}
+					/>
+				) : (
+					<AnimatedCursor /> // default basic cursor
+				)}
+
 
                 {/* Header (Example) - Now using HeaderBar */}
                 <HeaderBar isLoggedIn={isLoggedIn} />
