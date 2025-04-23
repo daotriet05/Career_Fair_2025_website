@@ -49,6 +49,7 @@ function App() {
         {/* Only show the animated cursor on desktop */}
         {isDesktop && showReady ? (
           <AnimatedCursor
+			className="custom-cursor"
             color="#fff"
             innerSize={15}
             outerSize={45}
