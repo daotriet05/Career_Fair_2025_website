@@ -1,5 +1,10 @@
-body {
-    overflow-x: hidden;
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
+  touch-action: auto;
 }
 
 .App {
@@ -64,4 +69,10 @@ body {
   display: inline-block;
   white-space: nowrap;
   animation: marquee 15s linear infinite;
+}
+
+@media (min-width: 768px) {
+  body::-webkit-scrollbar {
+    display: none;
+  }
 }
