@@ -90,6 +90,7 @@ function Dashboard() {
 
     const isStudent = userData?.role === "Student";
 
+    // for students acces to their data
     const refetchUserData = async () => {
         if (userObj) {
             const data = await userObj.getUserData();
@@ -97,6 +98,36 @@ function Dashboard() {
         }
     }
 
+    const updateCVLink = async (link) => {
+        try {
+            if (!userObj) return;
+    
+            const data = await userObj.getUserData(); // 🔍 fetch user data from Firestore
+            data.CV_link = link; // ✍️ update CV link
+            await userObj.updateUserData(data); // 🔁 update Firestore
+            setUserData(data); // 🧠 update React state
+            console.log("✅ CV link updated:", link);
+        } catch (error) {
+            console.error("❌ Error updating CV link:", error);
+        }
+    };
+    
+    const updateLinkedInLink = async (link) => {
+        try {
+            if (!userObj) return;
+    
+            const data = await userObj.getUserData(); // 🔍 fetch user data from Firestore
+            data.linkedin_link = link; // ✍️ update LinkedIn link
+            await userObj.updateUserData(data); // 🔁 update Firestore
+            setUserData(data); // 🧠 update React state
+            console.log("✅ LinkedIn link updated:", link);
+        } catch (error) {
+            console.error("❌ Error updating LinkedIn link:", error);
+        }
+    };
+               
+
+    // for companies access to students data
     const updateBoothCollected = async (boothName, uid) => { // update booth collected status to student
         try {
             const studentRef = doc(db, "studentRegistrations", uid);
@@ -181,7 +212,7 @@ function Dashboard() {
                 </div>
 
                 <div className="w-full max-w-5xl">
-                    {tab === "scanner" && isStudent && <QRCodeDisplay userID={userObj.uid} />}
+                    {tab === "scanner" && isStudent && <QRCodeDisplay userID={userObj.uid} data={userData} updateCVLink={updateCVLink} updateLinkedInLink={updateLinkedInLink}/>}
                     {tab === "scanner" && !isStudent && <QRScanner companyName={userData?.displayName} updateBoothCollected={updateBoothCollected} getStudentData={getStudentData}/>}
                     {tab === "boarding" && isStudent && <BoardingPass data={userData} refetchUserData={refetchUserData}/>}
                     {tab === "analysis" && !isStudent && <Analysis data={userData} refetchUserData={refetchUserData}/>}
