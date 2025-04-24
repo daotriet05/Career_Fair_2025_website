@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
 
-const QRScanner = ({ companyName, updateBoothCollected }) => {
+const QRScanner = ({ companyName, updateBoothCollected, getStudentData }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
   const scanIntervalRef = useRef(null);
 
   const [scannedData, setScannedData] = useState("Find a code to scan");
+  const [studentData, setStudentData] = useState(null); // State to hold student data
   const [isScanning, setIsScanning] = useState(false);
 
   // ✅ Manual function to start camera
@@ -17,8 +18,10 @@ const QRScanner = ({ companyName, updateBoothCollected }) => {
         video: { facingMode: "environment" },
       });
       streamRef.current = stream;
-
-      const video = videoRef.current;
+        setScannedData("Find a code to scan");
+        setStudentData(null); // Reset student data when starting camera
+      
+        const video = videoRef.current;
       if (video) {
         video.srcObject = stream;
         video.onloadedmetadata = () => {
@@ -78,11 +81,20 @@ const QRScanner = ({ companyName, updateBoothCollected }) => {
       if (code) {
         console.log("✅ QR Code scanned:", code.data);
         setScannedData(code.data);
-        if (updateBoothCollected) {
-            updateBoothCollected(companyName, code.data); // Update booth collected status
-            stopCamera(); // 🔁 stop immediately after detection
-        }
-        stopCamera(); // 🔁 stop immediately after detection
+        
+        (async () => {
+            const studentData = await getStudentData(code.data);
+            if (studentData) {
+              console.log("📚 Student name:", studentData.displayName);
+              setStudentData(studentData);
+        
+              if (updateBoothCollected) {
+                await updateBoothCollected(companyName, code.data);
+              }
+        
+              stopCamera(); // ✅ safe to stop here
+            }
+          })();
       }
     }, 100);
   };
@@ -104,14 +116,46 @@ const QRScanner = ({ companyName, updateBoothCollected }) => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <p className="text-lg font-semibold">{scannedData}</p>
+      {/*<p className="text-lg font-semibold">{scannedData}</p>*/}
+        {studentData && (
+            <div className="bg-white shadow-md rounded-lg p-4 w-full max-w-md text-center">
+                <h2 className="text-xl font-semibold mb-2">Student Information</h2>
+                <p className="text-gray-700">
+                    Name: <b>{studentData.displayName}</b>
+                </p>
+                <p className="text-gray-700">Major: {studentData.major}</p>
+                {/* 📄 Buttons */}
+                <div className="mt-4 flex justify-center gap-4">
+                {studentData.CV_link && (
+                    <a
+                    href={studentData.CV_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition"
+                    >
+                        View CV
+                    </a>
+                )}
+                {studentData.linkedin_link && (
+                    <a
+                    href={studentData.linkedin_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded transition"
+                    >
+                        LinkedIn
+                    </a>
+                )}
+                </div>
+            </div>
+        )}
 
       {!isScanning && (
         <button
           onClick={startCamera}
           className="bg-blue-600 text-white px-4 py-2 rounded"
         >
-          Start Camera
+          Start Scan
         </button>
       )}
 
@@ -120,7 +164,7 @@ const QRScanner = ({ companyName, updateBoothCollected }) => {
           onClick={stopCamera}
           className="bg-red-600 text-white px-4 py-2 rounded"
         >
-          Stop Camera
+          Stop Scan
         </button>
       )}
         <p>Company Name: {companyName}</p>

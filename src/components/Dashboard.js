@@ -6,6 +6,7 @@ import Analysis from "./DashboardComponents/Analysis";
 import dashboardBanner from "../images/dashboard_banner.png";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
+import { user } from "fontawesome";
 
 // Change userData as needed to test different roles
 /*const userData = {
@@ -89,26 +90,95 @@ function Dashboard() {
 
     const isStudent = userData?.role === "Student";
 
-    const updateBoothCollected = async (boothName, uid) => {
-        try {
-            const userRef = doc(db, "studentRegistrations", uid);
-            const userSnap = await getDoc(userRef);
+    // for students acces to their data
+    const refetchUserData = async () => {
+        if (userObj) {
+            const data = await userObj.getUserData();
+            setUserData(data);
+        }
+    }
 
-            if (!userSnap.exists()) {
-                console.error("User not found:", uid);
+    const updateCVLink = async (link) => {
+        try {
+            if (!userObj) return;
+    
+            const data = await userObj.getUserData(); // 🔍 fetch user data from Firestore
+            data.CV_link = link; // ✍️ update CV link
+            await userObj.updateUserData(data); // 🔁 update Firestore
+            setUserData(data); // 🧠 update React state
+            console.log("✅ CV link updated:", link);
+        } catch (error) {
+            console.error("❌ Error updating CV link:", error);
+        }
+    };
+    
+    const updateLinkedInLink = async (link) => {
+        try {
+            if (!userObj) return;
+    
+            const data = await userObj.getUserData(); // 🔍 fetch user data from Firestore
+            data.linkedin_link = link; // ✍️ update LinkedIn link
+            await userObj.updateUserData(data); // 🔁 update Firestore
+            setUserData(data); // 🧠 update React state
+            console.log("✅ LinkedIn link updated:", link);
+        } catch (error) {
+            console.error("❌ Error updating LinkedIn link:", error);
+        }
+    };
+               
+
+    // for companies access to students data
+    const updateBoothCollected = async (boothName, uid) => { // update booth collected status to student
+        try {
+            const studentRef = doc(db, "studentRegistrations", uid);
+            const studentSnap = await getDoc(studentRef);
+
+            if (!studentSnap.exists()) {
+                console.error("Student not found:", uid);
                 return;
             }
 
-            const userData = userSnap.data();
+            const studentData = studentSnap.data();
+
+            const previousBoothStatus = studentData.boothCollected?.[boothName] ?? false;
             const boothCollected = {
-                ...(userData.boothCollected || {}),
+                ...(studentData.boothCollected || {}),
                 [boothName]: true,
             };
 
-            await updateDoc(userRef, { boothCollected });
-            console.log(`Booth ${boothName} marked as collected for user ${uid}.`);
+            // if the student has not collected the booth, update the status to true and increase the number of student visited by 1
+            if (!previousBoothStatus) {
+                setUserData(userObj.getUserData()); // refresh the state
+                userData.studentAnalysis[studentData.major] += 1; // increase the number of students visited by 1
+                setUserData(userData); // update the state
+                userObj.updateUserData(userData); // update the data in firebase
+                console.log("Student analysis updated:", userData.studentAnalysis);
+            }
+
+            await updateDoc(studentRef, { boothCollected });
+            console.log(`Booth ${boothName} marked as collected for student ${uid}.`);
         } catch (error) {
             console.error("Error updating booth collected status:", error);
+        }
+    }
+
+    const getStudentData = async (uid) => {
+        try {
+            console.log("Fetching student data for UID:", uid);
+            
+            const studentRef = doc(db, "studentRegistrations", uid);
+            const studentSnap = await getDoc(studentRef);
+
+            if (!studentSnap.exists()) {
+                console.error("Student not found:", uid);
+                return null;
+            }
+            console.log("Student data fetched:", studentSnap.data());
+            
+            return studentSnap.data();
+        } catch (error) {
+            console.error("Error fetching student data:", error);
+            return null;
         }
     }
 
@@ -142,10 +212,10 @@ function Dashboard() {
                 </div>
 
                 <div className="w-full max-w-5xl">
-                    {tab === "scanner" && isStudent && <QRCodeDisplay userID={userObj.uid} />}
-                    {tab === "scanner" && !isStudent && <QRScanner companyName={userData?.displayName} updateBoothCollected={updateBoothCollected}/>}
-                    {tab === "boarding" && isStudent && <BoardingPass data={userData} />}
-                    {tab === "analysis" && !isStudent && <Analysis data={userData} />}
+                    {tab === "scanner" && isStudent && <QRCodeDisplay userID={userObj.uid} data={userData} updateCVLink={updateCVLink} updateLinkedInLink={updateLinkedInLink}/>}
+                    {tab === "scanner" && !isStudent && <QRScanner companyName={userData?.displayName} updateBoothCollected={updateBoothCollected} getStudentData={getStudentData}/>}
+                    {tab === "boarding" && isStudent && <BoardingPass data={userData} refetchUserData={refetchUserData}/>}
+                    {tab === "analysis" && !isStudent && <Analysis data={userData} refetchUserData={refetchUserData}/>}
                 </div>
 
 

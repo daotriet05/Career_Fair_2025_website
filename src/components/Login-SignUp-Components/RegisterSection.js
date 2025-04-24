@@ -13,9 +13,9 @@
     export const majors = ["CSE", "ECE", "MEN", "BCE", "ARC", "SME", "SPE", "BBA", "BFA", "Other"];
     export const intakes = ["Before 2018", "2018", "2019", "2020", "2021", "2022", "2023", "2024"];
     export const booths = [
-                    "Adnovum", "Baker Hughes", "Bosch", "Endress Hauser", "Fischer",
+                    "Adnovum", "Bosch", "Endress Hauser", "Fischer",
                     "FPT Software", "Indefol", "Kyungbang", "LEGO", "MAC ZT", "Mitek",
-                    "Netcompany", "Nextern", "Renesas", "Shopee Express", "TTI",
+                    "Netcompany", "Nextern", "Renesas", "SAP", "Shopee Express", "TTI",
                     "Wanek", "Ziehl Albegg",
                 ];
 
@@ -27,7 +27,7 @@
             studentEmail: "",
             studentMajor: "",
             studentIntake: "",
-            CV: "",
+            CV_link: "",
             linkedin_link: "",
             studentQuestion: "",
         });
