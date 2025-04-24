@@ -29,7 +29,7 @@ function InforSection() {
             INFORMATION<br />ABOUT THE<br />EVENT
           </h2>
           <p className="mt-6 text-2xl italic font-montserrat">
-            a promising and impressing CFIE <strong>is coming</strong>
+            a promising and impressing CFIED <strong>is coming</strong>
           </p>
         </div>
       </div>

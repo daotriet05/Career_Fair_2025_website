@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import '../../App.css';
 
 function SponsorSection() {
@@ -39,9 +38,7 @@ function SponsorSection() {
 
         {/* Scrolling Text Section */}
         <div className="bg-white py-8 w-full">
-          <p className="text-center text-lg font-semibold text-black w-full whitespace-nowrap overflow-hidden animate-marquee">
-            Code sao cho hình chạy ngang qua đi, t mời m đồ ML
-          </p>
+          <p className="text-center text-lg font-semibold text-black w-full whitespace-nowrap overflow-hidden animate-marquee"></p>
         </div>
       </div>
 
