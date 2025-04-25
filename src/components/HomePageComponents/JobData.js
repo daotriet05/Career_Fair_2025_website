@@ -157,7 +157,7 @@ export const engineeringJobs = [
         company: 'FPT Software',
         position: 'Fresher SAP Functional Consultant (German/French)',
         location: '',
-        JD_link: 'https://docs.google.com/document/d/1B-ijLygA_Of3dn5x4uHdJx133ZA2_r2L/edit?usp=drive_link&ouid=107987931277148505499&rtpof=true&sd=true',
+        JD_link: 'https://drive.google.com/file/d/1YYwqy7RVgYGR4KhSMpPORM5Wa5Vb8YNw/view?usp=sharing',
         logo: require('../../images/logo_2025/FPT Software.webp'),
     },
     {
@@ -293,7 +293,7 @@ export const engineeringJobs = [
         company: 'FPT Software',
         position: 'Fresher SAP Functional Consultant (German/French)',
         location: '',
-        JD_link: 'https://docs.google.com/document/d/1B-ijLygA_Of3dn5x4uHdJx133ZA2_r2L/edit?usp=drive_link&ouid=107987931277148505499&rtpof=true&sd=true',
+        JD_link: 'https://drive.google.com/file/d/1YYwqy7RVgYGR4KhSMpPORM5Wa5Vb8YNw/view?usp=sharing',
         logo: require('../../images/logo_2025/FPT Software.webp'),
     },
     {
@@ -344,7 +344,7 @@ export const engineeringJobs = [
         company: 'FPT Software',
         position: 'Fresher SAP Functional Consultant (German/French)',
         location: '',
-        JD_link: 'https://docs.google.com/document/d/1B-ijLygA_Of3dn5x4uHdJx133ZA2_r2L/edit?usp=drive_link&ouid=107987931277148505499&rtpof=true&sd=true',
+        JD_link: 'https://drive.google.com/file/d/1YYwqy7RVgYGR4KhSMpPORM5Wa5Vb8YNw/view?usp=sharing',
         logo: require('../../images/logo_2025/FPT Software.webp'),
     },
   ];
@@ -367,7 +367,7 @@ export const engineeringJobs = [
         company: 'FPT Software',
         position: 'Fresher SAP Functional Consultant (German/French)',
         location: '',
-        JD_link: 'https://docs.google.com/document/d/1B-ijLygA_Of3dn5x4uHdJx133ZA2_r2L/edit?usp=drive_link&ouid=107987931277148505499&rtpof=true&sd=true',
+        JD_link: 'https://drive.google.com/file/d/1YYwqy7RVgYGR4KhSMpPORM5Wa5Vb8YNw/view?usp=sharing',
         logo: require('../../images/logo_2025/FPT Software.webp'),
     },
   ];
