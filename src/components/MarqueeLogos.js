@@ -15,10 +15,14 @@ import Mitek from "../images/logo_2025/mitek.webp";
 import Netcompany from "../images/logo_2025/Netcompany.webp";
 import Nextern from "../images/logo_2025/nextern.webp";
 import Renesas from "../images/logo_2025/Renesas.webp";
-import ShopeeExpress from "../images/logo_2025/Shopee Express.webp";
+import Shopee from "../images/logo_2025/shopee.webp";
 import TTI from "../images/logo_2025/TTI.webp";
 import Wanek from "../images/logo_2025/wanek.webp";
 import ZiehlAbegg from "../images/logo_2025/Ziehl Abegg.webp";
+
+import NTPM from "../images/logo_2025/NTPM.webp";
+import Techcombank from "../images/logo_2025/Techcombank.webp";
+import NamABank from "../images/logo_2025/Nam A Bank.webp";
 
 const logos = [
     { src: Adnovum, alt: "Adnovum" },
@@ -35,10 +39,14 @@ const logos = [
     { src: Netcompany, alt: "Netcompany" },
     { src: Nextern, alt: "Nextern" },
     { src: Renesas, alt: "Renesas" },
-    { src: ShopeeExpress, alt: "Shopee Express" },
+    { src: Shopee, alt: "Shopee" },
     { src: TTI, alt: "TTI" },
     { src: Wanek, alt: "Wanek Furniture" },
     { src: ZiehlAbegg, alt: "Ziehl Abegg" },
+    { src: NTPM, alt: "NTPM" },
+    { src: Techcombank, alt: "Techcombank" },
+    { src: NamABank, alt: "Nam A Bank" },
+
   ];
   
   const MarqueeLogos = () => {

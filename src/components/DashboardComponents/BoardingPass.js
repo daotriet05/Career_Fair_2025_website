@@ -14,10 +14,14 @@ import Mitek from "../../images/logo_2025/mitek.webp";
 import Netcompany from "../../images/logo_2025/Netcompany.webp";
 import Nextern from "../../images/logo_2025/nextern.webp";
 import Renesas from "../../images/logo_2025/Renesas.webp";
-import ShopeeExpress from "../../images/logo_2025/Shopee Express.webp";
+import Shopee from "../../images/logo_2025/shopee.webp";
 import TTI from "../../images/logo_2025/TTI.webp";
 import Wanek from "../../images/logo_2025/wanek.webp";
 import ZiehlAbegg from "../../images/logo_2025/Ziehl Abegg.webp";
+
+import NTPM from "../../images/logo_2025/NTPM.webp";
+import Techcombank from "../../images/logo_2025/Techcombank.webp";
+import NamABank from "../../images/logo_2025/Nam A Bank.webp";
 
 const logos = {
     "Adnovum": Adnovum,
@@ -34,10 +38,13 @@ const logos = {
     "Netcompany": Netcompany,
     "Nextern": Nextern,
     "Renesas": Renesas,
-    "Shopee Express": ShopeeExpress,
+    "Shopee": Shopee,
     "TTI": TTI,
     "Wanek": Wanek,
     "Ziehl Albegg": ZiehlAbegg,
+    "NTPM": NTPM,
+    "Techcombank": Techcombank,
+    "Nam A Bank": NamABank,
 }
 
 const BoardingPass = ({ data, refetchUserData }) => {
@@ -45,8 +52,8 @@ const BoardingPass = ({ data, refetchUserData }) => {
   const booths = [
     "Adnovum", "Bosch", "Endress Hauser", "Fischer",
     "FPT Software", "Indefol", "Kyungbang", "LEGO", "MAC ZT", "Mitek",
-    "Netcompany", "Nextern", "Renesas", "SAP", "Shopee Express", "TTI",
-    "Wanek", "Ziehl Albegg",
+    "Netcompany", "Nextern", "Renesas", "SAP", "Shopee", "TTI",
+    "Wanek", "Ziehl Albegg",   "NTPM", "Techcombank", "Nam A Bank"
     ];
   return (
     <div className="max-w-5xl mx-auto px-4 text-center">

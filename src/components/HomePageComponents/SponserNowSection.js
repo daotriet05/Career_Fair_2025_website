@@ -14,10 +14,14 @@ import Mitek from "../../images/logo_2025/mitek.webp";
 import Netcompany from "../../images/logo_2025/Netcompany.webp";
 import Nextern from "../../images/logo_2025/nextern.webp";
 import Renesas from "../../images/logo_2025/Renesas.webp";
-import ShopeeExpress from "../../images/logo_2025/Shopee Express.webp";
+import Shopee from "../../images/logo_2025/shopee.webp";
 import TTI from "../../images/logo_2025/TTI.webp";
 import Wanek from "../../images/logo_2025/wanek.webp";
 import ZiehlAbegg from "../../images/logo_2025/Ziehl Abegg.webp";
+
+import NTPM from "../../images/logo_2025/NTPM.webp";
+import Techcombank from "../../images/logo_2025/Techcombank.webp";
+import NamABank from "../../images/logo_2025/Nam A Bank.webp";
 
 const logoOrder = [
     { image: Wanek, alt: "Wanek Furniture", url: "https://www.facebook.com/VGU.CFIED" },
@@ -36,13 +40,15 @@ const logoOrder = [
     { image: FPTSoftware, alt: "FPT Software" , url: "https://www.facebook.com/VGU.CFIED"},
     { image: Nextern, alt: "Nextern" , url: "https://www.facebook.com/VGU.CFIED"},
     { image: TTI, alt: "TTI" , url: "https://www.facebook.com/VGU.CFIED"},
-    { image: ShopeeExpress, alt: "Shopee Express" , url: "https://www.facebook.com/VGU.CFIED"},
+    { image: Shopee, alt: "Shopee" , url: "https://www.facebook.com/VGU.CFIED"},
     { image: Adnovum, alt: "Adnovum" , url: "https://www.facebook.com/VGU.CFIED"},
     { image: Wanek, alt: "Wanek Furniture", url: "https://www.facebook.com/VGU.CFIED" },
     { image: LEGO, alt: "LEGO" , url: "https://www.facebook.com/VGU.CFIED"},
     { image: Indefol, alt: "Indefol" , url: "https://www.facebook.com/VGU.CFIED"},
     { image: ZiehlAbegg, alt: "Ziehl Abegg" , url: "https://www.facebook.com/VGU.CFIED"},
-
+    { image: NTPM, alt: "NTPM" , url: "https://www.facebook.com/VGU.CFIED"},
+    { image: Techcombank, alt: "Techcombank" , url: "https://www.facebook.com/VGU.CFIED"},
+    { image: NamABank, alt: "Nam A Bank" , url: "https://www.facebook.com/VGU.CFIED"},
   ];
 
 
@@ -68,7 +74,7 @@ const GnSCard = ({ image, title }) => {
 const ExhiCard = ({ image, title }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     return(
-        <div className="w-[250px] sm:w-[200px] flex justify-self-center">
+        <div className="w-[100px] sm:w-[200px] flex justify-self-center">
             <div className="bg-white w-full h-[140px] rounded-xl overflow-hidden relative">
             {/* Lazy load animation */}
             {!isLoaded && <div className="absolute inset-0 bg-gray-300 animate-pulse" />}
@@ -132,8 +138,8 @@ function SponserNowSection(){
             <h1 className="text-xl p-2 font-bold">Exhibitors</h1>
             <div className="w-full" style={{border:"3px solid black"}}></div>
             {/* Exhibitors lv1 (5 items) */}
-            <div className="py-16 grid grid-cols-1 sm:grid-cols-4 gap-x-[100px] gap-y-[70px]">
-                {logoOrder.slice(4, 8).map((image, idx) => (
+            <div className="py-8 grid grid-cols-3 sm:grid-cols-4 gap-x-[100px] gap-y-[10px] sm:gap-y-[50px]">
+                {logoOrder.slice(4, 25).map((image, idx) => (
                     <a 
                     key={idx} 
                     href={image.url}
@@ -144,45 +150,7 @@ function SponserNowSection(){
                     </a>
                 ))}
             </div>
-             {/* Exhibitors Sponser lv2 (4 items / rows) */}
-             <div className="grid grid-rows-2 grid-cols-1 sm:grid-cols-4 gap-x-[100px] gap-y-[70px]">
-                {logoOrder.slice(8, 16).map((image, idx) => (
-                    <a 
-                    key={idx} 
-                    href={image.url}
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="transition hover:scale-110">
-                        <ExhiCard key={idx} {...image} />
-                    </a>
-                ))}
-            </div>
-             {/* Exhibitors lv3 (3 items / rows) */}
-             <div className="py-[70px] grid grid-cols-1 sm:grid-cols-3 gap-x-[100px] gap-y-[70px]">
-                {logoOrder.slice(16, 19).map((image, idx) => (
-                    <a
-                    key={idx} 
-                    href={image.url}
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="transition hover:scale-110">
-                        <ExhiCard key={idx} {...image} />                        
-                    </a>
-                ))}
-            </div>
-            {/* Exhibitors lv4 (3 items / rows) */}
-            <div className="py-[70px] grid grid-cols-1 sm:grid-cols-3 gap-x-[100px] gap-y-[70px]">
-                {logoOrder.slice(19, 22).map((image, idx) => (
-                    <a
-                    key={idx} 
-                    href={image.url}
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="transition hover:scale-110">
-                        <ExhiCard key={idx} {...image} />                        
-                    </a>
-                ))}
-            </div>
+             
         </div>
     </div>
     )
