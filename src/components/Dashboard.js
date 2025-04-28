@@ -3,50 +3,20 @@ import BoardingPass from "./DashboardComponents/BoardingPass";
 import QRScanner from "./DashboardComponents/QRScanner";
 import QRCodeDisplay from "./DashboardComponents/QRCodeDisplay";
 import Analysis from "./DashboardComponents/Analysis";
+import VolunteerTask from "./DashboardComponents/VolunteerTask";
+import VolunteerTaskManagement from "./DashboardComponents/VolunteerTaskManagement";
 import dashboardBanner from "../images/dashboard_banner.png";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
-import { user } from "fontawesome";
 
-// Change userData as needed to test different roles
-/*const userData = {
-    displayName : "FPT Software",
-    role : "Company",
-    numberStudent : 0,
-    studentAnalysis: {
-        'CSE' : 280,
-        'ECE' : 160,
-        'MEN' : 100,
-        'BCE' : 100,
-        'BBA' : 60,
-        'BFA' : 60,
-        'ARC' : 50,
-    },
-};*/
-
-
-// const userData = {
-//     displayName : "DAO HOANG MINH TRIET",
-//     role : "Student",
-//     boothCollected: {
-//         'TTI' : false,
-//         'FPT' : false,
-//         'Netcompany' : true,
-//     },
-//     numCode: "1234567890",
-//     checkinStatus: false, // when checkinStatus is activated, set checkoutStatus to false (for cases when users re-checkin)
-//     checkoutStatus: false,
-//     CV_link: "https://drive.google.com/file/d/1Um8irhxixuR6jvbCO7Dvp1_AMQYKPsGU4zxirNEWJr0/edit?usp=drivesdk",
-//     linkedIn_link: "https://www.linkedin.com/in/dao-hoang-minh-triet-1234567890",
-// }
-
+// Helper class to fetch and update user
 class User {
     constructor(uid) {
         if (!uid) throw new Error("UID is required");
         this.uid = uid;
         this.ref = doc(db, "studentRegistrations", uid);
     }
-  
+
     async getUserData() {
         const snap = await getDoc(this.ref);
         if (!snap.exists()) throw new Error("No user data found.");
@@ -54,81 +24,83 @@ class User {
     }
 
     async updateUserData(updatedData) {
-        await setDoc(this.ref, updatedData); // overwrite the full document
+        await setDoc(this.ref, updatedData);
         console.log("✅ Data updated.");
     }
-  
+}
+
+// Helper functions
+function getInitialTab(role) {
+    if (role === "Student") return "boarding";
+    if (role === "Volunteer") return "volunteerTask";
+    if (role === "Organizer") return "volunteerManagement";
+    return "analysis"; // Company or default
+}
+
+function getFirstTabName(role) {
+    if (role === "Student") return "Your Boarding Pass";
+    if (role === "Volunteer") return "Volunteer Task";
+    if (role === "Organizer") return "Volunteer Management";
+    return "Analysis"; // Company
 }
 
 function Dashboard() {
     const [tab, setTab] = useState("boarding");
-    const [userData, setUserData] = useState(null); // Initialize with userData
-    const [userObj, setUserObj] = useState(null); // Initialize with userObj
+    const [userData, setUserData] = useState(null);
+    const [userObj, setUserObj] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
                 if (firebaseUser) {
-                    const user = new User(firebaseUser.uid); // 👈 pass UID directly
+                    const user = new User(firebaseUser.uid);
                     setUserObj(user);
                     const data = await user.getUserData();
                     setUserData(data);
-
-                    console.log("Adnovum booth collected:", data.boothCollected?.Adnovum);
-                    setTab(data.role === "Student" ? "boarding" : "analysis");
+                    setTab(getInitialTab(data.role));
                 }
             });
-            
+
             return () => unsubscribe();
         };
-      
+
         fetchData();
-        
-        
     }, []);
-      
 
-    const isStudent = userData?.role === "Student";
-
-    // for students acces to their data
     const refetchUserData = async () => {
         if (userObj) {
             const data = await userObj.getUserData();
             setUserData(data);
         }
-    }
+    };
 
     const updateCVLink = async (link) => {
         try {
             if (!userObj) return;
-    
-            const data = await userObj.getUserData(); // 🔍 fetch user data from Firestore
-            data.CV_link = link; // ✍️ update CV link
-            await userObj.updateUserData(data); // 🔁 update Firestore
-            setUserData(data); // 🧠 update React state
+            const data = await userObj.getUserData();
+            data.CV_link = link;
+            await userObj.updateUserData(data);
+            setUserData(data);
             console.log("✅ CV link updated:", link);
         } catch (error) {
             console.error("❌ Error updating CV link:", error);
         }
     };
-    
+
     const updateLinkedInLink = async (link) => {
         try {
             if (!userObj) return;
-    
-            const data = await userObj.getUserData(); // 🔍 fetch user data from Firestore
-            data.linkedin_link = link; // ✍️ update LinkedIn link
-            await userObj.updateUserData(data); // 🔁 update Firestore
-            setUserData(data); // 🧠 update React state
+            const data = await userObj.getUserData();
+            data.linkedin_link = link;
+            await userObj.updateUserData(data);
+            setUserData(data);
             console.log("✅ LinkedIn link updated:", link);
         } catch (error) {
             console.error("❌ Error updating LinkedIn link:", error);
         }
     };
-               
 
-    // for companies access to students data
-    const updateBoothCollected = async (boothName, uid) => { // update booth collected status to student
+    const updateBoothCollected = async (boothName, uid) => {
         try {
             const studentRef = doc(db, "studentRegistrations", uid);
             const studentSnap = await getDoc(studentRef);
@@ -139,19 +111,17 @@ function Dashboard() {
             }
 
             const studentData = studentSnap.data();
-
             const previousBoothStatus = studentData.boothCollected?.[boothName] ?? false;
             const boothCollected = {
                 ...(studentData.boothCollected || {}),
                 [boothName]: true,
             };
 
-            // if the student has not collected the booth, update the status to true and increase the number of student visited by 1
             if (!previousBoothStatus) {
-                setUserData(userObj.getUserData()); // refresh the state
-                userData.studentAnalysis[studentData.major] += 1; // increase the number of students visited by 1
-                setUserData(userData); // update the state
-                userObj.updateUserData(userData); // update the data in firebase
+                setUserData(userObj.getUserData());
+                userData.studentAnalysis[studentData.major] += 1;
+                setUserData(userData);
+                userObj.updateUserData(userData);
                 console.log("Student analysis updated:", userData.studentAnalysis);
             }
 
@@ -160,12 +130,11 @@ function Dashboard() {
         } catch (error) {
             console.error("Error updating booth collected status:", error);
         }
-    }
+    };
 
     const getStudentData = async (uid) => {
         try {
             console.log("Fetching student data for UID:", uid);
-            
             const studentRef = doc(db, "studentRegistrations", uid);
             const studentSnap = await getDoc(studentRef);
 
@@ -174,13 +143,12 @@ function Dashboard() {
                 return null;
             }
             console.log("Student data fetched:", studentSnap.data());
-            
             return studentSnap.data();
         } catch (error) {
             console.error("Error fetching student data:", error);
             return null;
         }
-    }
+    };
 
     return (
         <>
@@ -191,13 +159,13 @@ function Dashboard() {
                 <div className="flex space-x-4 mb-8">
                     <button
                         className={`border-2 rounded-lg px-4 py-2 font-semibold ${
-                            tab === (isStudent ? "boarding" : "analysis")
+                            tab === getInitialTab(userData?.role)
                                 ? "border-yellow-400 text-yellow-500"
                                 : "border-gray-300"
                         }`}
-                        onClick={() => setTab(isStudent ? "boarding" : "analysis")}
+                        onClick={() => setTab(getInitialTab(userData?.role))}
                     >
-                        {isStudent ? "Your Boarding Pass" : "Analysis"}
+                        {getFirstTabName(userData?.role)}
                     </button>
                     <button
                         className={`border-2 rounded-lg px-4 py-2 font-semibold ${
@@ -211,49 +179,52 @@ function Dashboard() {
                     </button>
                 </div>
 
+                {/* Tab Content */}
                 <div className="w-full max-w-5xl">
-                    {tab === "scanner" && isStudent && <QRCodeDisplay userID={userObj.uid} data={userData} updateCVLink={updateCVLink} updateLinkedInLink={updateLinkedInLink}/>}
-                    {tab === "scanner" && !isStudent && <QRScanner companyName={userData?.displayName} updateBoothCollected={updateBoothCollected} getStudentData={getStudentData}/>}
-                    {tab === "boarding" && isStudent && <BoardingPass data={userData} refetchUserData={refetchUserData}/>}
-                    {tab === "analysis" && !isStudent && <Analysis data={userData} refetchUserData={refetchUserData}/>}
+                    {/* Second tab: QR Code Scanner */}
+                    {tab === "scanner" && (
+                        userData?.role === "Company" ? (
+                            <QRScanner 
+                                companyName={userData?.displayName} 
+                                updateBoothCollected={updateBoothCollected} 
+                                getStudentData={getStudentData} 
+                            />
+                        ) : (
+                            <QRCodeDisplay 
+                                userID={userObj?.uid} 
+                                data={userData} 
+                                updateCVLink={updateCVLink} 
+                                updateLinkedInLink={updateLinkedInLink} 
+                            />
+                        )
+                    )}
+
+                    {/* First tab: depends on role */}
+                    {tab === "boarding" && userData?.role === "Student" && (
+                        <BoardingPass 
+                            data={userData} 
+                            refetchUserData={refetchUserData} 
+                        />
+                    )}
+                    {tab === "analysis" && userData?.role === "Company" && (
+                        <Analysis 
+                            data={userData} 
+                            refetchUserData={refetchUserData} 
+                        />
+                    )}
+                    {tab === "volunteerTask" && userData?.role === "Volunteer" && (
+                        <VolunteerTask 
+                            data={userData} 
+                            refetchUserData={refetchUserData} 
+                        />
+                    )}
+                    {tab === "volunteerManagement" && userData?.role === "Organizer" && (
+                        <VolunteerTaskManagement 
+                            data={userData} 
+                            refetchUserData={refetchUserData} 
+                        />
+                    )}
                 </div>
-
-
-                {/* 
-                    TEST BUTTON: CHANGE BOOTH COLLECTED STATUS ADNOVUM FROM FALSE TO TRUE
-                    How to use:
-                    - First check in firebase if the status of Adnovum is false (if not, change it false)
-                    - Then click the button below to change it to true (open console to see the result)
-                */}
-
-                {/* {userObj && (
-                    <button
-                        onClick={async () => {
-                        try {
-                            const currentData = await userObj.getUserData();
-
-                            console.log("Before:", currentData.boothCollected?.Adnovum); // 🔍
-
-                            currentData.boothCollected = {
-                            ...(currentData.boothCollected || {}),
-                            Adnovum: true,
-                            };
-
-                            await userObj.updateUserData(currentData);
-
-                            console.log("After:", currentData.boothCollected.Adnovum); // ✅
-
-                            setUserData(currentData); // refresh state
-
-                        } catch (err) {
-                            console.error("❌ Test update failed:", err);
-                        }
-                        }}
-                        className="mt-4 px-4 py-2 bg-green-600 text-white rounded"
-                    >
-                        Test: Set Adnovum to True
-                    </button>
-                )} */}
             </div>
         </>
     );
