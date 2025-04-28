@@ -22,6 +22,7 @@ import ZiehlAbegg from "../../images/logo_2025/Ziehl Abegg.webp";
 import NTPM from "../../images/logo_2025/NTPM.webp";
 import Techcombank from "../../images/logo_2025/Techcombank.webp";
 import NamABank from "../../images/logo_2025/Nam A Bank.webp";
+import iTechwx from "../../images/logo_2025/iTechwx.webp";
 
 const logos = {
     "Adnovum": Adnovum,
@@ -45,6 +46,7 @@ const logos = {
     "NTPM": NTPM,
     "Techcombank": Techcombank,
     "Nam A Bank": NamABank,
+    "iTechwx": iTechwx,
 }
 
 const BoardingPass = ({ data, refetchUserData }) => {
@@ -53,7 +55,7 @@ const BoardingPass = ({ data, refetchUserData }) => {
     "Adnovum", "Bosch", "Endress Hauser", "Fischer",
     "FPT Software", "Indefol", "Kyungbang", "LEGO", "MAC ZT", "Mitek",
     "Netcompany", "Nextern", "Renesas", "SAP", "Shopee", "TTI",
-    "Wanek", "Ziehl Albegg",   "NTPM", "Techcombank", "Nam A Bank"
+    "Wanek", "Ziehl Albegg",   "NTPM", "Techcombank", "Nam A Bank", "iTechwx"
     ];
   return (
     <div className="max-w-5xl mx-auto px-4 text-center">

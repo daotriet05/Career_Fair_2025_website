@@ -23,6 +23,7 @@ import ZiehlAbegg from "../images/logo_2025/Ziehl Abegg.webp";
 import NTPM from "../images/logo_2025/NTPM.webp";
 import Techcombank from "../images/logo_2025/Techcombank.webp";
 import NamABank from "../images/logo_2025/Nam A Bank.webp";
+import iTechwx from "../images/logo_2025/iTechwx.webp";
 
 const logos = [
     { src: Adnovum, alt: "Adnovum" },
@@ -46,6 +47,7 @@ const logos = [
     { src: NTPM, alt: "NTPM" },
     { src: Techcombank, alt: "Techcombank" },
     { src: NamABank, alt: "Nam A Bank" },
+    { src: iTechwx, alt: "iTechwx" },
 
   ];
   

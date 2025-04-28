@@ -22,6 +22,7 @@ import ZiehlAbegg from "../../images/logo_2025/Ziehl Abegg.webp";
 import NTPM from "../../images/logo_2025/NTPM.webp";
 import Techcombank from "../../images/logo_2025/Techcombank.webp";
 import NamABank from "../../images/logo_2025/Nam A Bank.webp";
+import iTechwx from "../../images/logo_2025/iTechwx.webp";
 
 const logoOrder = [
     { image: Wanek, alt: "Wanek Furniture", url: "https://www.facebook.com/VGU.CFIED" },
@@ -49,6 +50,7 @@ const logoOrder = [
     { image: NTPM, alt: "NTPM" , url: "https://www.facebook.com/VGU.CFIED"},
     { image: Techcombank, alt: "Techcombank" , url: "https://www.facebook.com/VGU.CFIED"},
     { image: NamABank, alt: "Nam A Bank" , url: "https://www.facebook.com/VGU.CFIED"},
+    { image: iTechwx, alt: "iTechwx" , url: "https://www.facebook.com/VGU.CFIED"},
   ];
 
 
@@ -139,7 +141,7 @@ function SponserNowSection(){
             <div className="w-full" style={{border:"3px solid black"}}></div>
             {/* Exhibitors lv1 (5 items) */}
             <div className="py-8 grid grid-cols-3 sm:grid-cols-4 gap-x-[100px] gap-y-[10px] sm:gap-y-[50px]">
-                {logoOrder.slice(4, 25).map((image, idx) => (
+                {logoOrder.slice(4, 26).map((image, idx) => (
                     <a 
                     key={idx} 
                     href={image.url}
