@@ -83,7 +83,7 @@ const VolunteerTask = ({ data, refetchUserData }) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 text-center">
+    <div className="max-w-4xl mx-auto px-0 sm:px-4 text-center">
         <div className="flex justify-center items-center mb-6">
         {/* 🔁 Refresh Button */}
         <div className="mb-8">
@@ -106,33 +106,35 @@ const VolunteerTask = ({ data, refetchUserData }) => {
           const task = tasksByTime[time];
           return (
             <div
-              key={time}
-              className="mb-8 p-6 border rounded-2xl shadow-lg flex flex-col items-center w-full max-w-lg mx-auto"
+                key={time}
+                className="mb-6 p-2 sm:p-4 border rounded-xl shadow flex flex-col items-center w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mx-auto overflow-hidden"
             >
-              {/* Time */}
-              <div className="bg-gray-800 text-white py-2 px-6 rounded-full mb-6 font-bold text-lg">
-                {time}
-              </div>
+                {/* Time */}
+                <div className="bg-gray-800 text-white py-2 px-6 rounded-full mb-6 font-bold text-lg">
+                    {time}
+                </div>
 
-              {/* Task Info */}
-              <table className="w-full table-fixed mb-6">
-                <thead>
-                  <tr>
-                    <th className="px-1 py-2 text-sm w-[5rem]">Code</th>
-                    <th className="px-1 py-2 text-sm w-[8rem]">Position</th>
-                    <th className="px-1 py-2 text-sm w-[10rem]">Describe Task</th>
-                    <th className="px-1 py-2 text-sm w-[6rem]">Change</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="px-1 py-2 break-words break-normal">{task.code}</td>
-                    <td className="px-1 py-2 break-words break-normal">{task.Position}</td>
-                    <td className="px-1 py-2 break-words break-normal">{task["Describe Task"]}</td>
-                    <td className="px-1 py-2 break-words break-normal">{task.Change}</td>
-                  </tr>
-                </tbody>
-              </table>
+                {/* Task Info */}
+                <div className="w-full overflow-x-auto">
+                    <table className="w-full table-fixed mb-6 text-sm">
+                    <thead>
+                        <tr>
+                        <th className="px-1 py-2 w-[25%] min-w-[4rem] break-words">Code</th>
+                        <th className="px-1 py-2 w-[25%] min-w-[6rem] break-words">Position</th>
+                        <th className="px-1 py-2 w-[30%] min-w-[8rem] break-words">Describe Task</th>
+                        <th className="px-1 py-2 w-[20%] min-w-[4rem] break-words">Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td className="px-1 py-2 break-words whitespace-normal">{task.code}</td>
+                        <td className="px-1 py-2 break-words whitespace-normal">{task.Position}</td>
+                        <td className="px-1 py-2 break-words whitespace-normal">{task["Describe Task"]}</td>
+                        <td className="px-1 py-2 break-words whitespace-normal">{task.Change}</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
 
               {/* Buttons */}
               <div className="flex flex-wrap justify-center gap-4">
