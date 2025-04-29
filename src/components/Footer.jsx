@@ -6,7 +6,7 @@ import group13 from "../images/Footer/group-13.png";
 export const Footer = () => {
   return (
     <footer className="w-full bg-[#aa943d] py-8">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-start">
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-center md:text-left md:items-start">
         
         {/* Contact Info Section */}
         <div className="mb-6 md:mb-0">
@@ -21,7 +21,7 @@ export const Footer = () => {
         </div>
 
         {/* Address Section */}
-        <div className="flex flex-col text-white text-base leading-relaxed">
+        <div className="mb-6 md:mb-0 text-white text-base leading-relaxed">
           <div className="font-black text-xl mb-4">
             VIETNAMESE-GERMAN UNIVERSITY
           </div>
@@ -61,7 +61,6 @@ export const Footer = () => {
           </a>
 
           {/* Map Link */}
-
           <a
             href="https://www.google.com/maps/place/Vietnamese%E2%80%93German+University+(VGU)/@11.107497,106.6141063,697m/data=!3m2!1e3!4b1!4m6!3m5!1s0x3174ce286d98ddc7:0xfa362a1ccda178aa!8m2!3d11.107497!4d106.6141063!16s%252Fm%252F0g9y6j9"
             target="_blank"
@@ -69,8 +68,6 @@ export const Footer = () => {
           >
             <img src={group13} alt="Map" className="w-10 h-10 cursor-pointer" />
           </a>
-
-
         </div>
 
       </div>
