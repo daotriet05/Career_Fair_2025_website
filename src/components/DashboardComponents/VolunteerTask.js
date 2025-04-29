@@ -85,12 +85,15 @@ const VolunteerTask = ({ data, refetchUserData }) => {
   return (
     <div className="max-w-4xl mx-auto px-4 text-center">
         <div className="flex justify-center items-center mb-6">
-        <button
+        {/* 🔁 Refresh Button */}
+        <div className="mb-8">
+            <button
             onClick={fetchTasks}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
-        >
-            Refresh
-        </button>
+            className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-md transition duration-200"
+            >
+            Refresh Data
+            </button>
+        </div>
         </div>
 
       {Object.keys(tasksByTime)

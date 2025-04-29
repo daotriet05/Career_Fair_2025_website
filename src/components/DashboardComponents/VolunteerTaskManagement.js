@@ -51,14 +51,16 @@ const VolunteerTaskManagement = () => {
   return (
     <div className="flex flex-col items-center px-4 py-8">
        <div className="flex justify-center items-center mb-6">
-        <h1 className="text-2xl font-bold mr-4">For Organizers only</h1>
-        <button
-          onClick={fetchTasks}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
-        >
-          Refresh
-        </button>
-      </div>
+        {/* 🔁 Refresh Button */}
+        <div className="mb-8">
+            <button
+            onClick={fetchTasks}
+            className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 px-6 rounded-md transition duration-200"
+            >
+            Refresh Data
+            </button>
+        </div>
+        </div>
 
       {Object.keys(tasksByTime)
         .sort((a, b) => {
