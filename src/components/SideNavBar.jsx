@@ -93,34 +93,39 @@ export const SideNavBar = ({ isLoggedIn, showLogoutButton, isVisible, setIsVisib
           </div>
 
           {/* Bottom Button */}
-          <div className="absolute bottom-8 w-11/12 flex justify-center">
+            <div className="absolute bottom-8 w-11/12 flex justify-center">
             {isLoggedIn ? (
-              showLogoutButton ? (
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-md text-lg w-full"
-                >
-                  Log Out
-                </button>
-              ) : (
-                <Link
-                  to="/dashboard"
-                  onClick={() => setIsVisible(false)}
-                  className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-md text-lg w-full text-center"
-                >
-                  Dashboard
+                showLogoutButton ? (
+                <Link to="/">
+                    <button
+                    onClick={() => {
+                        handleLogout();
+                        setIsVisible(false); // 🔥 hide sidebar after logout
+                    }}
+                    className="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-md text-lg w-full"
+                    >
+                    Log Out
+                    </button>
                 </Link>
-              )
+                ) : (
+                <Link
+                    to="/dashboard"
+                    onClick={() => setIsVisible(false)} // 🔥 hide sidebar after click
+                    className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-md text-lg w-full text-center"
+                >
+                    Dashboard
+                </Link>
+                )
             ) : (
-              <Link
-                to="#"
-                onClick={() => setIsVisible(false)}
-                className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-3 px-8 rounded-md text-lg w-full text-center"
-              >
-                Company Registration
-              </Link>
+                <Link
+                to="/login"
+                onClick={() => setIsVisible(false)} // 🔥 hide sidebar after login
+                className="bg-yellow-400 hover:bg-yellow-500 text-black px-6 md:px-10 py-2 h-12 text-sm font-bold rounded-md flex items-center justify-center transition duration-200"
+                >
+                Log In
+                </Link>
             )}
-          </div>
+            </div>
 
           {/* Back Arrow */}
           <img
