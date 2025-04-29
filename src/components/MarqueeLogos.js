@@ -54,7 +54,7 @@ const logos = [
   const MarqueeLogos = () => {
     return (
       <div className="bg-gray-100 py-4">
-        <Marquee speed={70} pauseOnHover gradient={false}>
+        <Marquee speed={100} pauseOnHover gradient={false}>
           {logos.map((logo, index) => (
             <img
               key={index}

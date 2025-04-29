@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Clock } from 'lucide-react';
 import '../../App.css';
-import LazyImage from '../EffectComponents/LazyImage';
+import * as Reveal from "react-awesome-reveal";
+
 
 import img1 from '../../images/agenda/1_checkin.webp';
 import img2 from '../../images/agenda/2_music.webp';
@@ -56,9 +57,11 @@ const AgendaCard = React.memo(({ time, title, image }) => {
 const EventAgenda = () => {
   return (
     <div className="flex flex-col py-12 px-4 gap-12 bg-[#EFF18F] min-h-screen w-full items-center">
-      <h1 className="text-6xl md:text-7xl font-extrabold text-[#184A45]">
-        EVENT AGENDA
-      </h1>
+      <Reveal.Fade direction="up" duration={2000} triggerOnce>
+        <h1 className="text-6xl md:text-7xl font-extrabold text-[#184A45]">
+          EVENT AGENDA
+        </h1>
+      </Reveal.Fade>
 
       {/* Top row (4 items) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-16 gap-y-10">

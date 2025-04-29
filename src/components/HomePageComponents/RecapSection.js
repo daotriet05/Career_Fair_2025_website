@@ -2,7 +2,7 @@ import React from 'react';
 import '../../App.css';
 import MarqueeLogosRecap from './MarqueeLogosRecap';
 import businessesImage from '../../images/recap_2024/collaboration.webp';
-import sponsorshipsImage from '../../images/recap_2024/sponsorships.webp';
+import sponsorshipsImage from '../../images/recap_2024/sponsorships.webp'; 
 
 function RecapSection() {
   return (
@@ -24,14 +24,14 @@ function RecapSection() {
 
         {/* Recap Button */}
         <div className="flex justify-center items-center gap-4 mb-8 flex-wrap">
-          <a
-            href="https://www.youtube.com/watch?v=AKjRGArpgMo"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 bg-white text-[#194d39] px-4 py-2 rounded-full font-semibold shadow-md hover:scale-105 transition"
-          >
-            ▶️ 2024 VGU CFIE Recap
-          </a>
+            <a
+                href="https://www.youtube.com/watch?v=AKjRGArpgMo" // replace this with the real URL
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-white text-[#194d39] px-4 py-2 rounded-full font-semibold shadow-md hover:scale-105 transition"
+            >
+                ▶️ 2024 VGU CFIED Recap
+            </a>
         </div>
 
         {/* Business + Sponsor Logos */}
