@@ -38,7 +38,6 @@ export const SideNavBar = ({ isLoggedIn, showLogoutButton, isVisible, setIsVisib
           {/* Top Logo */}
           <div className="flex flex-col items-center mt-4 mb-8">
             <img src={image1} alt="Logo" className="h-16 object-contain" />
-            <h1 className="text-2xl font-bold text-black mt-2">CAREER FAIR</h1>
           </div>
 
           {/* Navigation Links */}
