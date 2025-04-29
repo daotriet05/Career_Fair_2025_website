@@ -12,11 +12,14 @@ import { auth } from './firebase-config'; // Import Firebase auth
 import { Footer } from './components/Footer'
 import { SideNavBar } from './components/SideNavBar';
 
+
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
   const [showReady, setCursorReady] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth < 768); // Check if screen width is larger than 768px
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth > 600); // Track if screen width is smaller than 600px
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768); // Check if screen width is larger than 768px
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600); // Track if screen width is smaller than 600px
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false); // Track if the sidebar is visible
 
   useLenis();
 
@@ -47,6 +50,10 @@ function App() {
     };
   }, []);
 
+    const handleMenuClick = () => {
+    setIsSidebarVisible(!isSidebarVisible); // Toggle sidebar visibility on menu click
+    };
+
   return (
     <Router>
       <div className="App">
@@ -72,12 +79,19 @@ function App() {
           <AnimatedCursor /> // default basic cursor for mobile
         )}
 
-        {/* Conditionally render HeaderBar or SideNavBar based on screen size */}
-        {isSmallScreen ? (
-          <SideNavBar isLoggedIn={isLoggedIn} /> // Show SideNavBar on small screens
+        { !isSidebarVisible ? (  // Show HeaderBar only if screen > 600px and sidebar is hidden
+          <HeaderBar
+            onMenuClick={handleMenuClick}
+            isLoggedIn={isLoggedIn}
+          />
         ) : (
-          <HeaderBar isLoggedIn={isLoggedIn} /> // Show HeaderBar on large screens
+          <SideNavBar
+            isVisible={isSidebarVisible}
+            setIsVisible={setIsSidebarVisible}
+            isLoggedIn={isLoggedIn}
+          />
         )}
+
 
         <Routes>
           <Route path="/" element={
