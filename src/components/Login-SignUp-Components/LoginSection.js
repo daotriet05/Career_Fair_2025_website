@@ -2,12 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase-config'; // Adjust path as needed
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import ReCAPTCHA from "react-google-recaptcha";
+
+const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
 function LoginSection() {
     const [studentEmail, setStudentEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+    const [captchaToken, setCaptchaToken] = useState(null);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,10 +23,6 @@ function LoginSection() {
             } else {
               setIsLoggedIn(false);
             }
-
-            // if (user) {
-            //     navigate('/'); // Navigate to the home page (assuming '/' is your home route)
-            // }
         });
 
         return () => unsubscribe(); // Cleanup subscription on unmount
@@ -30,22 +31,52 @@ function LoginSection() {
     const handleLogin = async (e) => {
         e.preventDefault();
         setError('');
+    
+        if (!captchaToken) {
+            setError("Please complete the CAPTCHA.");
+            return;
+        }
 
+        console.log("Captcha token sending:", captchaToken); // Add this to debug
+
+        // 1. Verify CAPTCHA token with Firebase Cloud Function
         try {
-        await signInWithEmailAndPassword(auth, studentEmail, password);
-        console.log('Login successful!');
-        navigate('/'); // Navigate to the home page (assuming '/' is your home route)
+            const captchaRes = await fetch("https://us-central1-careerfair2025-user-data.cloudfunctions.net/verifyCaptcha", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token: captchaToken })
+            });
+
+            const captchaData = await captchaRes.json();
+    
+            if (!captchaData.success) {
+                console.error("Captcha server response failed:", captchaData); // Debugging server response
+                setError("CAPTCHA verification failed. Please try again.");
+                return;
+            }
+        } catch (captchaError) {
+            console.error("Captcha verification error:", captchaError);
+            setError("CAPTCHA verification failed. Please try again later.");
+            return;
+        }
+
+        // 2. Proceed with Firebase sign-in
+        try {
+            await signInWithEmailAndPassword(auth, studentEmail, password);
+            console.log('Login successful!');
+            navigate('/'); // Navigate to the home page (assuming '/' is your home route)
         } catch (authError) {
-        console.error('Login failed:', authError);
-        if (authError.code === 'auth/user-not-found') {
-            setError('User not found.');
-        } else if (authError.code === 'auth/wrong-password') {
-            setError('Incorrect password.');
-        } else {
-            setError('Login failed: ' + authError.message);
+            console.error('Login failed:', authError);
+            if (authError.code === 'auth/user-not-found') {
+                setError('User not found.');
+            } else if (authError.code === 'auth/wrong-password') {
+                setError('Incorrect password.');
+            } else {
+                setError('Login failed: ' + authError.message);
+            }
         }
-        }
-    };
+    };    
+
 
     const handleRegisterNavigation = () => {
         navigate('/student-registration'); // Navigate to the registration page
@@ -72,6 +103,13 @@ function LoginSection() {
                 className="w-full px-4 py-2 bg-gray-100 border rounded-full text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
                 required
             />
+            {RECAPTCHA_SITE_KEY && (
+                <ReCAPTCHA
+                    sitekey={RECAPTCHA_SITE_KEY}
+                    onChange={(value) => setCaptchaToken(value)}
+                    className="mb-4"
+                />
+            )}
             <button
                 type="submit"
                 className="w-full bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 rounded-full focus:outline-none focus:shadow-outline"

@@ -9,6 +9,17 @@ import Dashboard from './components/Dashboard';
 import HeaderBar from './components/HeaderBar'; // Import HeaderBar
 import { auth } from './firebase-config'; // Import Firebase auth
 
+import { Navigate } from 'react-router-dom';
+
+// Prevent un logged-in users from accessing the dashboard (or other pages if we want) page
+function ProtectedRoute({ isLoggedIn, children }) {
+  if (!isLoggedIn) {
+	alert("You must log in first to access this page.");
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+}
+
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 	useLenis();
@@ -48,11 +59,14 @@ function App() {
 						</>
 					} />
                     <Route path="/dashboard" element={
+						<ProtectedRoute isLoggedIn={isLoggedIn}>
 						<>
-						<HeaderBar isLoggedIn={isLoggedIn} showLogoutButton={true} />
-						<Dashboard />
+							<HeaderBar isLoggedIn={isLoggedIn} showLogoutButton={true} />
+							<Dashboard />
 						</>
-					} />
+						</ProtectedRoute>
+					}
+					/>
                 </Routes>
             </div>
         </Router>
