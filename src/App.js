@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import './App.css';
 import useLenis from './components/EffectComponents/useLenis';
 import AnimatedCursor from "react-animated-cursor";
@@ -7,121 +7,98 @@ import HomePage from './components/HomePage';
 import RegisterSection from './components/Login-SignUp-Components/RegisterSection';
 import LoginSection from "./components/Login-SignUp-Components/LoginSection";
 import Dashboard from './components/Dashboard';
-import HeaderBar from './components/HeaderBar'; // Import HeaderBar
-import { auth } from './firebase-config'; // Import Firebase auth
+import HeaderBar from './components/HeaderBar';
+import { auth } from './firebase-config';
 import { Footer } from './components/Footer'
 import { SideNavBar } from './components/SideNavBar';
 
-
-function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+function AppWrapper() {
+    const location = useLocation();
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [showReady, setCursorReady] = useState(false);
-    const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768); // Check if screen width is larger than 768px
-    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600); // Track if screen width is smaller than 600px
-    const [isSidebarVisible, setIsSidebarVisible] = useState(false); // Track if the sidebar is visible
-
-    const [showLogoutButton, setShowLogoutButton] = useState(false); // Track if the logout button should be shown
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth > 768);
+    const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 600);
+    const [isSidebarVisible, setIsSidebarVisible] = useState(false);
 
     useLenis();
 
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
-        setIsLoggedIn(!!user);
-        console.log("Auth state changed, isLoggedIn:", !!user);
+            setIsLoggedIn(!!user);
         });
 
-        // Update isSmallScreen state when the window resizes
         const handleResize = () => {
-        setIsDesktop(window.innerWidth > 768);
-        setIsSmallScreen(window.innerWidth < 600);
+            setIsDesktop(window.innerWidth > 768);
+            setIsSmallScreen(window.innerWidth < 600);
         };
 
-        // Event listener for resize
         window.addEventListener("resize", handleResize);
 
-        // Delay mounting the cursor slightly
-        const timer = setTimeout(() => {
-        setCursorReady(true);
-        }, 100); // even 10ms might be enough
-        
+        const timer = setTimeout(() => setCursorReady(true), 100);
         return () => {
-        clearTimeout(timer);
-        unsubscribe();
-        window.removeEventListener("resize", handleResize); // Clean up the resize event listener
+            clearTimeout(timer);
+            unsubscribe();
+            window.removeEventListener("resize", handleResize);
         };
     }, []);
 
-        const handleMenuClick = () => {
-        setIsSidebarVisible(!isSidebarVisible); // Toggle sidebar visibility on menu click
-        };
+    const handleMenuClick = () => {
+        setIsSidebarVisible(!isSidebarVisible);
+    };
+
+    // Decide whether to show logout button based on route
+    const showLogoutButton =
+        location.pathname === "/dashboard" ? true : false;
 
     return (
-        <Router>
         <div className="App">
-            {/* Only show the animated cursor on desktop */}
             {isDesktop && showReady ? (
-            <AnimatedCursor
-                className="custom-cursor"
-                color="#fff"
-                innerSize={15}
-                outerSize={45}
-                innerScale={0.5}
-                outerScale={3}
-                outerAlpha={0}
-                outerStyle={{
-                mixBlendMode: 'exclusion',
-                zIndex: 9999
-                }}
-                innerStyle={{
-                zIndex: 9999
-                }}
-            />
+                <AnimatedCursor
+                    className="custom-cursor"
+                    color="#fff"
+                    innerSize={15}
+                    outerSize={45}
+                    innerScale={0.5}
+                    outerScale={3}
+                    outerAlpha={0}
+                    outerStyle={{ mixBlendMode: 'exclusion', zIndex: 9999 }}
+                    innerStyle={{ zIndex: 9999 }}
+                />
             ) : (
-            <AnimatedCursor /> // default basic cursor for mobile
+                <AnimatedCursor />
             )}
 
-            { !isSidebarVisible ? (  // Show HeaderBar only if screen > 600px and sidebar is hidden
-            <HeaderBar
-                onMenuClick={handleMenuClick}
-                isLoggedIn={isLoggedIn}
-            />
+            {isSidebarVisible ? (
+                <SideNavBar
+                    isVisible={isSidebarVisible}
+                    setIsVisible={setIsSidebarVisible}
+                    isLoggedIn={isLoggedIn}
+                    showLogoutButton={showLogoutButton}
+                />
             ) : (
-            <SideNavBar
-                isVisible={isSidebarVisible}
-                setIsVisible={setIsSidebarVisible}
-                isLoggedIn={isLoggedIn}
-            />
+                <HeaderBar
+                    onMenuClick={handleMenuClick}
+                    isLoggedIn={isLoggedIn}
+                    showLogoutButton={showLogoutButton}
+                />
             )}
-
 
             <Routes>
-            <Route path="/" element={
-                <>
-                <HomePage />
-                </>
-            } />
-            <Route path="/student-registration" element={
-                <>
-                <HeaderBar isLoggedIn={isLoggedIn} showLogoutButton={false} />
-                <RegisterSection />
-                </>					
-            } />
-            <Route path="/login" element={
-                <>
-                <HeaderBar isLoggedIn={isLoggedIn} showLogoutButton={false} />
-                <LoginSection />
-                </>
-            } />
-            <Route path="/dashboard" element={
-                <>
-                <HeaderBar isLoggedIn={isLoggedIn} showLogoutButton={true} />
-                <Dashboard />
-                </>
-            } />
+                <Route path="/" element={<HomePage />} />
+                <Route path="/student-registration" element={<RegisterSection />} />
+                <Route path="/login" element={<LoginSection />} />
+                <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
-            {/*Footer*/}
-                <Footer />
+
+            <Footer />
         </div>
+    );
+}
+
+function App() {
+    return (
+        <Router>
+            <AppWrapper />
         </Router>
     );
 }
