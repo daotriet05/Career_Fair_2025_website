@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import '../../App.css';
 import LazyImage from '../EffectComponents/LazyImage';
 import { engineeringJobs, econMgmtJobs, urbanEnvJobs, itJobs } from './JobData';
@@ -30,12 +30,6 @@ function JobsSection() {
   const jobs = jobDataMap[activeTab];
   const jobsToShow = jobs.slice(0, visibleRows * 3);
   const hasMore = jobs.length > jobsToShow.length;
-
-  useEffect(() => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [visibleRows]);
 
   return (
     <div className="home-page-section bg-white min-h-screen px-4 flex flex-col items-center">
@@ -117,7 +111,7 @@ function JobsSection() {
         </button>
       )}
 
-      {/* Invisible ref for smooth scroll */}
+      {/* Static div, scroll effect removed */}
       <div ref={bottomRef} className="h-4" />
     </div>
   );
