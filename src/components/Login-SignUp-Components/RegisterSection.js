@@ -25,6 +25,7 @@
         const [formData, setFormData] = useState({
             studentName: "",
             studentEmail: "",
+            studentPassword: "",
             studentMajor: "",
             studentIntake: "",
             CV_link: "",
@@ -47,61 +48,73 @@
 
         const handleCaptcha = (value) => setCaptchaToken(value);
 
-        const generateRandomPassword = (length = 8) => {
-            const characters = "0123456789";
-            let password = "";
-            for (let i = 0; i < length; i++) {
-                password += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            return password;
-        };
-
         const handleSubmit = async (event) => {
             event.preventDefault();
             if (!captchaToken) return setStatus("Please complete the CAPTCHA.");
-            const generatedPassword = generateRandomPassword();
 
             try {
-                const userCred = await createUserWithEmailAndPassword(auth, formData.studentEmail, generatedPassword);
+                const captchaRes = await fetch("https://us-central1-careerfair2025-user-data.cloudfunctions.net/verifyCaptcha", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ token: captchaToken })
+                });
+
+                const captchaData = await captchaRes.json();
+
+                if (!captchaData.success) {
+                    setStatus("CAPTCHA verification failed. Please try again.");
+                    return;
+                }
+            
+            } catch (captchaError) {
+                setStatus("CAPTCHA verification request failed.");
+                console.error("Captcha error:", captchaError);
+                return;
+            }
+
+            try {
+                const userCred = await createUserWithEmailAndPassword(auth, formData.studentEmail, formData.studentPassword);
                 await sendEmailVerification(userCred.user);
 
                 // await signOut(auth); // Force user to verify before using app
                 setStep("verify");
 
-                // Start polling to detect when user has verified their email
+                // 4. Poll every 3 seconds to check if user has verified
                 const intervalId = setInterval(async () => {
-                    await auth.currentUser.reload(); // Refresh user data
+                    await auth.currentUser.reload(); // Refresh user state
                     const updatedUser = auth.currentUser;
 
                     if (updatedUser && updatedUser.emailVerified) {
                         clearInterval(intervalId);
-                        await signOut(auth); // Sign out to force login next time
+
+                        //  NOW save to Firestore after verification
+                        const boothCollected = {};
+                        booths.forEach((booth) => (boothCollected[booth] = false));
+
+                        const userData = {
+                            displayName: formData.studentName,
+                            email: formData.studentEmail,   
+                            password: formData.studentPassword,
+                            role: "Student",
+                            major: formData.studentMajor,
+                            intake: formData.studentIntake,
+                            boothCollected: boothCollected,
+                            numCode: Math.floor(10000000 + Math.random() * 90000000),
+                            checkinStatus: false,
+                            checkoutStatus: false,
+                            CV: formData.CV?.trim() ? formData.CV.trim() : null,
+                            linkedin_link: formData.linkedin_link?.trim()
+                                ? formData.linkedin_link.trim()
+                                : null,
+                            studentQuestion: formData.studentQuestion,
+                            createdAt: Timestamp.now(),
+                        };
+
+                        await setDoc(doc(db, "studentRegistrations", userCred.user.uid), userData);
+                        await signOut(auth);
                         navigate("/login");
                     }
-                }, 3000); // Check every 3 seconds
-
-                const boothCollected = {};
-                booths.forEach(booth => boothCollected[booth] = false);
-                
-                const userData = {
-                    displayName: formData.studentName,
-                    email: formData.studentEmail,
-                    password: generatedPassword,
-                    role: "Student",
-                    major: formData.studentMajor,
-                    intake: formData.studentIntake,
-                    boothCollected: boothCollected,
-                    numCode: generateRandomPassword(8),
-                    checkinStatus: false,
-                    checkoutStatus: false,
-                    CV: formData.CV?.trim() ? formData.CV.trim() : null,
-                    linkedin_link: formData.linkedin_link?.trim() ? formData.linkedin_link.trim() : null,
-                    studentQuestion: formData.studentQuestion,
-                    createdAt: Timestamp.now(),
-                };
-
-                await setDoc(doc(db, "studentRegistrations", userCred.user.uid), userData);
-
+                }, 3000);
             } catch (error) {
                 setStatus("Error: " + error.message);
             }
@@ -139,6 +152,20 @@
                                     type="email"
                                     name="studentEmail"
                                     value={formData.studentEmail}
+                                    onChange={handleChange}
+                                    required
+                                    className="w-full px-4 py-2 mt-1 rounded-md border border-gray-300 focus:outline-none"
+                                />
+                            </div>
+
+                            <div className="mb-4">
+                                <label className="block text-white font-semibold text-left mb-1">
+                                    Password: <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="password"
+                                    name="studentPassword"
+                                    value={formData.studentPassword}
                                     onChange={handleChange}
                                     required
                                     className="w-full px-4 py-2 mt-1 rounded-md border border-gray-300 focus:outline-none"
