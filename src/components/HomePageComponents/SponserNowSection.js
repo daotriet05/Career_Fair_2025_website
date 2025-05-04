@@ -11,7 +11,7 @@ import Kyungbang from "../../images/logo_2025/Kyungbang.webp";
 import LEGO from "../../images/logo_2025/LEGO.webp";
 import MACZT from "../../images/logo_2025/MAC ZT.webp";
 import Mitek from "../../images/logo_2025/mitek.webp";
-import Netcompany from "../../images/logo_2025/Netcompany.webp";
+import Netcompany from "../../images/logo_2025/Netcompany.webp"; 
 import Nextern from "../../images/logo_2025/nextern.webp";
 import Renesas from "../../images/logo_2025/Renesas.webp";
 import Shopee from "../../images/logo_2025/shopee.webp";
@@ -83,7 +83,7 @@ function SponserNowSection() {
       }}
     >
       <div className="w-full max-w-7xl mx-auto py-10">
-        <h1 className="text-xl p-2 font-bold">Sponsors</h1>
+        <h1 className="text-xl p-2 font-bold">Gold Sponsors</h1>
         <div className="w-full border-[3px] border-black"></div>
 
         <div className="py-16 grid grid-cols-1 sm:grid-cols-2 gap-x-[390px] gap-y-[70px]">
@@ -121,7 +121,7 @@ function SponserNowSection() {
         <div className="w-full border-[3px] border-black"></div>
 
         <div className="py-8 grid grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
-        {logoOrder.slice(4).map((logo) => (
+        {logoOrder.slice(0).map((logo) => (
             <a
             key={logo.alt}
             href={logo.url}
