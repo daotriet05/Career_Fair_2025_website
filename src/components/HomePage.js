@@ -8,6 +8,7 @@ import RecapSection from "./HomePageComponents/RecapSection";
 import WorkshopSection from "./HomePageComponents/WorkshopSection";
 import JobsSection from "./HomePageComponents/JobsSection";
 import SponserNowSection from "./HomePageComponents/SponserNowSection";
+import BoothMap from "./HomePageComponents/BoothMap";
 
 function HomePage() {
   const [showMarquee, setShowMarquee] = useState(false);
@@ -46,6 +47,7 @@ function HomePage() {
         </Reveal.Fade>
         <div id="info"><InforSection /></div>
         <div id="agenda"><AgendaSection /></div>
+        <div id="boothmap"><BoothMap /></div>
         <div id="jobs"><JobsSection /></div>
         <div id="workshop"><WorkshopSection /></div>
         <div id="recap"><RecapSection /></div>

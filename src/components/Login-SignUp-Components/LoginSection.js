@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase-config'; // Adjust path as needed
 import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+// import ReCAPTCHA from 'react-google-recaptcha';
+
+// const RECAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA_KEY;
 
 function LoginSection() {
     const [studentEmail, setStudentEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
+    // const [captchaToken, setCaptchaToken] = useState(null); // Track captcha token  
     const navigate = useNavigate();
 
     useEffect(() => {

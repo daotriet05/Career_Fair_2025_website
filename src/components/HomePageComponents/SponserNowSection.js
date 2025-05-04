@@ -51,7 +51,7 @@ const logoOrder = [
 const LogoCard = ({ image, title, scale }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   return (
-    <div className="w-[300px] flex justify-self-center">
+    <div className="w-full max-w-[300px] mx-auto flex justify-center">
       <div className="bg-white w-full h-[140px] rounded-xl overflow-hidden relative flex items-center justify-center shadow-lg transition-transform transform hover:scale-105">
         {!isLoaded && <div className="absolute inset-0 bg-gray-300 animate-pulse" />}
         <img
@@ -120,7 +120,7 @@ function SponserNowSection() {
         <h1 className="text-xl p-2 font-bold">Exhibitors</h1>
         <div className="w-full border-[3px] border-black"></div>
 
-        <div className="py-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-x-[100px] gap-y-[50px]">
+        <div className="py-8 grid grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
         {logoOrder.slice(4).map((logo) => (
             <a
             key={logo.alt}
@@ -129,7 +129,7 @@ function SponserNowSection() {
             rel="noopener noreferrer"
             className="transition hover:scale-110"
             >
-            <LogoCard {...logo} title={logo.alt} />
+            <LogoCard image={logo.image} title={logo.alt} scale={logo.scale}/>
             </a>
         ))}
         </div>
