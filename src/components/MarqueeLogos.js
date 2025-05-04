@@ -26,46 +26,46 @@ import NamABank from "../images/logo_2025/Nam A Bank.webp";
 import iTechwx from "../images/logo_2025/iTechwx.webp";
 
 const logos = [
-    { src: Adnovum, alt: "Adnovum" },
-    { src: SAP, alt: "SAP" },
-    { src: Bosch, alt: "Bosch" },
-    { src: EndressHauser, alt: "Endress Hauser" },
-    { src: Fischer, alt: "Fischer" },
-    { src: FPTSoftware, alt: "FPT Software" },
-    { src: Indefol, alt: "Indefol" },
-    { src: Kyungbang, alt: "Kyungbang" },
-    { src: LEGO, alt: "LEGO" },
-    { src: MACZT, alt: "MAC ZT" },
-    { src: Mitek, alt: "Mitek" },
-    { src: Netcompany, alt: "Netcompany" },
-    { src: Nextern, alt: "Nextern" },
-    { src: Renesas, alt: "Renesas" },
-    { src: Shopee, alt: "Shopee" },
-    { src: TTI, alt: "TTI" },
-    { src: Wanek, alt: "Wanek Furniture" },
-    { src: ZiehlAbegg, alt: "Ziehl Abegg" },
-    { src: NTPM, alt: "NTPM" },
-    { src: Techcombank, alt: "Techcombank" },
-    { src: NamABank, alt: "Nam A Bank" },
-    { src: iTechwx, alt: "iTechwx" },
+  { src: Adnovum, alt: "Adnovum" },
+  { src: SAP, alt: "SAP" },
+  { src: Bosch, alt: "Bosch" },
+  { src: EndressHauser, alt: "Endress Hauser" },
+  { src: Fischer, alt: "Fischer", scale: "scale-80" },
+  { src: FPTSoftware, alt: "FPT Software", scale: "scale-150" },
+  { src: Indefol, alt: "Indefol" },
+  { src: Kyungbang, alt: "Kyungbang" },
+  { src: LEGO, alt: "LEGO" },
+  { src: MACZT, alt: "MAC ZT", scale: "scale-110" },
+  { src: Mitek, alt: "Mitek" },
+  { src: Netcompany, alt: "Netcompany", scale: "scale-90" },
+  { src: Nextern, alt: "Nextern" },
+  { src: Renesas, alt: "Renesas" },
+  { src: Shopee, alt: "Shopee", scale: "scale-100" },
+  { src: TTI, alt: "TTI" },
+  { src: Wanek, alt: "Wanek Furniture" },
+  { src: ZiehlAbegg, alt: "Ziehl Abegg" },
+  { src: NTPM, alt: "NTPM" },
+  { src: Techcombank, alt: "Techcombank", scale: "scale-150" },
+  { src: NamABank, alt: "Nam A Bank" },
+  { src: iTechwx, alt: "iTechwx" },
+];
 
-  ];
-  
-  const MarqueeLogos = () => {
-    return (
-      <div className="bg-gray-100 py-4">
-        <Marquee speed={100} pauseOnHover gradient={false}>
-          {logos.map((logo, index) => (
-            <img
-              key={index}
-              src={logo.src}
-              alt={logo.alt}
-              className="h-12 mx-10"
-            />
-          ))}
-        </Marquee>
-      </div>
-    );
-  };
+const MarqueeLogos = () => {
+  return (
+    <div className="bg-gray-100 py-4">
+      <Marquee speed={100} pauseOnHover gradient={false}>
+        {logos.map((logo, index) => (
+          <img
+            key={index}
+            src={logo.src}
+            alt={logo.alt}
+            title={logo.alt}
+            className={`h-[48px] mx-10 transform transition-transform duration-300 ${logo.scale || ''}`}
+          />
+        ))}
+      </Marquee>
+    </div>
+  );
+};
 
 export default MarqueeLogos;
