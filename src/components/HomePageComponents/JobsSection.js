@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../../App.css';
 import LazyImage from '../EffectComponents/LazyImage';
 import { engineeringJobs, econMgmtJobs, urbanEnvJobs, itJobs } from './JobData';
@@ -19,17 +19,32 @@ const jobDataMap = {
 
 function JobsSection() {
   const [activeTab, setActiveTab] = useState('engineering');
-  const [visibleRows, setVisibleRows] = useState(5); // 5 hàng, mỗi hàng 3 job
+  const [visibleJobs, setVisibleJobs] = useState(15); // default: 5 rows × 3 jobs
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const bottomRef = useRef(null);
+
+  // Update isMobile on resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleTabChange = (key) => {
     setActiveTab(key);
-    setVisibleRows(5); // reset khi đổi tab
+    setVisibleJobs(isMobile ? 7 : 15); // reset job count
   };
 
   const jobs = jobDataMap[activeTab];
-  const jobsToShow = jobs.slice(0, visibleRows * 3);
+  const jobsToShow = jobs.slice(0, visibleJobs);
   const hasMore = jobs.length > jobsToShow.length;
+
+  const handleLoadMore = () => {
+    setVisibleJobs((prev) => prev + (isMobile ? 7 : 15));
+  };
 
   return (
     <div className="home-page-section bg-white min-h-screen px-4 flex flex-col items-center">
@@ -39,9 +54,9 @@ function JobsSection() {
           JOB INTERVIEW
         </h1>
         <div className="mt-4 sm:mt-0 sm:ml-0">
-          <a 
-            href="https://forms.gle/b5ZrWNCbre2Qoghg8" 
-            target="_blank" 
+          <a
+            href="https://forms.gle/b5ZrWNCbre2Qoghg8"
+            target="_blank"
             rel="noopener noreferrer"
             className="bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-4 py-2 rounded-md inline-block text-center"
           >
@@ -77,13 +92,11 @@ function JobsSection() {
             key={index}
             className="bg-white border-2 border-[#e4e4e4] text-black p-4 rounded-lg flex items-center gap-6"
           >
-            {/* Logo */}
             <LazyImage
               src={job.logo}
               alt={`${job.company} logo`}
               className="h-24 w-24 object-contain flex-shrink-0"
             />
-            {/* Text */}
             <div className="flex flex-col text-left flex-1">
               <p className="font-bold text-md">{job.position}</p>
               <p className="text-md">{job.company}</p>
@@ -104,14 +117,13 @@ function JobsSection() {
       {/* Load More Button */}
       {hasMore && (
         <button
-          onClick={() => setVisibleRows(visibleRows + 5)}
+          onClick={handleLoadMore}
           className="mt-6 px-6 py-2 rounded-full border-2 border-[#194d39] text-[#194d39] text-lg font-bold hover:bg-[#194d39] hover:text-white transition"
         >
           More
         </button>
       )}
 
-      {/* Static div, scroll effect removed */}
       <div ref={bottomRef} className="h-4" />
     </div>
   );

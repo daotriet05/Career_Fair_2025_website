@@ -120,18 +120,18 @@ function SponserNowSection() {
         <h1 className="text-xl p-2 font-bold">Exhibitors</h1>
         <div className="w-full border-[3px] border-black"></div>
 
-        <div className="py-8 grid grid-cols-3 sm:grid-cols-4 gap-x-[100px] gap-y-[10px] sm:gap-y-[50px]">
-          {logoOrder.slice(4).map((logo) => (
+        <div className="py-8 grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-x-[100px] gap-y-[50px]">
+        {logoOrder.slice(4).map((logo) => (
             <a
-              key={logo.alt}
-              href={logo.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition hover:scale-110"
+            key={logo.alt}
+            href={logo.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition hover:scale-110"
             >
-              <LogoCard {...logo} title={logo.alt} />
+            <LogoCard {...logo} title={logo.alt} />
             </a>
-          ))}
+        ))}
         </div>
       </div>
     </div>
