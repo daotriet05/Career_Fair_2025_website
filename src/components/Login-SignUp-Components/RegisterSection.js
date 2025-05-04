@@ -18,6 +18,7 @@ export const booths = [
                 "Nam A Bank", "Netcompany", "Nextern", "NTPM", "Renesas", "SAP", "Shopee",
                 "Techcombank", "TTI", "Wanek", "Ziehl Albegg",
             ];
+export const roles = ["Student", "Volunteer", "Organizer"];
 
 // const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
@@ -27,7 +28,11 @@ function RegisterSection() {
         studentEmail: "",
         studentPassword: "",
         studentMajor: "",
+        otherMajor: "",    // for Master students
+        CV: "",
         studentIntake: "",
+        studentRole: "",
+        identificationNumCode: "",
         CV_link: "",
         linkedin_link: "",
         studentQuestion: "",
@@ -67,7 +72,7 @@ function RegisterSection() {
         //         setStatus("CAPTCHA verification failed. Please try again.");
         //         return;
         //     }
-        
+
         // } catch (captchaError) {
         //     setStatus("CAPTCHA verification request failed.");
         //     console.error("Captcha error:", captchaError);
@@ -97,9 +102,10 @@ function RegisterSection() {
                         displayName: formData.studentName,
                         email: formData.studentEmail,   
                         password: formData.studentPassword,
-                        role: "Student",
-                        major: formData.studentMajor,
+                        major: formData.studentMajor === "Other" ? formData.otherMajor : formData.studentMajor,
                         intake: formData.studentIntake,
+                        role: formData.studentRole,
+                        identificationNumCode: formData.studentRole === "Volunteer" ? formData.identificationNumCode : null,
                         boothCollected: boothCollected,
                         checkinStatus: false,
                         checkoutStatus: false,
@@ -192,6 +198,24 @@ function RegisterSection() {
                             </select>
                         </div>
 
+                        {/* Show this input only if the selected major is "Other" */}
+                        {formData.studentMajor === "Other" && (
+                            <div className="mb-4">
+                                <label className="block text-white font-semibold text-left mb-1">
+                                Please specify your major:
+                                </label>
+                                <input
+                                type="text"
+                                name="otherMajor"
+                                value={formData.otherMajor}
+                                onChange={handleChange}
+                                placeholder="Type your major here"
+                                required
+                                className="w-full px-4 py-2 mt-1 rounded-md border border-gray-300 focus:outline-none"
+                                />
+                            </div>
+                        )}
+
                         <div className="mb-4">
                             <label className="block text-white font-semibold text-left mb-1">
                                 Select Intake: <span className="text-red-500">*</span>
@@ -209,6 +233,41 @@ function RegisterSection() {
                                 ))}
                             </select>
                         </div>
+
+                        <div className="mb-4">
+                            <label className="block text-white font-semibold text-left mb-1">
+                                Select Role: <span className="text-red-500">*</span>
+                            </label>
+                            <select
+                                name="studentRole"
+                                value={formData.studentRole}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 mt-1 rounded-md border border-gray-300 focus:outline-none"
+                            >
+                                <option value="">-- Select Role --</option>
+                                <option value="Student">Student</option>
+                                <option value="Volunteer">Volunteer</option>
+                                <option value="Organizer">Organizer</option>
+                            </select>
+                        </div>
+
+                        {/* Volunteer Identification Code - only shown if role is Volunteer or Organizer */}
+                        {(formData.studentRole === "Volunteer" || formData.studentRole === "Organizer") && (
+                            <div className="mb-4">
+                                <label className="block text-white font-semibold text-left mb-1">
+                                    Identification Code:
+                                </label>
+                                <input
+                                    type="text"
+                                    name="identificationNumCode"
+                                    value={formData.identificationNumCode}
+                                    onChange={handleChange}
+                                    placeholder="Enter your code"
+                                    className="w-full px-4 py-2 mt-1 rounded-md border border-gray-300 focus:outline-none"
+                                />
+                            </div>
+                        )}
 
                         <div className="mb-4">
                             <label className="block text-white font-semibold text-left mb-1">

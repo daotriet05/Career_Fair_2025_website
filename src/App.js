@@ -23,8 +23,19 @@ function AppWrapper() {
     useLenis();
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            setIsLoggedIn(!!user);
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+        //     setIsLoggedIn(!!user);
+        // });
+            if (user) {
+                await user.reload(); // Refresh user state
+                if (user.emailVerified) {
+                setIsLoggedIn(true); // ✅ Only count as logged in if verified
+                } else {
+                setIsLoggedIn(false); // ❌ Do NOT allow unverified access
+                }
+            } else {
+                setIsLoggedIn(false);
+            }
         });
 
         const handleResize = () => {
