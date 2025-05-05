@@ -83,15 +83,16 @@ function RegisterSection() {
             const userCred = await createUserWithEmailAndPassword(auth, formData.studentEmail, formData.studentPassword);
             await sendEmailVerification(userCred.user);
 
-            // await signOut(auth); // Force user to verify before using app
+            await signOut(auth); // Force user to verify before using app
             setStep("verify");
+
+            const user = userCred.user;
 
             // 4. Poll every 3 seconds to check if user has verified
             const intervalId = setInterval(async () => {
-                await auth.currentUser.reload(); // Refresh user state
-                const updatedUser = auth.currentUser;
+                await user.reload(); // Refresh user state
 
-                if (updatedUser && updatedUser.emailVerified) {
+                if (user.emailVerified) {
                     clearInterval(intervalId);
 
                     //  NOW save to Firestore after verification

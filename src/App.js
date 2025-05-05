@@ -27,12 +27,7 @@ function AppWrapper() {
         //     setIsLoggedIn(!!user);
         // });
             if (user) {
-                await user.reload(); // Refresh user state
-                if (user.emailVerified) {
-                setIsLoggedIn(true); // ✅ Only count as logged in if verified
-                } else {
-                setIsLoggedIn(false); // ❌ Do NOT allow unverified access
-                }
+                setIsLoggedIn(true); //  Allow any authenticated user
             } else {
                 setIsLoggedIn(false);
             }
