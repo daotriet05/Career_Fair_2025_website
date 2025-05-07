@@ -14,34 +14,6 @@ export const engineeringJobs = [
         logo: require('../../images/logo_2025/TTI.webp'),
     },
     {
-        company: 'KyungBang',
-        position: 'Maintenance Staff',
-        location: '',
-        JD_link: 'https://docs.google.com/document/d/1h4AYZZvzTDbLWK2WXadMiCk8BfczBfAJ/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
-        logo: require('../../images/logo_2025/Kyungbang.webp'),
-    },
-    {
-        company: 'KyungBang',
-        position: 'Electrical Technician',
-        location: '',
-        JD_link: 'https://docs.google.com/document/d/1h4AYZZvzTDbLWK2WXadMiCk8BfczBfAJ/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
-        logo: require('../../images/logo_2025/Kyungbang.webp'),
-    },
-    {
-        company: 'KyungBang',
-        position: 'Mechanical Technician',
-        location: '',
-        JD_link: 'https://docs.google.com/document/d/1RCjnDqSpMuw_0a9_YEqONXRouvArHzb2/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
-        logo: require('../../images/logo_2025/Kyungbang.webp'),
-    },
-    {
-        company: 'fischer',
-        position: 'Supplier Quality Engineer',
-        location: '',
-        JD_link: 'https://docs.google.com/document/d/1SiqWd44pwZXgcyvxWNaRKmo-WPJthN9b/edit?usp=drive_link&ouid=102380696678556884167&rtpof=true&sd=true',
-        logo: require('../../images/logo_2025/fischer.webp'),
-    },
-    {
         company: 'MAC ZT',
         position: 'BIM Engineer - Allplan',
         location: '',
@@ -181,37 +153,58 @@ export const engineeringJobs = [
         JD_link: 'https://drive.google.com/file/d/1qXMIcettuR20J9qn3zkwALRVlC1YJrQQ/view?usp=drive_link',
         logo: require('../../images/logo_2025/Ziehl Abegg.webp'),
     },
-  ];
-  
-  export const econMgmtJobs = [
     {
-        datacompany: 'KyungBang',
-        position: 'Production Supervisor',
+        company: 'KyungBang',
+        position: 'Maintenance Staff',
         location: '',
-        JD_link: 'https://docs.google.com/document/d/1dxS-jfsvGadbwYpjNGGFDObpOW73vK8v/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
-        logo: require('../../images/logo_2025/Kyungbang.webp'),
-    },
-    {
-        datacompany: 'KyungBang',
-        position: 'Sale Executive',
-        location: '',
-        JD_link: 'https://docs.google.com/document/d/1YPr-5SgkVjc8QasUfWST4Vwhc0dhmv0s/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
+        JD_link: 'https://docs.google.com/document/d/1h4AYZZvzTDbLWK2WXadMiCk8BfczBfAJ/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
         logo: require('../../images/logo_2025/Kyungbang.webp'),
     },
     {
         company: 'KyungBang',
-        position: 'Compliance Auditor',
+        position: 'Electrical Technician',
         location: '',
-        JD_link: 'https://docs.google.com/document/d/1avJVPA18mIQie9jQ23-GlnBAL4663HSJ/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
+        JD_link: 'https://docs.google.com/document/d/1h4AYZZvzTDbLWK2WXadMiCk8BfczBfAJ/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
+        logo: require('../../images/logo_2025/Kyungbang.webp'),
+    },
+    {
+        company: 'KyungBang',
+        position: 'Mechanical Technician',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1RCjnDqSpMuw_0a9_YEqONXRouvArHzb2/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
         logo: require('../../images/logo_2025/Kyungbang.webp'),
     },
     {
         company: 'fischer',
-        position: 'Executive Purchaser',
+        position: 'Supplier Quality Engineer',
         location: '',
-        JD_link: 'https://docs.google.com/document/d/1GsJx-zQPVzeJlmT7yMtgDmfhET5Dtemt/edit?usp=drive_link&ouid=102380696678556884167&rtpof=true&sd=true',
+        JD_link: 'https://docs.google.com/document/d/1SiqWd44pwZXgcyvxWNaRKmo-WPJthN9b/edit?usp=drive_link&ouid=102380696678556884167&rtpof=true&sd=true',
         logo: require('../../images/logo_2025/fischer.webp'),
     },
+    {
+        company: 'iTechwx',
+        position: 'Technical Support Engineer',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1J7xxYSp5uQJF1sr78WpQDN3nYzXa9fPn/view?usp=sharing',
+        logo: require('../../images/logo_2025/iTechwx.webp'),
+    },
+    {
+        company: 'MAC ZT',
+        position: 'QA Engineer (Quality Assurance Engineer)',
+        location: '',
+        JD_link: 'https://www.topcv.vn/viec-lam/qa-engineer-ky-su-kiem-tra-chat-luong/1716734.html?ta_source=JobSearchList_LinkDetail&u_sr_id=kwaMSSjWFL4BFZLMivBH1YOgroEEHuHJjXPb0XNq_1746510265',
+        logo: require('../../images/logo_2025/MAC ZT.webp'),
+    },
+    {
+        company: 'MAC ZT',
+        position: 'BIM Engineer (BIM Design Engineer) - Allplan',
+        location: '',
+        JD_link: 'https://www.topcv.vn/viec-lam/bim-engineer-ky-su-trien-khai-ban-ve-allplan/1706254.html?t...46510265',
+        logo: require('../../images/logo_2025/MAC ZT.webp'),
+    },
+  ];
+  
+  export const econMgmtJobs = [
     {
         company: 'Shopee',
         position: 'Customer Relationship Management Associate - Shopee',
@@ -331,6 +324,48 @@ export const engineeringJobs = [
         JD_link: 'https://tuyendung.techcombankjobs.com/thuc-tap-khcn',
         logo: require('../../images/logo_2025/Techcombank.webp'),
     },
+    {
+        datacompany: 'KyungBang',
+        position: 'Production Supervisor',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1dxS-jfsvGadbwYpjNGGFDObpOW73vK8v/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
+        logo: require('../../images/logo_2025/Kyungbang.webp'),
+    },
+    {
+        datacompany: 'KyungBang',
+        position: 'Sale Executive',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1YPr-5SgkVjc8QasUfWST4Vwhc0dhmv0s/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
+        logo: require('../../images/logo_2025/Kyungbang.webp'),
+    },
+    {
+        company: 'KyungBang',
+        position: 'Compliance Auditor',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1avJVPA18mIQie9jQ23-GlnBAL4663HSJ/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
+        logo: require('../../images/logo_2025/Kyungbang.webp'),
+    },
+    {
+        company: 'fischer',
+        position: 'Executive Purchaser',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1GsJx-zQPVzeJlmT7yMtgDmfhET5Dtemt/edit?usp=drive_link&ouid=102380696678556884167&rtpof=true&sd=true',
+        logo: require('../../images/logo_2025/fischer.webp'),
+    },
+    {
+        company: 'Techcombank',
+        position: 'HR intern',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/16gu6V2vu2rbRDItvV_TO5MY06DK_QQlNGyay-EAtaV0/edit?tab=t.0',
+        logo: require('../../images/logo_2025/Techcombank.webp'),
+    },
+    {
+        company: 'Techcombank',
+        position: 'Customer Relations',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1kTJw-JEHp1ImzrFxf0SWwJAesS7yJUNLNszW-l1DKh0/edit?tab=t.0',
+        logo: require('../../images/logo_2025/Techcombank.webp'),
+    },
   ];
   export const urbanEnvJobs = [
     {
@@ -390,5 +425,12 @@ export const engineeringJobs = [
         location: '',
         JD_link: 'https://drive.google.com/file/d/1YYwqy7RVgYGR4KhSMpPORM5Wa5Vb8YNw/view?usp=sharing',
         logo: require('../../images/logo_2025/FPT Software.webp'),
+    },
+    {
+        company: 'iTechwx',
+        position: 'Technical Support Engineer',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1J7xxYSp5uQJF1sr78WpQDN3nYzXa9fPn/view?usp=sharing',
+        logo: require('../../images/logo_2025/iTechwx.webp'),
     },
   ];
