@@ -23,8 +23,14 @@ function AppWrapper() {
     useLenis();
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            setIsLoggedIn(!!user);
+        const unsubscribe = auth.onAuthStateChanged(async (user) => {
+        //     setIsLoggedIn(!!user);
+        // });
+            if (user) {
+                setIsLoggedIn(true); //  Allow any authenticated user
+            } else {
+                setIsLoggedIn(false);
+            }
         });
 
         const handleResize = () => {

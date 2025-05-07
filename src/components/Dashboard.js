@@ -5,11 +5,12 @@ import QRCodeDisplay from "./DashboardComponents/QRCodeDisplay";
 import Analysis from "./DashboardComponents/Analysis";
 import VolunteerTask from "./DashboardComponents/VolunteerTask";
 import VolunteerTaskManagement from "./DashboardComponents/VolunteerTaskManagement";
+import AdminDisplay from "./DashboardComponents/AdminDisplay";
+import AdminQRScanner from "./DashboardComponents/AdminQRScanner";
 import dashboardBanner from "../images/dashboard_banner.png";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 
-// Helper class to fetch and update user
 class User {
     constructor(uid) {
         if (!uid) throw new Error("UID is required");
@@ -29,18 +30,19 @@ class User {
     }
 }
 
-// Helper functions
 function getInitialTab(role) {
     if (role === "Student") return "boarding";
     if (role === "Volunteer") return "volunteerTask";
     if (role === "Organizer") return "volunteerManagement";
-    return "analysis"; // Company or default
+    if (role === "Admin") return "adminDisplay";
+    return "analysis"; // Company
 }
 
 function getFirstTabName(role) {
     if (role === "Student") return "Your Boarding Pass";
     if (role === "Volunteer") return "Volunteer Task";
     if (role === "Organizer") return "Volunteer Management";
+    if (role === "Admin") return "Admin Display";
     return "Analysis"; // Company
 }
 
@@ -100,41 +102,94 @@ function Dashboard() {
         }
     };
 
-    const updateBoothCollected = async (boothName, uid) => {
+    const updateBoothCollected = async (boothName, studentUID) => {
         try {
-            const studentRef = doc(db, "studentRegistrations", uid);
+            // Step 1: Fetch student data
+            const studentRef = doc(db, "studentRegistrations", studentUID);
             const studentSnap = await getDoc(studentRef);
-
             if (!studentSnap.exists()) {
-                console.error("Student not found:", uid);
+                console.error("❌ Student not found:", studentUID);
                 return;
             }
-
+    
             const studentData = studentSnap.data();
-            const previousBoothStatus = studentData.boothCollected?.[boothName] ?? false;
-            const boothCollected = {
+            console.log("📚 GOT Student data:", studentData);
+    
+            // Step 2: Update boothCollected for the student
+            const updatedBoothCollected = {
                 ...(studentData.boothCollected || {}),
                 [boothName]: true,
             };
-
-            if (!previousBoothStatus) {
-                setUserData(userObj.getUserData());
-                userData.studentAnalysis[studentData.major] += 1;
-                setUserData(userData);
-                userObj.updateUserData(userData);
-                console.log("Student analysis updated:", userData.studentAnalysis);
+            await updateDoc(studentRef, { boothCollected: updatedBoothCollected });
+            console.log(`✅ Booth ${boothName} marked as collected for student ${studentUID}.`);
+    
+            // Step 3: Get company displayName (used as adminStorage doc name)
+            if (!userObj || !userData?.displayName) {
+                console.error("❌ Company identity (userObj/displayName) missing.");
+                return;
             }
-
-            await updateDoc(studentRef, { boothCollected });
-            console.log(`Booth ${boothName} marked as collected for student ${uid}.`);
+            const companyDisplayName = userData.displayName;
+    
+            // Step 4: Get scannedStudents map from adminStorage
+            const adminRef = doc(db, "adminStorage", companyDisplayName);
+            const adminSnap = await getDoc(adminRef);
+    
+            let scannedStudents = {};
+            if (adminSnap.exists()) {
+                scannedStudents = adminSnap.data().scannedStudents || {};
+            }
+    
+            // Step 5: Check if student already scanned
+            if (scannedStudents[studentUID]) {
+                console.log("⚠️ Student already scanned. Skipping analysis update.");
+                return;
+            }
+    
+            // Step 6: Add new student to scannedStudents map
+            scannedStudents[studentUID] = {
+                displayName: studentData.displayName,
+                email: studentData.email,
+                major: studentData.major,
+                intake: studentData.intake,
+                CV_link: studentData.CV_link || null,
+                linkedin_link: studentData.linkedin_link || null
+            };
+    
+            await setDoc(adminRef, { scannedStudents });
+            console.log("📥 New scanned student stored in adminStorage.");
+    
+            // Step 7: Update major/intake count in company data
+            const companyData = await userObj.getUserData();
+            const major = studentData.major;
+            const intake = studentData.intake;
+    
+            const updatedAnalysisMajor = {
+                ...companyData.studentAnalysisMajor,
+                [major]: (companyData.studentAnalysisMajor?.[major] || 0) + 1,
+            };
+    
+            const updatedAnalysisIntake = {
+                ...companyData.studentAnalysisIntake,
+                [intake]: (companyData.studentAnalysisIntake?.[intake] || 0) + 1,
+            };
+    
+            const updatedCompanyData = {
+                ...companyData,
+                studentAnalysisMajor: updatedAnalysisMajor,
+                studentAnalysisIntake: updatedAnalysisIntake
+            };
+    
+            await userObj.updateUserData(updatedCompanyData);
+            setUserData(updatedCompanyData);
+            console.log("✅ Company analytics updated after new scan.");
         } catch (error) {
-            console.error("Error updating booth collected status:", error);
+            console.error("🔥 Error in updateBoothCollected:", error);
         }
     };
+    
 
     const getStudentData = async (uid) => {
         try {
-            console.log("Fetching student data for UID:", uid);
             const studentRef = doc(db, "studentRegistrations", uid);
             const studentSnap = await getDoc(studentRef);
 
@@ -142,7 +197,6 @@ function Dashboard() {
                 console.error("Student not found:", uid);
                 return null;
             }
-            console.log("Student data fetched:", studentSnap.data());
             return studentSnap.data();
         } catch (error) {
             console.error("Error fetching student data:", error);
@@ -151,82 +205,83 @@ function Dashboard() {
     };
 
     return (
-        <>
-            <div className="min-h-screen bg-white p-6 pt-28 font-sans flex flex-col items-center">
-                <img src={dashboardBanner} alt="VGU to Career" className="w-full max-w-md mb-6" />
+        <div className="min-h-screen bg-white p-6 pt-28 font-sans flex flex-col items-center">
+            <img src={dashboardBanner} alt="VGU to Career" className="w-full max-w-md mb-6" />
 
-                {/* Tab Switcher */}
-                <div className="flex space-x-4 mb-8">
-                    <button
-                        className={`border-2 rounded-lg px-4 py-2 font-semibold ${
-                            tab === getInitialTab(userData?.role)
-                                ? "border-yellow-400 text-yellow-500"
-                                : "border-gray-300"
-                        }`}
-                        onClick={() => setTab(getInitialTab(userData?.role))}
-                    >
-                        {getFirstTabName(userData?.role)}
-                    </button>
-                    <button
-                        className={`border-2 rounded-lg px-4 py-2 font-semibold ${
-                            tab === "scanner"
-                                ? "border-yellow-400 text-yellow-500"
-                                : "border-gray-300"
-                        }`}
-                        onClick={() => setTab("scanner")}
-                    >
-                        QR Code Scanner
-                    </button>
-                </div>
-
-                {/* Tab Content */}
-                <div className="w-full max-w-5xl">
-                    {/* Second tab: QR Code Scanner */}
-                    {tab === "scanner" && (
-                        userData?.role === "Company" ? (
-                            <QRScanner 
-                                companyName={userData?.displayName} 
-                                updateBoothCollected={updateBoothCollected} 
-                                getStudentData={getStudentData} 
-                            />
-                        ) : (
-                            <QRCodeDisplay 
-                                userID={userObj?.uid} 
-                                data={userData} 
-                                updateCVLink={updateCVLink} 
-                                updateLinkedInLink={updateLinkedInLink} 
-                            />
-                        )
-                    )}
-
-                    {/* First tab: depends on role */}
-                    {tab === "boarding" && userData?.role === "Student" && (
-                        <BoardingPass 
-                            data={userData} 
-                            refetchUserData={refetchUserData} 
-                        />
-                    )}
-                    {tab === "analysis" && userData?.role === "Company" && (
-                        <Analysis 
-                            data={userData} 
-                            refetchUserData={refetchUserData} 
-                        />
-                    )}
-                    {tab === "volunteerTask" && userData?.role === "Volunteer" && (
-                        <VolunteerTask 
-                            data={userData} 
-                            refetchUserData={refetchUserData} 
-                        />
-                    )}
-                    {tab === "volunteerManagement" && userData?.role === "Organizer" && (
-                        <VolunteerTaskManagement 
-                            data={userData} 
-                            refetchUserData={refetchUserData} 
-                        />
-                    )}
-                </div>
+            {/* Tab Switcher */}
+            <div className="flex space-x-4 mb-8">
+                <button
+                    className={`border-2 rounded-lg px-4 py-2 font-semibold ${
+                        tab === getInitialTab(userData?.role)
+                            ? "border-yellow-400 text-yellow-500"
+                            : "border-gray-300"
+                    }`}
+                    onClick={() => setTab(getInitialTab(userData?.role))}
+                >
+                    {getFirstTabName(userData?.role)}
+                </button>
+                <button
+                    className={`border-2 rounded-lg px-4 py-2 font-semibold ${
+                        tab === "scanner"
+                            ? "border-yellow-400 text-yellow-500"
+                            : "border-gray-300"
+                    }`}
+                    onClick={() => setTab("scanner")}
+                >
+                    QR Code Scanner
+                </button>
             </div>
-        </>
+
+            {/* Tab Content */}
+            <div className="w-full max-w-5xl">
+                {tab === "scanner" && (
+                    userData?.role === "Company" ? (
+                        <QRScanner
+                            companyName={userData?.displayName}
+                            updateBoothCollected={updateBoothCollected}
+                            getStudentData={getStudentData}
+                        />
+                    ) : userData?.role === "Admin" ? (
+                        <AdminQRScanner />
+                    ) : (
+                        <QRCodeDisplay
+                            userID={userObj?.uid}
+                            data={userData}
+                            updateCVLink={updateCVLink}
+                            updateLinkedInLink={updateLinkedInLink}
+                        />
+                    )
+                )}
+
+                {tab === "boarding" && userData?.role === "Student" && (
+                    <BoardingPass
+                        data={userData}
+                        refetchUserData={refetchUserData}
+                    />
+                )}
+                {tab === "analysis" && userData?.role === "Company" && (
+                    <Analysis
+                        data={userData}
+                        refetchUserData={refetchUserData}
+                    />
+                )}
+                {tab === "volunteerTask" && userData?.role === "Volunteer" && (
+                    <VolunteerTask
+                        data={userData}
+                        refetchUserData={refetchUserData}
+                    />
+                )}
+                {tab === "volunteerManagement" && userData?.role === "Organizer" && (
+                    <VolunteerTaskManagement
+                        data={userData}
+                        refetchUserData={refetchUserData}
+                    />
+                )}
+                {tab === "adminDisplay" && userData?.role === "Admin" && (
+                    <AdminDisplay />
+                )}
+            </div>
+        </div>
     );
 }
 
