@@ -14,14 +14,14 @@ export const engineeringJobs = [
         logo: require('../../images/logo_2025/TTI.webp'),
     },
     {
-        company: 'Kyungbang',
+        company: 'KyungBang',
         position: 'Maintenance Staff',
         location: '',
         JD_link: 'https://docs.google.com/document/d/1h4AYZZvzTDbLWK2WXadMiCk8BfczBfAJ/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
         logo: require('../../images/logo_2025/Kyungbang.webp'),
     },
     {
-        company: 'Kyungbang',
+        company: 'KyungBang',
         position: 'Electrical Technician',
         location: '',
         JD_link: 'https://docs.google.com/document/d/1h4AYZZvzTDbLWK2WXadMiCk8BfczBfAJ/edit?usp=drive_link&ouid=114794095987303658186&rtpof=true&sd=true',
