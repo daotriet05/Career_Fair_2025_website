@@ -19,7 +19,7 @@ function IntroSection({ showMarquee }) {
           <div className="text-2xl font-semibold bg-gray-200 bg-opacity-75 p-8 rounded-md text-black border border-black ml-0 md:ml-10">
             <p className="text-[#275F48]"><strong>Date:</strong> <span className="text-black">14th May 2025</span></p>
             <p className="mt-6 text-[#275F48]"><strong>Time:</strong> <span className="text-black">8:30 - 13:30</span></p>
-            <p className="mt-6 text-[#275F48]"><strong>Venue:</strong> <span className="text-black">VGU Convention Hall - Ben Cat Campus</span></p>
+            <p className="mt-6 text-[#275F48]"><strong>Venue:</strong> <span className="text-black">VGU Convention Hall - Binh Duong Campus</span></p>
           </div>
         </div>
       </div>

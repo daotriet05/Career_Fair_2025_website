@@ -22,7 +22,7 @@ function BoothMap() {
     "Endress+Hauser",
     "Wanek Furniture",
     "iTechwx",
-    "Nextarm Vietnam",
+    "Nextern Vietnam",
     "Netcompany Vietnam",
     "Renesas Design Vietnam",
     "Kyungbang Vietnam",

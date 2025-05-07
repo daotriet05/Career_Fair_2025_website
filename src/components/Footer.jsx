@@ -26,7 +26,7 @@ export const Footer = () => {
             VIETNAMESE-GERMAN UNIVERSITY
           </div>
           <p className="mb-2">
-            Ecolakes Mỹ Phước, Ring road 4, Quarter 4, Thới Hòa Ward, Binh Duong 
+          Ring road 4, Quarter 4, Thoi Hoa Ward, Ben Cat City, Binh Duong Province
           </p>
           <p>(0274) 222 0990 - (0274) 222 0980</p>
         </div>
