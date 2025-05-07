@@ -65,6 +65,26 @@ function JobsSection() {
         </div>
       </div>
 
+      <div className="w-full max-w-7xl text-left mb-6 px-4 sm:px-0">
+        <ul className="list-inside pl-6 space-y-4 text-lg text-gray-700">
+          <li>
+            <strong className="text-[#194d39]">Step 1:</strong> Find your major and preferred job position
+          </li>
+          <li>
+            <strong className="text-[#194d39]">Step 2:</strong> Click on <span className="font-semibold">View JD</span> to access job requirements
+          </li>
+          <li>
+            <strong className="text-[#194d39]">Step 3:</strong> Submit your CV through the link in the yellow button
+          </li>
+        </ul>
+        <p className="mt-4 text-gray-600 text-sm">
+          <em>
+            *Please note that only the CVs submitted through our form are registered and contacted directly by the company for an in-event job interview.
+          </em>
+        </p>
+      </div>
+
+
       {/* Category Tabs */}
       <div className="w-full max-w-7xl flex flex-wrap justify-center gap-6 mb-6">
         {categories.map((cat) => (
