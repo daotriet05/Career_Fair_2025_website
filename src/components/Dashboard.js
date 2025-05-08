@@ -10,6 +10,7 @@ import AdminQRScanner from "./DashboardComponents/AdminQRScanner";
 import dashboardBanner from "../images/dashboard_banner.png";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
+import "../App.css";
 
 class User {
     constructor(uid) {
@@ -203,13 +204,39 @@ function Dashboard() {
             return null;
         }
     };
+function Text({ userData }) {
+    const messages = [
+        `Welcome ${userData?.role} to VGU Career Fair`,
+        `Welcome ${userData?.displayName || "Admin"} to VGU Career Fair`,
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % messages.length);
+        }, 10000); // change every 10 seconds
+
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <div className="container">
+            <span key={currentIndex} className="first">
+                {messages[currentIndex]}
+            </span>
+        </div>
+    );
+}
+      
 
     return (
         <div className="min-h-screen bg-white p-6 pt-28 font-sans flex flex-col items-center">
             <img src={dashboardBanner} alt="VGU to Career" className="w-full max-w-md mb-6" />
-
+            {/* Use the Text component */}
+            {userData && <Text userData={userData} />}
+            <div className="flex space-x-4 mb-8 mx-auto">
             {/* Tab Switcher */}
-            <div className="flex space-x-4 mb-8">
                 <button
                     className={`border-2 rounded-lg px-4 py-2 font-semibold ${
                         tab === getInitialTab(userData?.role)
@@ -231,7 +258,6 @@ function Dashboard() {
                     QR Code Scanner
                 </button>
             </div>
-
             {/* Tab Content */}
             <div className="w-full max-w-5xl">
                 {tab === "scanner" && (

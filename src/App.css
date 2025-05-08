@@ -82,3 +82,63 @@ html, body {
     display: none !important;
   }
 }
+.container {
+  text-align: middle;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  white-space: nowrap;
+  padding-bottom: 20px;
+}
+
+.container .first {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  font-size: 2em;
+  color: #bd1f40 white;
+  animation: alternate-color 14s ; /* Added color animation */
+}
+
+.container .first::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+  border-left: 2px solid black; 
+  animation: animate 10s steps(50), blink 1s steps(1) 30; /* Added blink animation */
+  z-index: 1;
+}
+
+@keyframes alternate-color {
+  0%, 100% {
+    color: #e5ea98; 
+  }
+  50% {
+    color: #155f48;
+  }
+}
+
+@keyframes animate {
+  0% {
+    left: 0;
+  }
+  40%, 60% {
+    left: 100%;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+@keyframes blink {
+  from, to {
+    border-color: transparent; /* Cursor invisible */
+  }
+  50% {
+    border-color: black; /* Cursor visible */
+  }
+}

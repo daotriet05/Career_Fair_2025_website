@@ -26,6 +26,7 @@ import iTechwx from "../../images/logo_2025/iTechwx.webp";
 const logoOrder = [
   { image: Wanek, alt: "Wanek Furniture", url: "https://www.wanekcareer.com/" },
   { image: LEGO, alt: "LEGO", url: "https://www.lego.com" },
+  { image: iTechwx, alt: "iTechwx", url: "https://www.itechwx.com/Home" },
   { image: Indefol, alt: "Indefol", url: "https://www.indefol.com/" },
   { image: ZiehlAbegg, alt: "Ziehl Abegg", url: "https://www.ziehl-abegg.com/en/" },
   { image: Bosch, alt: "Bosch", url: "https://www.bosch.com.vn/" },
@@ -45,7 +46,6 @@ const logoOrder = [
   { image: NTPM, alt: "NTPM", url: "http://www.ntpm.com.vn" },
   { image: Techcombank, alt: "Techcombank", url: "http://www.techcombank.com.vn", scale: "scale-125" },
   { image: NamABank, alt: "Nam A Bank", url: "" },
-  { image: iTechwx, alt: "iTechwx", url: "https://www.itechwx.com/Home" },
 ];
 
 const LogoCard = ({ image, title, scale }) => {
@@ -86,8 +86,8 @@ function SponserNowSection() {
         <h1 className="text-xl p-2 font-bold">Gold Sponsors</h1>
         <div className="w-full border-[3px] border-black"></div>
 
-        <div className="py-16 grid grid-cols-1 sm:grid-cols-2 gap-x-[390px] gap-y-[70px]">
-          {logoOrder.slice(0, 2).map((logo) => (
+        <div className="py-16 grid grid-cols-1 sm:grid-cols-3 gap-x-10 gap-y-[70px]">
+          {logoOrder.slice(0, 3).map((logo) => (
             <a
               key={logo.alt}
               href={logo.url}
@@ -104,7 +104,7 @@ function SponserNowSection() {
         <div className="w-full border-[3px] border-black"></div>
 
         <div className="py-16 grid grid-cols-1 sm:grid-cols-2 gap-x-[390px] gap-y-[70px]">
-          {logoOrder.slice(2, 4).map((logo) => (
+          {logoOrder.slice(3, 5).map((logo) => (
             <a
               key={logo.alt}
               href={logo.url}

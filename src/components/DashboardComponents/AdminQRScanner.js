@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../firebase-config";
+import QRImage from "../../icons/qr-code.png";
 
 const AdminQRScanner = () => {
   const videoRef = useRef(null);
@@ -133,7 +134,38 @@ const AdminQRScanner = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 shadow-lg p-4 rounded-lg bg-gray-100 w-1/2 mx-auto">
+      <video
+        ref={videoRef}
+        className="w-72 h-72 md:w-96 md:h-96 border-4 border-black rounded-xl"
+        style={{
+          objectFit: "cover",
+          display: isScanning ? "block" : "block",
+          backgroundImage: `url(${QRImage})`, // Replace with your image path
+          backgroundSize: "80%", // Ensures the image covers the entire block
+          backgroundPosition: "center", // Centers the image
+          backgroundRepeat: "no-repeat", // Prevents image repetition
+        }}
+        muted
+        playsInline
+      />
+      {/* Scan Buttons */}
+      {!isScanning && (
+        <button
+          onClick={startCamera}
+          className="bg-green-800 text-white px-4 py-2 rounded"
+        >
+          Start Scan
+        </button>
+      )}
+      {isScanning && (
+        <button
+          onClick={stopCamera}
+          className="bg-red-600 text-white px-4 py-2 rounded"
+        >
+          Stop Scan
+        </button>
+      )}
       {/* Mode Selector */}
       <div className="flex gap-4 mb-4">
         {["check-in", "check-out", "receive-reward"].map((option) => (
@@ -163,31 +195,7 @@ const AdminQRScanner = () => {
         </div>
       )}
 
-      {/* Scan Buttons */}
-      {!isScanning && (
-        <button
-          onClick={startCamera}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Start Scan
-        </button>
-      )}
-      {isScanning && (
-        <button
-          onClick={stopCamera}
-          className="bg-red-600 text-white px-4 py-2 rounded"
-        >
-          Stop Scan
-        </button>
-      )}
 
-      <video
-        ref={videoRef}
-        className="w-72 h-72 md:w-96 md:h-96 border-4 border-black rounded-xl"
-        style={{ objectFit: "cover", display: isScanning ? "block" : "none" }}
-        muted
-        playsInline
-      />
       <canvas ref={canvasRef} style={{ display: "none" }} />
     </div>
   );
