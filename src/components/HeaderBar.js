@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase-config";
 import "../App.css";
-import vgulogo from "../images/vgu-logo.png";
+import vgulogo from "../images/Logo_VGU.png";
 import { GiHamburgerMenu } from "react-icons/gi"; // <-- Import Hamburger Icon
 
 function HeaderBar({ isLoggedIn, showLogoutButton, onMenuClick }) { // <-- Add onMenuClick prop
@@ -23,7 +23,7 @@ function HeaderBar({ isLoggedIn, showLogoutButton, onMenuClick }) { // <-- Add o
             <nav className="fixed top-2 inset-x-0 mx-auto w-11/12 md:w-2/3 max-w-screen-xl h-20 flex items-center justify-between px-3 bg-gradient-to-r from-gray-200 to-gray-100 shadow-md z-50 rounded-lg space-x-4">
                 {/* Logo */}
                 <div className="flex items-center space-x-2">
-                    <img src={vgulogo} alt="VGU Logo" className="h-17" />
+                    <img src={vgulogo} alt="VGU Logo" className="h-12 md:h-16 object-contain" />
                 </div>
 
                 {/* Navigation Links - only shown on medium and larger screens */}

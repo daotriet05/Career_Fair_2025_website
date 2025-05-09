@@ -105,7 +105,6 @@ function SponserNowSection() {
         <div className="w-full border-[3px] border-black"></div>
 
         <div className="py-16 grid grid-cols-1 sm:grid-cols-2 gap-x-[390px] gap-y-[70px]">
-        {/* <div className="py-16 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10"> */}
           {logoOrder.slice(3, 5).map((logo) => (
             <a
               key={logo.alt}

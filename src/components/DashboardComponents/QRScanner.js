@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
+import QRImage from "../../icons/qr-code.png";
 
 const QRScanner = ({ companyName, updateBoothCollected, getStudentData }) => {
   const videoRef = useRef(null);
@@ -110,7 +111,41 @@ const QRScanner = ({ companyName, updateBoothCollected, getStudentData }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 shadow-lg p-4 rounded-lg bg-gray-100 w-1/2 mx-auto">
+      <video
+        ref={videoRef}
+        className="w-72 h-72 md:w-96 md:h-96 border-4 border-black rounded-xl"
+        style={{
+          objectFit: "cover",
+          display: isScanning ? "block" : "block",
+          backgroundImage: `url(${QRImage})`, // Replace with your image path
+          backgroundSize: "80%", // Ensures the image covers the entire block
+          backgroundPosition: "center", // Centers the image
+          backgroundRepeat: "no-repeat", // Prevents image repetition
+        }}
+        muted
+        playsInline
+      />
+
+      {!isScanning && (
+        <button
+        onClick={startCamera}
+        className="bg-green-800 text-white px-8 py-4 rounded"
+        >
+          Start Scan
+        </button>
+      )}
+
+      {isScanning && (
+        <button
+        onClick={stopCamera}
+        className="bg-red-600 text-white px-4 py-2 rounded"
+        >
+          Stop Scan
+        </button>
+      )}
+      <p style={{fontWeight:"bold"}}>Company Name: {companyName}</p>
+
       {studentData && (
         <div className="bg-white shadow-md rounded-lg p-4 w-full max-w-md text-center">
           <h2 className="text-xl font-semibold mb-2">Student Information</h2>
@@ -142,33 +177,6 @@ const QRScanner = ({ companyName, updateBoothCollected, getStudentData }) => {
           </div>
         </div>
       )}
-
-      {!isScanning && (
-        <button
-          onClick={startCamera}
-          className="bg-blue-600 text-white px-4 py-2 rounded"
-        >
-          Start Scan
-        </button>
-      )}
-
-      {isScanning && (
-        <button
-          onClick={stopCamera}
-          className="bg-red-600 text-white px-4 py-2 rounded"
-        >
-          Stop Scan
-        </button>
-      )}
-
-      <p>Company Name: {companyName}</p>
-      <video
-        ref={videoRef}
-        className="w-72 h-72 md:w-96 md:h-96 border-4 border-black rounded-xl"
-        style={{ objectFit: "cover", display: isScanning ? "block" : "none" }}
-        muted
-        playsInline
-      />
       <canvas ref={canvasRef} style={{ display: "none" }} />
     </div>
   );
