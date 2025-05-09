@@ -45,7 +45,7 @@ const logoOrder = [
   { image: Adnovum, alt: "Adnovum", url: "http://www.adnovum.com" },
   { image: NTPM, alt: "NTPM", url: "http://www.ntpm.com.vn" },
   { image: Techcombank, alt: "Techcombank", url: "http://www.techcombank.com.vn", scale: "scale-125" },
-  { image: NamABank, alt: "Nam A Bank", url: "" },
+  { image: NamABank, alt: "Nam A Bank", url: "https://www.namabank.com.vn/" },
 ];
 
 const LogoCard = ({ image, title, scale }) => {
