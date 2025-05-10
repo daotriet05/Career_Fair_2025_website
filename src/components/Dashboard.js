@@ -58,10 +58,10 @@ function Dashboard() {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
             if (firebaseUser) {
-                if (!firebaseUser.emailVerified) {
-                    alert("⚠️ Please verify your email before accessing the dashboard.");
-                    return;
-                }
+                // if (!firebaseUser.emailVerified) {
+                //     alert("⚠️ Please verify your email before accessing the dashboard.");
+                //     return;
+                // }
 
                 const user = new User(firebaseUser.uid);
                 setUserObj(user);
