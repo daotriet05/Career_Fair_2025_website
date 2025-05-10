@@ -1,8 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import QRImage from "../../icons/qr-code.png";
+
+// Fetch UID by ticketCode
+const getUIDByTicketCode = async (ticketCode) => {
+    const snapshot = await getDocs(collection(db, "studentRegistrations"));
+    for (const docSnap of snapshot.docs) {
+      const data = docSnap.data();
+      if (data.ticketCode === ticketCode) {
+        return docSnap.id; // UID = document ID
+      }
+    }
+    return null;
+};
 
 const AdminQRScanner = () => {
   const videoRef = useRef(null);
@@ -103,28 +115,32 @@ const AdminQRScanner = () => {
     }
   };
 
-  const startScanningLoop = () => {
-    scanIntervalRef.current = setInterval(() => {
-      const video = videoRef.current;
-      const canvas = canvasRef.current;
-      if (!video || !canvas || video.videoWidth === 0 || video.videoHeight === 0) return;
+    const startScanningLoop = () => {
+        scanIntervalRef.current = setInterval(() => {
+            const video = videoRef.current;
+            const canvas = canvasRef.current;
+            if (!video || !canvas || video.videoWidth === 0 || video.videoHeight === 0) return;
 
-      const ctx = canvas.getContext("2d");
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const code = jsQR(imageData.data, canvas.width, canvas.height);
+            const ctx = canvas.getContext("2d");
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, canvas.width, canvas.height);
 
-      if (code && !hasScannedRef.current) {
-        console.log("✅ QR Code scanned:", code.data);
-        hasScannedRef.current = true;
-        setScannedData(code.data);
-        stopCamera();
-        updateStudentStatus(code.data);
-      }
-    }, 100);
-  };
+            if (code && !hasScannedRef.current) {
+                console.log("✅ QR Code scanned:", code.data);
+                hasScannedRef.current = true;
+                setScannedData(code.data);
+                stopCamera();
+                (async () => {
+                    const uid = await getUIDByTicketCode(code.data);
+                    console.log("🔍 UID found:", uid);
+                    updateStudentStatus(uid);
+                })();
+            }
+        }, 100);
+    };
 
   useEffect(() => {
     return () => {

@@ -32,7 +32,7 @@ const logoOrder = [
   { image: Bosch, alt: "Bosch", url: "https://www.bosch.com.vn/" },
   { image: EndressHauser, alt: "Endress Hauser", url: "https://www.apsc.endress.com/" },
   { image: SAP, alt: "SAP", url: "https://www.sap.com/" },
-  { image: Fischer, alt: "Fischer", url: "https://www.facebook.com/VGU.CFIED", scale: "scale-90" },
+  { image: Fischer, alt: "Fischer", url: "https://www.fischer-international.com/en", scale: "scale-90" },
   { image: MACZT, alt: "MAC ZT", url: "https://www.linkedin.com/company/maczt-asia/", scale: "scale-110" },
   { image: Renesas, alt: "Renesas", url: "https://www.renesas.com/en" },
   { image: Mitek, alt: "Mitek", url: "https://mitekvietnam.com.vn/" },
