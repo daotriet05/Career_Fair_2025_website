@@ -16,9 +16,9 @@ export const booths = [
                 "Adnovum", "Bosch", "Endress Hauser", "Fischer",
                 "FPT Software", "Indefol", "iTechwx", "Kyungbang", "LEGO", "MAC ZT", "Mitek",
                 "Nam A Bank", "Netcompany", "Nextern", "NTPM", "Renesas", "SAP", "Shopee",
-                "Techcombank", "TTI", "Wanek", "Ziehl Albegg",
+                "Techcombank", "TTI", "Wanek", "Ziehl Albegg", "Vietcombank"
             ];
-export const roles = ["Student", "Volunteer", "Organizer"];
+export const roles = ["Student", "Organizer", "Head"];
 
 // const RECAPTCHA_SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY;
 
@@ -106,7 +106,7 @@ function RegisterSection() {
                         major: formData.studentMajor === "Other" ? formData.otherMajor : formData.studentMajor,
                         intake: formData.studentIntake,
                         role: formData.studentRole,
-                        identificationNumCode: formData.studentRole === "Volunteer" ? formData.identificationNumCode : null,
+                        identificationNumCode: (formData.studentRole === "Organizer" || formData.studentRole === "Head") ? formData.identificationNumCode : null,
                         boothCollected: boothCollected,
                         checkinStatus: false,
                         checkoutStatus: false,
@@ -248,13 +248,13 @@ function RegisterSection() {
                             >
                                 <option value="">-- Select Role --</option>
                                 <option value="Student">Student</option>
-                                <option value="Volunteer">Volunteer</option>
                                 <option value="Organizer">Organizer</option>
+                                <option value="Head">Head</option>
                             </select>
                         </div>
 
                         {/* Volunteer Identification Code - only shown if role is Volunteer or Organizer */}
-                        {(formData.studentRole === "Volunteer" || formData.studentRole === "Organizer") && (
+                        {(formData.studentRole === "Organizer" || formData.studentRole === "Head") && (
                             <div className="mb-4">
                                 <label className="block text-white font-semibold text-left mb-1">
                                     Identification Code:

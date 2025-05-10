@@ -23,7 +23,10 @@ class User {
 
     async getUserData() {
         const snap = await getDoc(this.ref);
-        if (!snap.exists()) throw new Error("No user data found.");
+        if (!snap.exists()) {
+            console.warn("⚠️ No user data found for UID:", this.uid);
+            return null;
+        }
         return snap.data();
     }
 
@@ -35,16 +38,16 @@ class User {
 
 function getInitialTab(role) {
     if (role === "Student") return "boarding";
-    if (role === "Volunteer") return "volunteerTask";
-    if (role === "Organizer") return "volunteerManagement";
+    if (role === "Organizer") return "volunteerTask";
+    if (role === "Head") return "volunteerManagement";
     if (role === "Admin") return "adminDisplay";
     return "analysis"; // Company
 }
 
 function getFirstTabName(role) {
     if (role === "Student") return "Your Boarding Pass";
-    if (role === "Volunteer") return "Volunteer Task";
-    if (role === "Organizer") return "Volunteer Management";
+    if (role === "Organizer") return "Volunteer Task";
+    if (role === "Head") return "Volunteer Management";
     if (role === "Admin") return "Admin Display";
     return "Analysis"; // Company
 }
@@ -55,21 +58,26 @@ function Dashboard() {
     const [userObj, setUserObj] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
-                if (firebaseUser) {
-                    const user = new User(firebaseUser.uid);
-                    setUserObj(user);
-                    const data = await user.getUserData();
-                    setUserData(data);
-                    setTab(getInitialTab(data.role));
+        const unsubscribe = auth.onAuthStateChanged(async (firebaseUser) => {
+            if (firebaseUser) {
+                // if (!firebaseUser.emailVerified) {
+                //     alert("⚠️ Please verify your email before accessing the dashboard.");
+                //     return;
+                // }
+
+                const user = new User(firebaseUser.uid);
+                setUserObj(user);
+                const data = await user.getUserData();
+                if (!data) {
+                    alert("⚠️ Your profile has not been set up yet. Please contact an admin.");
+                    return;
                 }
-            });
+                setUserData(data);
+                setTab(getInitialTab(data.role));
+            }
+        });
 
-            return () => unsubscribe();
-        };
-
-        fetchData();
+        return () => unsubscribe();
     }, []);
 
     const refetchUserData = async () => {
@@ -320,13 +328,15 @@ function Text({ userData }) {
                         refetchUserData={refetchUserData}
                     />
                 )}
-                {tab === "volunteerTask" && userData?.role === "Volunteer" && (
+                {tab === "volunteerTask" && userData?.role === "Organizer" && (
                     <VolunteerTask
-                        data={userData}
+                        data={{ identifyVolunteerCode: userData.identificationNumCode  }}
                         refetchUserData={refetchUserData}
                     />
                 )}
-                {tab === "volunteerManagement" && userData?.role === "Organizer" && (
+                
+
+                {tab === "volunteerManagement" && userData?.role === "Head" && (
                     <VolunteerTaskManagement
                         data={userData}
                         refetchUserData={refetchUserData}

@@ -1,5 +1,7 @@
+// QRCodeDisplay.js
 import React, { useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
+
 
 const QRCodeDisplay = ({ ticketCode, data, updateCVLink, updateLinkedInLink }) => {
   const [editingCV, setEditingCV] = useState(false);
@@ -23,6 +25,10 @@ const QRCodeDisplay = ({ ticketCode, data, updateCVLink, updateLinkedInLink }) =
       setLinkedinInput("");
     }
   };
+
+  const boothCount = data?.boothCollected
+    ? Object.values(data.boothCollected).filter(Boolean).length
+    : 0;
 
   return (
     <div className="flex flex-col items-center gap-8">
@@ -59,7 +65,7 @@ const QRCodeDisplay = ({ ticketCode, data, updateCVLink, updateLinkedInLink }) =
                 >
                   Upload Your CV Link
                 </button>
-                {data.CV_link ? (
+                {data && data.CV_link ? (
                   <a
                     href={data.CV_link}
                     target="_blank"
@@ -106,7 +112,7 @@ const QRCodeDisplay = ({ ticketCode, data, updateCVLink, updateLinkedInLink }) =
                 >
                   Upload Your LinkedIn Link
                 </button>
-                {data.linkedin_link ? (
+                {data && data.linkedin_link ? (
                   <a
                     href={data.linkedin_link}
                     target="_blank"
@@ -123,6 +129,32 @@ const QRCodeDisplay = ({ ticketCode, data, updateCVLink, updateLinkedInLink }) =
               </>
             )}
           </div>
+        </div>
+      </div>
+
+      {/* Reward Status Display */}
+      <div className="bg-[#0a4f3c] text-white rounded-2xl px-6 py-6 w-full max-w-2xl">
+        <h3 className="text-xl font-bold mb-4 text-center">Rewards Received</h3>
+
+        <p className="text-sm text-gray-200 text-center mb-3">
+          Booths Collected: <span className="font-bold text-white">{boothCount}</span>
+        </p>
+
+        <div className="flex flex-col gap-2 items-center">
+          {data?.receivedRewards ? (
+            <ul className="text-left list-disc">
+              {[5, 8, 13, 18].map((booth) => (
+                <li
+                  key={booth}
+                  className={data.receivedRewards[booth] ? "text-green-300" : "text-gray-300"}
+                >
+                  {booth} booths: {data.receivedRewards[booth] ? "✅ Received" : "❌ Not yet"}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-300 italic">You have not received any rewards yet.</p>
+          )}
         </div>
       </div>
     </div>
