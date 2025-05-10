@@ -39,17 +39,17 @@ const AdminQRScanner = () => {
           video
             .play()
             .then(() => {
-              console.log("📷 Camera is playing");
+              console.log("Camera is playing");
               setIsScanning(true);
               startScanningLoop();
             })
             .catch((err) => {
-              console.error("❌ video.play() failed:", err);
+              console.error("video.play() failed:", err);
             });
         };
       }
     } catch (err) {
-      console.error("❌ Failed to access camera:", err);
+      console.error("Failed to access camera:", err);
     }
   };
 
