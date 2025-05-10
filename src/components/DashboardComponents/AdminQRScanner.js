@@ -136,8 +136,14 @@ const AdminQRScanner = () => {
 		if (code && !hasScannedRef.current) {
 			hasScannedRef.current = true;
 			setScannedData(code.data);
+            console.log("🔍 Scanned data:", code.data);
+            
 			stopCamera();
-			updateStudentStatus(code.data);
+			(async () => {
+                const uid = await getUIDByTicketCode(code.data);
+                console.log("🔍 UID found:", uid);
+                updateStudentStatus(uid);
+            })();
 		}
 		}, 100);
 	};
@@ -264,6 +270,7 @@ const AdminQRScanner = () => {
 
 		<canvas ref={canvasRef} style={{ display: "none" }} />
 		</div>
+    );   
 };
 
 export default AdminQRScanner;
