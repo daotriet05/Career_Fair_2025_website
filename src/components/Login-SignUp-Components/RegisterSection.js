@@ -16,7 +16,7 @@ export const booths = [
                 "Adnovum", "Bosch", "Endress Hauser", "Fischer",
                 "FPT Software", "Indefol", "iTechwx", "Kyungbang", "LEGO", "MAC ZT", "Mitek",
                 "Nam A Bank", "Netcompany", "Nextern", "NTPM", "Renesas", "SAP", "Shopee",
-                "Techcombank", "TTI", "Wanek", "Ziehl Albegg",
+                "Techcombank", "TTI", "Wanek", "Ziehl Albegg", "Vietcombank"
             ];
 export const roles = ["Student", "Organizer", "Head"];
 
