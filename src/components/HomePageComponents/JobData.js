@@ -283,13 +283,6 @@ export const engineeringJobs = [
         logo: require('../../images/logo_2025/shopee.webp'),
     },
     {
-        company: 'Shopee',
-        position: 'Recruiter - People Team, Shopee (Working location: Ha Noi & Ho Chi Minh)',
-        location: '',
-        JD_link: 'https://careers.shopee.vn/job-detail/J02007770/1?channel=10001',
-        logo: require('../../images/logo_2025/shopee.webp'),
-    },
-    {
         company: 'FPT Software',
         position: 'Fresher SAP Functional Consultant (German/French)',
         location: '',
@@ -432,5 +425,12 @@ export const engineeringJobs = [
         location: '',
         JD_link: 'https://drive.google.com/file/d/1J7xxYSp5uQJF1sr78WpQDN3nYzXa9fPn/view?usp=sharing',
         logo: require('../../images/logo_2025/iTechwx.webp'),
+    },
+    {
+        company: 'SAP',
+        position: 'Technical Support Engineer',
+        location: '',
+        JD_link: 'https://drive.google.com/drive/folders/1PMyAzIpU-GNPbQq7bEYqs6l2l_ZE9SLi',
+        logo: require('../../images/logo_2025/SAP.webp'),
     },
   ];

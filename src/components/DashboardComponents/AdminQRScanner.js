@@ -1,8 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 import QRImage from "../../icons/qr-code.png";
+
+// Fetch UID by ticketCode
+const getUIDByTicketCode = async (ticketCode) => {
+    const snapshot = await getDocs(collection(db, "studentRegistrations"));
+    for (const docSnap of snapshot.docs) {
+      const data = docSnap.data();
+      if (data.ticketCode === ticketCode) {
+        return docSnap.id; // UID = document ID
+      }
+    }
+    return null;
+};
 
 const AdminQRScanner = () => {
 	const videoRef = useRef(null);
@@ -252,7 +264,6 @@ const AdminQRScanner = () => {
 
 		<canvas ref={canvasRef} style={{ display: "none" }} />
 		</div>
-	);
 };
 
 export default AdminQRScanner;

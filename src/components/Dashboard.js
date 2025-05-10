@@ -12,6 +12,8 @@ import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { db, auth } from "../firebase-config";
 import "../App.css";
 
+import axios from "axios";
+
 class User {
     constructor(uid) {
         if (!uid) throw new Error("UID is required");
@@ -147,6 +149,30 @@ function Dashboard() {
             if (adminSnap.exists()) {
                 scannedStudents = adminSnap.data().scannedStudents || {};
             }
+
+            ///////////////////////////////////////
+            // ✅ Post to booth tracking API
+            const ticketCode = studentData.ticketCode;
+            const boothCount = Object.keys(updatedBoothCollected).length;
+
+           
+            await axios.post(
+                "https://ticket-ud5mqzde6a-uc.a.run.app/api/boothVisited",
+                {
+                    code: ticketCode,
+                    boothVisited: boothCount,
+                },
+                {
+                headers: {
+                    "Content-Type": "application/json",
+                    "x-api-key": "CFIED25@vgu"
+                }
+                }
+            );
+
+            console.log("🎯 External boothVisited API updated.");
+
+            //////////////////////////////////////
     
             // Step 5: Check if student already scanned
             if (scannedStudents[studentUID]) {
@@ -191,6 +217,9 @@ function Dashboard() {
             await userObj.updateUserData(updatedCompanyData);
             setUserData(updatedCompanyData);
             console.log("✅ Company analytics updated after new scan.");
+
+            
+
         } catch (error) {
             console.error("🔥 Error in updateBoothCollected:", error);
         }
@@ -279,7 +308,7 @@ function Text({ userData }) {
                         <AdminQRScanner />
                     ) : (
                         <QRCodeDisplay
-                            userID={userObj?.uid}
+                            ticketCode={userData?.ticketCode}
                             data={userData}
                             updateCVLink={updateCVLink}
                             updateLinkedInLink={updateLinkedInLink}

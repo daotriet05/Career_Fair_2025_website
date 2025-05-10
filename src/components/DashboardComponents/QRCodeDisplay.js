@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { QRCodeCanvas } from "qrcode.react";
 
-const QRCodeDisplay = ({ userID, data = {}, updateCVLink, updateLinkedInLink }) => {
+
+const QRCodeDisplay = ({ ticketCode, data, updateCVLink, updateLinkedInLink }) => {
   const [editingCV, setEditingCV] = useState(false);
   const [cvInput, setCvInput] = useState("");
 
@@ -31,8 +32,8 @@ const QRCodeDisplay = ({ userID, data = {}, updateCVLink, updateLinkedInLink }) 
 
   return (
     <div className="flex flex-col items-center gap-8">
-      <p className="text-lg font-semibold">QR CODE</p>
-      <QRCodeCanvas value={userID} size={300} />
+      <p className="text-xl font-bold">{ticketCode}</p>
+      <QRCodeCanvas value={ticketCode} size={300} />
 
       {/* 📦 Green Box Container */}
       <div className="flex flex-col lg:flex-row gap-6 w-full max-w-2xl mt-6 justify-center">

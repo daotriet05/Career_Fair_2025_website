@@ -2,6 +2,21 @@ import { useEffect, useRef, useState } from "react";
 import jsQR from "jsqr";
 import QRImage from "../../icons/qr-code.png";
 
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase-config";
+
+// Fetch UID by ticketCode
+const getUIDByTicketCode = async (ticketCode) => {
+  const snapshot = await getDocs(collection(db, "studentRegistrations"));
+  for (const docSnap of snapshot.docs) {
+    const data = docSnap.data();
+    if (data.ticketCode === ticketCode) {
+      return docSnap.id; // UID = document ID
+    }
+  }
+  return null;
+};
+
 const QRScanner = ({ companyName, updateBoothCollected, getStudentData }) => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -85,19 +100,21 @@ const QRScanner = ({ companyName, updateBoothCollected, getStudentData }) => {
         setScannedData(code.data);
 
         (async () => {
-          const studentData = await getStudentData(code.data);
-          if (studentData) {
-            console.log("📚 Student name:", studentData.displayName);
-            setStudentData(studentData);
+            const uid = await getUIDByTicketCode(code.data);
+            console.log("🔍 UID found:", uid);
+            const studentData = await getStudentData(uid);
+            if (studentData) {
+                console.log("📚 Student name:", studentData.displayName);
+                setStudentData(studentData);
 
-            if (updateBoothCollected) {
-              await updateBoothCollected(companyName, code.data);
+                if (updateBoothCollected) {
+                await updateBoothCollected(companyName, uid);
+                }
+
+                stopCamera(); // ✅ safe to stop here
+            } else {
+                hasScannedRef.current = false; // Allow re-scan if failed
             }
-
-            stopCamera(); // ✅ safe to stop here
-          } else {
-            hasScannedRef.current = false; // Allow re-scan if failed
-          }
         })();
       }
     }, 100);
