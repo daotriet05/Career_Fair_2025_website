@@ -98,11 +98,14 @@ const QRScanner = ({ companyName, updateBoothCollected, getStudentData }) => {
         console.log("✅ QR Code scanned:", code.data);
         hasScannedRef.current = true; // ✅ Lock after first scan
         setScannedData(code.data);
-
+        stopCamera(); // ✅ safe to stop here
+        
         (async () => {
             const uid = await getUIDByTicketCode(code.data);
             console.log("🔍 UID found:", uid);
             const studentData = await getStudentData(uid);
+
+            
             if (studentData) {
                 console.log("📚 Student name:", studentData.displayName);
                 setStudentData(studentData);
@@ -111,7 +114,7 @@ const QRScanner = ({ companyName, updateBoothCollected, getStudentData }) => {
                 await updateBoothCollected(companyName, uid);
                 }
 
-                stopCamera(); // ✅ safe to stop here
+                
             } else {
                 hasScannedRef.current = false; // Allow re-scan if failed
             }
