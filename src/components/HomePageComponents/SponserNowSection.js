@@ -22,11 +22,13 @@ import NTPM from "../../images/logo_2025/NTPM.webp";
 import Techcombank from "../../images/logo_2025/Techcombank.webp";
 import NamABank from "../../images/logo_2025/Nam A Bank.webp";
 import iTechwx from "../../images/logo_2025/iTechwx.webp";
+import Vietcombank from "../../images/logo_2025/Vietcombank.webp";
 
 const logoOrder = [
   { image: Wanek, alt: "Wanek Furniture", url: "https://www.wanekcareer.com/" },
   { image: LEGO, alt: "LEGO", url: "https://www.lego.com" },
   { image: iTechwx, alt: "iTechwx", url: "https://www.itechwx.com/Home" },
+  { image: Vietcombank, alt: "Vietcombank", url: "https://www.vietcombank.com.vn/" },
   { image: Indefol, alt: "Indefol", url: "https://www.indefol.com/" },
   { image: ZiehlAbegg, alt: "Ziehl Abegg", url: "https://www.ziehl-abegg.com/en/" },
   { image: Bosch, alt: "Bosch", url: "https://www.bosch.com.vn/" },
@@ -87,8 +89,8 @@ function SponserNowSection() {
         <div className="w-full border-[3px] border-black"></div>
 
         {/* <div className="py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-[390px] gap-y-[70px]"> */}
-        <div className="py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-          {logoOrder.slice(0, 3).map((logo) => (
+        <div className="py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
+          {logoOrder.slice(0, 4).map((logo) => (
             <a
               key={logo.alt}
               href={logo.url}
@@ -105,7 +107,7 @@ function SponserNowSection() {
         <div className="w-full border-[3px] border-black"></div>
 
         <div className="py-16 grid grid-cols-1 sm:grid-cols-2 gap-x-[390px] gap-y-[70px]">
-          {logoOrder.slice(3, 5).map((logo) => (
+          {logoOrder.slice(4, 6).map((logo) => (
             <a
               key={logo.alt}
               href={logo.url}

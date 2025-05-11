@@ -24,6 +24,7 @@ import NTPM from "../images/logo_2025/NTPM.webp";
 import Techcombank from "../images/logo_2025/Techcombank.webp";
 import NamABank from "../images/logo_2025/Nam A Bank.webp";
 import iTechwx from "../images/logo_2025/iTechwx.webp";
+import Vietcombank from "../images/logo_2025/Vietcombank.webp";
 
 const logos = [
   { src: Adnovum, alt: "Adnovum" },
@@ -48,6 +49,7 @@ const logos = [
   { src: Techcombank, alt: "Techcombank", scale: "scale-150" },
   { src: NamABank, alt: "Nam A Bank" },
   { src: iTechwx, alt: "iTechwx" },
+  { src: Vietcombank, alt: "Vietcombank" },
 ];
 
 const MarqueeLogos = () => {
