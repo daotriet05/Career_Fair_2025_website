@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import '../../App.css';
-import BoothMapImage from '../../images/BoothMap.png';
+import BoothMapImage from '../../images/Boothmap.png';
 
 function BoothMap() {
   const boothNames = [
@@ -26,7 +26,8 @@ function BoothMap() {
     "Netcompany Vietnam",
     "Renesas Design Vietnam",
     "Kyungbang Vietnam",
-    "MiTek Vietnam"
+    "MiTek Vietnam",
+    "Vietcombank"
   ];
 
   return (
