@@ -26,7 +26,8 @@ function BoothMap() {
     "Netcompany Vietnam",
     "Renesas Design Vietnam",
     "Kyungbang Vietnam",
-    "MiTek Vietnam"
+    "MiTek Vietnam",
+    "Vietcombank"
   ];
 
   return (

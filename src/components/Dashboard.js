@@ -153,7 +153,7 @@ function Dashboard() {
             ///////////////////////////////////////
             // ✅ Post to booth tracking API
             const ticketCode = studentData.ticketCode;
-            const boothCount = Object.keys(updatedBoothCollected).length;
+            const boothCount = Object.values(updatedBoothCollected).filter(Boolean).length;
 
            
             await axios.post(
