@@ -264,6 +264,6 @@ const AdminQRScanner = () => {
 
 		<canvas ref={canvasRef} style={{ display: "none" }} />
 		</div>
-};
+	);};
 
 export default AdminQRScanner;
