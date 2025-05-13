@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
 import '../../App.css';
-import BoothMapImage from '../../images/Boothmap.png';
+import BoothMapImage from '../../images/BoothMap.png';
 
 function BoothMap() {
   const boothNames = [

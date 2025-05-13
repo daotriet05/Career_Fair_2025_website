@@ -8,6 +8,7 @@ const AdminDisplay = () => {
     const [openDropdown, setOpenDropdown] = useState(null);
     const [currentStudents, setCurrentStudents] = useState([]);
     const [rewardedStudents, setRewardedStudents] = useState([]);
+    const [luckyDrawStudents, setLuckyDrawStudents] = useState([]);
     const [photoBoothStudents, setPhotoBoothStudents] = useState([]);
     const [organizerTasks, setOrganizerTasks] = useState({});
 
@@ -40,6 +41,7 @@ const AdminDisplay = () => {
         try {
             const snap = await getDocs(collection(db, "studentRegistrations"));
             const current = [];
+            const luckyDraw = [];
             const rewarded = [];
             const photobooth = [];
 
@@ -48,6 +50,18 @@ const AdminDisplay = () => {
                 if (s.checkinStatus && !s.checkoutStatus) {
                     current.push({ displayName: s.displayName, email: s.email });
                 }
+
+                if (s.role === "Student"){
+                    const numBooths = Object.values(s.boothCollected).filter(value => value === true).length;
+                    if (numBooths >= 5) {
+                        luckyDraw.push({ displayName: s.displayName, email: s.email });
+                    }
+                }
+                else if (s.role === "Organizer" || s.role === "Volunteer") {
+                    luckyDraw.push({ displayName: s.displayName, email: s.email });
+                }
+                    
+
                 if (s.receivedReward || s.receivedRewards) {
                     const timestamp = s.receivedRewardTimestamp;
                     const formattedTime = timestamp
@@ -68,6 +82,7 @@ const AdminDisplay = () => {
 
             setCurrentStudents(current);
             setRewardedStudents(rewarded);
+            setLuckyDrawStudents(luckyDraw);
             setPhotoBoothStudents(photobooth);
         } catch (err) {
             console.error("❌ Error fetching student statuses:", err);
@@ -154,6 +169,26 @@ const AdminDisplay = () => {
                 {openDropdown === "current" && (
                     <ul className="mt-2 border border-gray-200 rounded-lg p-4 bg-gray-50">
                         {currentStudents.map((s, idx) => (
+                            <li key={idx} className="text-sm text-gray-800 py-1">
+                                <b>{s.displayName}</b> – <i>{s.email}</i>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+
+            <h2 className="text-xl font-bold mt-10 mb-4 text-center">Lucky Draw Students</h2>
+            <div className="mb-6">
+                <button
+                    onClick={() => toggleDropdown("luckyDraw")}
+                    className="w-full text-left bg-green-100 hover:bg-green-200 text-black font-semibold px-4 py-2 rounded-lg shadow transition"
+                >
+                    Lucky Draw Students ({luckyDrawStudents.length})
+                </button>
+
+                {openDropdown === "luckyDraw" && (
+                    <ul className="mt-2 border border-gray-200 rounded-lg p-4 bg-gray-50">
+                        {luckyDrawStudents.map((s, idx) => (
                             <li key={idx} className="text-sm text-gray-800 py-1">
                                 <b>{s.displayName}</b> – <i>{s.email}</i>
                             </li>
