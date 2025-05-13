@@ -202,6 +202,13 @@ export const engineeringJobs = [
         JD_link: 'https://www.topcv.vn/viec-lam/bim-engineer-ky-su-trien-khai-ban-ve-allplan/1706254.html?t...46510265',
         logo: require('../../images/logo_2025/MAC ZT.webp'),
     },
+    {
+        company: 'NTPM',
+        position: 'Engineer Intern',
+        location: '',
+        JD_link: 'https://docs.google.com/document/d/1D3rpZLyqvrwMrWzRyAJJAxhu9szLCBmID_xCGrtyr7o/edit?tab=t.0',
+        logo: require('../../images/logo_2025/NTPM.webp'),
+    },
   ];
   
   export const econMgmtJobs = [
@@ -432,5 +439,12 @@ export const engineeringJobs = [
         location: '',
         JD_link: 'https://drive.google.com/drive/folders/1PMyAzIpU-GNPbQq7bEYqs6l2l_ZE9SLi',
         logo: require('../../images/logo_2025/SAP.webp'),
+    },
+    {
+        company: 'Adnovum',
+        position: 'General Internship Program',
+        location: '',
+        JD_link: 'https://drive.google.com/file/d/1Svi9qGtBa1MHTKXgFkdUwGEKzdKFtDPs/view?usp=drivesdk',
+        logo: require('../../images/logo_2025/Adnovum.webp'),
     },
   ];
