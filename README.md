@@ -1,70 +1,144 @@
-# Getting Started with Create React App
+# Career Fair 2025 Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern web application for managing and showcasing the VGU Career Fair 2025.  
+Built with ReactJS, Firebase, and TailwindCSS.
 
-## Available Scripts
 
-In the project directory, you can run:
+# Project Structure
 
-### `npm start`
+```
+career_fair_2025_website/
+│
+├── public/
+│   └── index.html
+├── src/
+│   ├── App.js
+│   ├── App.css
+│   ├── index.js
+│   ├── index.css
+│   ├── firebase-config.js
+│   ├── components/
+│   │   ├── HomePage.js
+│   │   ├── Dashboard.js
+│   │   ├── HeaderBar.js
+│   │   ├── Footer.js
+│   │   ├── SideNavBar.js
+│   │   ├── EffectComponents/
+│   │   │   └── useLenis.js
+│   │   ├── Login-SignUp-Components/
+│   │   │   ├── LoginSection.js
+│   │   │   └── RegisterSection.js
+│   │   ├── HomePageComponents/
+│   │   │   ├── IntroSection.js
+│   │   │   └── RecapSection.js
+│   │   ├── DashboardComponents/
+│   │   │   └── AdminDisplay.js
+│   │   └── TestPage.js
+│   └── images/
+│       └── intro-section.webp
+└── .ssh/
+    └── config
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# UI & Styling
 
-### `npm test`
+- Uses **TailwindCSS** utility classes for layout and responsiveness.
+- Custom fonts loaded via `index.css`.
+- Animated cursor and smooth scrolling effects.
+- FontAwesome icons can be used by including the CDN link in `public/index.html`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+# Component Descriptions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Homepage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**Role:**  
+The Homepage serves as the landing page for the Career Fair 2025 website.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Functionalities:**
+- Presents an overview of the event, including date, time, and venue.
+- Features a hero section with a prominent image or banner.
+- Includes sections like the event recap, statistics (e.g., number of businesses, sponsors, interviewers, and students), and a recap video link.
+- Displays a scrolling marquee of sponsor or partner logos.
+- **Responsive design:** On screens smaller than 600px, main sections stack vertically for better mobile usability.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## HeaderBar and SideNavBar
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Role:**  
+The HeaderBar is the top navigation bar, and the SideNavBar is a collapsible sidebar for additional navigation, especially in small screens.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Functionalities:**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**HeaderBar:**
+- Shows the site logo and main navigation links.
+- Displays login/logout buttons based on user authentication status.
+- Include a hamburger menu icon to toggle the SideNavBar on mobile devices.
 
-## Learn More
+**SideNavBar:**
+- SideNavBar is another version of HeaderBar when the screen is too small (mobile screen).
+- Provides quick access to dashboard sections and other authenticated features.
+- Can be shown or hidden, especially on smaller screens, for a clean and user-friendly interface.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Login and Registration
 
-### Code Splitting
+**Role:**  
+These components handle user authentication.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Functionalities:**
 
-### Analyzing the Bundle Size
+**LoginSection:**
+- Allows users to log in using their email and password.
+- Integrates with Firebase Authentication for secure login.
+- Provides error messages and feedback for failed login attempts.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**RegisterSection:**
+- Enables new users to create an account.
+- Collects necessary information and validates input.
+- Registers users with Firebase Authentication and stores additional user data as needed.
+- Provides feedback for registration errors or success.
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Dashboards
 
-### Advanced Configuration
+**Role:**  
+The Dashboard area is accessible to authenticated users and provides event management and participation features.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Functionalities:**
+- Displays user-specific information and actions (e.g., event participation, check-in status).
+- For admins, shows event data such as:
+  - Lists of current attendees, lucky draw eligible users, rewarded participants, and photobooth participants.
+  - Counts the number of booths each student has visited (using the `boothCollected` map).
+  - Handles and displays reward status and timestamps.
+- Allows navigation between different dashboard sections via the HeaderBar or SideNavBar.
+- Ensures data is fetched securely from Firebase and updates in real-time as needed.
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+# Development
 
-### `npm run build` fails to minify
+## Install dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm install
+```
+
+## Run locally
+
+```bash
+npm start
+```
+
+## Build for production
+
+```bash
+npm run build
+```
+
+
+# Notes
+
+- Make sure to configure your Firebase project in `src/firebase-config.js`.
+- For FontAwesome icons, add the CDN link to `public/index.html` as described in the documentation.
+- SSH config in `.ssh/config` is for server access and not related to the web app.
